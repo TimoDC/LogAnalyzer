@@ -32,11 +32,11 @@ section ul li:hover {
 }
 
 .new-dashboard-popup {
-    width: 20%;
+    width: fit-content;
     position: fixed;
     top: 50%;
-    left: 30%;
-    border: 5px solid #fe7330;
+    left: 50%;
+    border: 5px solid #f7c250;
     background-color: white;
     padding: 1rem;
   }
@@ -45,3 +45,17 @@ section ul li:hover {
     display: block;
     margin: 0.5rem;
 }
+
+
+.transparency {
+    animation: transparency 0.5s forwards;
+  }
+  
+  @keyframes transparency {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.1;
+    }
+  }

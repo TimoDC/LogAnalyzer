@@ -18,7 +18,7 @@
 
     <main>
         <aside>
-            <a href="#" id="newDashboardButton">New Dashboard</a>
+            <a  id="newDashboardButton">New Dashboard</a>
 
             <div id="dashboardButtons">
                 <a href="#">Dashboard 1</a>
