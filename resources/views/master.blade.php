@@ -55,6 +55,20 @@
         </form> 
     </section>
 
+    <section class="settings hidden">
+        <a href="#" class="close">X</a>
+        <div class="settingsHeader">
+            <h3>General</h3>
+        </div>
+        <div class="darkMode">
+            <h4>Dark mode: </h3>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </section>
+
     <footer>&copy; 2021 - LogAnalyzer</footer>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
