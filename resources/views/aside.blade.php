@@ -1,12 +1,12 @@
 <aside>
     <h3>Dashboards: </h3>
 
-    <h4><a href=#>Dashboard 1</a></h4>
+    <a href=#><h4>Dashboard 1</h4></a>
     
-    <h4><a href=#>Dashboard 2</a></h4>
+    <a href=#><h4>Dashboard 2</h4></a>
     
-    <h4><a href=#>Dashboard 3</a></h4>
+    <a href=#><h4>Dashboard 3</h4></a>
 
-    <a href=#>Logout</a>
-    <a href=#>Settings</a>
+    <a href=# id="logoutButton">Logout</a>
+    <a href=# id="settingsButton">Settings</a>
 </aside>
