@@ -37,17 +37,22 @@
                 <a href="#">Dashboard 3</a>
             </div>
 
-            <a href="#" id="logoutButton">Logout</a>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+
+
             <a href="#" id="settingsButton">Settings</a>
         </aside>
         @yield('main')
     </main>
 
 
-    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+
 
     <section class="new-dashboard-popup hidden">
         <h2>Make a new dashboard</h2>
