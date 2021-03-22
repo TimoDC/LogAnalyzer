@@ -1,39 +1,41 @@
+html{
+    background: url(../img/chart.jpg) no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}
+body{
+    height: 100%;
+}
 #app{
-    background-image: url(../img/chart.jpg);
-    background-repeat: no-repeat;
-    background-size: 100rem;
-    height: 49.6rem;
+    height: 100%;
     font-size: 2rem;   
     font-weight: bold;
     color: #d4d8da; 
 }
 
-.logincontainer{
-    position: relative;
+.py-4{
+    height: 100%;
 }
 
-.card{
-    padding-top: 1rem;
-    position: absolute;
-    width: 25rem;
-    height: 26vw;
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login{
     background-color: black;
     opacity: 0.6;
     text-align: center;
-    top: 10rem;
-    left: 35rem;
+    width: 27rem;
+    padding-bottom: 4.5rem;
+    padding-top: 3rem;
 }
 
-
-
-.card-header{  
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
-
-.card-body form div{
-    padding-top: 1rem;
-
+.login form div{
+    margin-top: 1.5rem;
 }
 
 input {
