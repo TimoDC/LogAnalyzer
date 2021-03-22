@@ -24,3 +24,9 @@ section ul li:hover {
     background-color: #00A7E7;
     cursor: pointer;
 }
+
+.hidden {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}

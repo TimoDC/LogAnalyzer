@@ -10,17 +10,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/aside.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/footer.css') }}"/>
     @yield("css")
-    <style>
-        .hidden {
-            visibility: hidden;
-            width: 0;
-            height: 0;
-        }
-        .new-dashboard{
-            cursor: pointer;
-        }
-    </style>
-
 </head>
 <body>
     <header>
