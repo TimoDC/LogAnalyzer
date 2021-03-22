@@ -19,3 +19,8 @@ section ul li {
     margin-bottom: 20px;
     text-align: center;
 }
+
+section ul li:hover {
+    background-color: #00A7E7;
+    cursor: pointer;
+}
