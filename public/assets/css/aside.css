@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-
 aside {
     width: 20%;
     border-right: 1px solid black; 
@@ -7,7 +5,6 @@ aside {
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
-    font-family: "Nunito", sans-serif;
 }
 
 aside a {
