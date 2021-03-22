@@ -46,6 +46,7 @@
 
 
     <section class="new-dashboard-popup hidden">
+        <a href="#" class="close">X</a>
         <h2>Make a new dashboard</h2>
         <form action="/">
             <input type="text" id="name" name="name" placeholder="Name">
