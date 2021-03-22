@@ -10,17 +10,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/aside.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/footer.css') }}"/>
     @yield("css")
-    <style>
-        .hidden {
-            visibility: hidden;
-            width: 0;
-            height: 0;
-        }
-        .new-dashboard{
-            cursor: pointer;
-        }
-    </style>
-
 </head>
 <body>
     <header>
@@ -29,7 +18,7 @@
 
     <main>
         <aside>
-            <a href="#" id="newDashboardButton">New Dashboard</a>
+            <a  id="newDashboardButton">New Dashboard</a>
 
             <div id="dashboardButtons">
                 <a href="#">Dashboard 1</a>
@@ -57,12 +46,11 @@
 
 
     <section class="new-dashboard-popup hidden">
+        <a href="#" class="close">X</a>
         <h2>Make a new dashboard</h2>
         <form action="/">
-            <label for="name">Name</label><br>
-            <input type="text" id="name" name="name"><br>
-            <label for="discription">Discription</label><br>
-            <input type="text" id="discription" name="discription"><br><br>
+            <input type="text" id="name" name="name" placeholder="Name">
+            <input type="text" id="discription" name="discription" placeholder="Description">
             <input type="submit" value="Make">
         </form> 
     </section>
