@@ -8,6 +8,17 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/reset.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/screen.css') }}"/>
     @yield("css")
+    <style>
+        .hidden {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+        }
+        .new-dashboard{
+            cursor: pointer;
+        }
+    </style>
+
 </head>
 <body>
     <header>
@@ -31,5 +42,18 @@
         </aside>
         @yield('main')
     </main>
+
+    <section class="new-dashboard-popup hidden">
+        <h2>Make a new dashboard</h2>
+        <form action="/">
+            <label for="name">Name</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="discription">Discription</label><br>
+            <input type="text" id="discription" name="discription"><br><br>
+            <input type="submit" value="Make">
+        </form> 
+    </section>
+
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 </html>
