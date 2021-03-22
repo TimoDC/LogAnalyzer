@@ -1,0 +1,26 @@
+section {
+    width: 60%;
+    margin-right: auto;
+}
+
+section ul div {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+section ul li {
+    list-style: none;
+    padding: 20px 20px;
+    width: 150px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+section ul li:hover {
+    background-color: #00A7E7;
+    cursor: pointer;
+}
