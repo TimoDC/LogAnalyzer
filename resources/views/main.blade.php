@@ -7,12 +7,17 @@
 @section("main")
 <section>
     <ul>
-        <li>Apache Logs</li>
-        <li>SSH Logs</li>
-        <li>ModSec Logs</li>
-        <li>MySQL Logs</li>
-        <li>Auth Logs</li>
-        <li>Overview All Logs</li>
+        <div>
+            <li>Apache Logs</li>
+            <li>SSH Logs</li>
+            <li>ModSec Logs</li>
+        </div>
+
+        <div>
+            <li>MySQL Logs</li>
+            <li>Auth Logs</li>
+            <li>Overview All Logs</li>
+        </div>
     </ul>
 </section>
 @endsection
