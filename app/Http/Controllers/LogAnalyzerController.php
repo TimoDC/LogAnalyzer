@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class LogAnalyzerController extends Controller
 {
     function index(){
-        return view("master");
+        return view("main");
     }
 }
