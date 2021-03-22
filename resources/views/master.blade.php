@@ -67,6 +67,11 @@
         </form> 
     </section>
 
+    <section id="settings hidden">
+        <h2>Settings</h2>
+        <h3>General</h3>
+    </section>
+
     <footer>&copy; 2021 - LogAnalyzer</footer>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
