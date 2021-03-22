@@ -7,6 +7,8 @@
     <title>LogAnalyzer</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/reset.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/screen.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/aside.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/footer.css') }}"/>
     @yield("css")
     <style>
         .hidden {
