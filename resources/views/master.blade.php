@@ -48,8 +48,8 @@
     <section class="new-dashboard-popup hidden">
         <h2>Make a new dashboard</h2>
         <form action="/">
-            <input type="text" id="name" name="name" placeholder="Name">>
-            <input type="text" id="discription" name="discription" placeholder="Description">>
+            <input type="text" id="name" name="name" placeholder="Name">
+            <input type="text" id="discription" name="discription" placeholder="Description">
             <input type="submit" value="Make">
         </form> 
     </section>
