@@ -1,24 +1,40 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+
 aside {
     width: 20%;
     border-right: 1px solid black; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    font-family: "Nunito", sans-serif;
 }
 
 aside a {
     padding: 15px;
-    margin: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
     font-size: medium;
-    width: 100%;
     text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+#newDashboardButton {
+    border: 1px solid black;
+    padding: 50px;
+    margin-bottom: 10px;
 }
 
 #dashboardButtons {
-    font-weight: bold;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    display: flex;
+    flex-direction: column;
 }
 
-#logoutButton, #settingsButton {
-    bottom: 0;
-    left: 0;
-    position: fixed;
+#dashboardButtons a {
+    font-weight: bold;
+}
+
+a:hover {
+    background-color: #00A7E7;
 }

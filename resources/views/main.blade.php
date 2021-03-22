@@ -22,17 +22,18 @@
     </ul>
 </section>
 <aside>
-    <h3>Dashboards: </h3>
+    <a href="#" id="newDashboardButton">New Dashboard</a>
+
     <div id="dashboardButtons">
-        <a href=#><h4>Dashboard 1</h4></a>
+        <a href="#">Dashboard 1</a>
     
-        <a href=#><h4>Dashboard 2</h4></a>
+        <a href="#">Dashboard 2</a>
     
-        <a href=#><h4>Dashboard 3</h4></a>
+        <a href="#">Dashboard 3</a>
     </div>
 
-    <a href=# id="logoutButton">Logout</a>
-    <a href=# id="settingsButton">Settings</a>
+    <a href="#" id="logoutButton">Logout</a>
+    <a href="#" id="settingsButton">Settings</a>
 </aside>
 
 @endsection
