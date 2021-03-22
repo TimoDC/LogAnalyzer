@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'b1b6ccd3bdac62ab41bf3f888c749b085d685fef',
+    'reference' => '97a440df92e530a72cb97177fb789ca3a716ffef',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -213,12 +213,12 @@ private static $installed = array (
     ),
     'guzzlehttp/psr7' => 
     array (
-      'pretty_version' => '1.7.0',
-      'version' => '1.7.0.0',
+      'pretty_version' => '1.8.1',
+      'version' => '1.8.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '53330f47520498c0ae1f61f7e2c90f55690c06a3',
+      'reference' => '35ea11d335fd638b5882ff1725228b3d35496ab1',
     ),
     'hamcrest/hamcrest-php' => 
     array (
@@ -469,7 +469,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'b1b6ccd3bdac62ab41bf3f888c749b085d685fef',
+      'reference' => '97a440df92e530a72cb97177fb789ca3a716ffef',
     ),
     'laravel/sail' => 
     array (

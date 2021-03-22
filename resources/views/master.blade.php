@@ -17,5 +17,11 @@
     <main>
         @yield('main')
     </main>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+
 </body>
 </html>

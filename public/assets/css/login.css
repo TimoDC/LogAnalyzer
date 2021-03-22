@@ -1,0 +1,57 @@
+#app{
+    background-image: url(../img/chart.jpg);
+    background-repeat: no-repeat;
+    background-size: 100rem;
+    height: 49.6rem;
+    font-size: 2rem;   
+    font-weight: bold;
+    color: #d4d8da; 
+}
+
+.logincontainer{
+    position: relative;
+}
+
+.card{
+    padding-top: 1rem;
+    position: absolute;
+    width: 25rem;
+    height: 26vw;
+    background-color: black;
+    opacity: 0.6;
+    text-align: center;
+    top: 10rem;
+    left: 35rem;
+}
+
+
+
+.card-header{  
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.card-body form div{
+    padding-top: 1rem;
+
+}
+
+input {
+    background-color: transparent;
+    width: 15rem;
+    height: 2.5rem;
+    border-radius: 1.2rem;
+    color: #00a7e7;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+button{
+    width: 15rem;
+    height: 2.5rem;
+    border-radius: 1.2rem;
+    background-color: #00a7e7;
+    font-size: 1.5rem;   
+    font-weight: bold;
+    color: #d4d8da; 
+}
