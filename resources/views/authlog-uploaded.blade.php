@@ -2,6 +2,7 @@
 
 @section("css")
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/authlogs.css') }}"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 @endsection
 
 @section("main")
@@ -10,7 +11,7 @@
     <input type="hidden" id="authlog" name="authlog" value="{{ asset($authlog) }}">
 
     <div id="entries">
-        <h2><span></span> entries found</h2>
+        <h2><span></span> entries</h2>
 
         <table>
             <thead>
@@ -24,6 +25,10 @@
             <tbody>
             </tbody>
         </table>
+    </div>
+
+    <div id="appnamechart">
+        <canvas id="appname" width="400" height="400"></canvas>
     </div>
 </section>
 @endsection
