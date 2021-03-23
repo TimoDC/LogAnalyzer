@@ -4,12 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Memory Usage</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/reset.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/screen.css') }}"/>
 </head>
+
+<?php
+    $MemTotal = shell_exec("free -h --mega |grep Mem| cut -c 10-22 | sed -e 's/^[ \t]*//'");
+    $MemUsed = shell_exec("free -h --mega |grep Mem| cut -c 20-32 | sed -e 's/^[ \t]*//'");
+    $SwapTotal = shell_exec("free -h --mega |grep Swap| cut -c 10-22| sed -e 's/^[ \t]*//'");
+    $SwapUsed = shell_exec("free -h --mega |grep Swap| cut -c 20-32| sed -e 's/^[ \t]*//'");
+    ?>
+
 <body>
 <a href="../"> Home </a>
 
-
+<div>
+    
+<table>
+    <tr>
+        <th></th>
+        <th scope="col">total</th>
+        <th scope="col">used</th>
+    </tr>
+    <tr>
+        <th scope="row">Mem</th>
+        <td><?php echo $MemTotal ?></td>
+        <td><?php echo $MemUsed ?></td>
+    </tr>
+    <tr>
+        <th scope="row">Swap</th>
+        <td><?php echo $SwapTotal ?></td>
+        <td><?php echo $SwapUsed ?></td>
+    </tr>
+</table>
+</div>
 
 </body>
 </html>
