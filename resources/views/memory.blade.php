@@ -41,15 +41,15 @@
     </tr>
     <tr>
         <th scope="row">Swap</th>
-        <td><?php echo $SwapTotal ?></td>
-        <td><?php echo $SwapUsed ?></td>
-        <td><?php echo $SwapFree ?></td>
+        <td id="SwapTotal"><?php echo $SwapTotal ?></td>
+        <td id="SwapUsed"><?php echo $SwapUsed ?></td>
+        <td id="SwapFree"><?php echo $SwapFree ?></td>
     </tr>
 </table>
 </div>
 
-<canvas id="canvas">
-</canvas>
+<canvas id="memoryCanvas" height="50rem"></canvas>
+<canvas id="swapCanvas" height="50rem"></canvas>
 
 <script src="{{ asset('assets/js/memory.js') }}"></script>
 </body>
