@@ -33,6 +33,7 @@ function checkforResponse() {
 }
 
 function analyseLog(content) {
+    document.querySelector(".logChart").classList.remove("hidden");
     let logs = content.split("\n");
     let p = document.querySelector(".logInfo p");
     p.innerHTML = "Log Count: " + logs.length;

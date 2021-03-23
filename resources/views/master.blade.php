@@ -16,43 +16,13 @@
         <h1>LogAnalyzer</h1>
     </header>
 
-    <main>
-        <aside>
-            <a  id="newDashboardButton">New Dashboard</a>
-
-            <div id="dashboardButtons">
-                <a href="#">Dashboard 1</a>
-            
-                <a href="#">Dashboard 2</a>
-            
-                <a href="#">Dashboard 3</a>
-            </div>
-
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                Logout
-            </a>
-
-            <a href="{{ route('memory') }}">
-                Memory Usage
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-
-
-            <a href="#" id="settingsButton">Settings</a>
-        </aside>
-        @yield('main')
-    </main>
-
-
-
-
+    @yield('main')
+    
     <section class="new-dashboard-popup hidden">
         <a href="#" class="close">X</a>
         <h2>Make a new dashboard</h2>
-        <form action="/">
+        <form action="/createDashBoard" method="post">
+            @csrf
             <input type="text" id="name" name="name" placeholder="Name">
             <input type="text" id="discription" name="discription" placeholder="Description">
             <input type="submit" value="Make">
