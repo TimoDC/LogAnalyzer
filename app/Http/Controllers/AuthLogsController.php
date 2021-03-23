@@ -20,7 +20,7 @@ class AuthLogsController extends Controller
 
     function validation(Request $request) {
         $rules = [
-            "authlog" => "required|mimes:log"
+            "authlog" => "required"
         ];
 
         return $request -> validate($rules);
