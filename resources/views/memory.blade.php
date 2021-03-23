@@ -7,13 +7,18 @@
     <title>Memory Usage</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/reset.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/screen.css') }}"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+            integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+            crossorigin="anonymous"></script>
 </head>
 
 <?php
-    $MemTotal = shell_exec("free -h --mega |grep Mem| cut -c 10-22 | sed -e 's/^[ \t]*//'");
-    $MemUsed = shell_exec("free -h --mega |grep Mem| cut -c 20-32 | sed -e 's/^[ \t]*//'");
-    $SwapTotal = shell_exec("free -h --mega |grep Swap| cut -c 10-22| sed -e 's/^[ \t]*//'");
-    $SwapUsed = shell_exec("free -h --mega |grep Swap| cut -c 20-32| sed -e 's/^[ \t]*//'");
+    $MemTotal = shell_exec("free --mega |grep Mem| cut -c 10-22 | sed -e 's/^[ \t]*//'");
+    $MemUsed = shell_exec("free  --mega |grep Mem| cut -c 20-32 | sed -e 's/^[ \t]*//'");
+    $MemFree = shell_exec("free --mega |grep Mem| cut -c 35-45 | sed -e 's/^[ \t]*//'");
+    $SwapTotal = shell_exec("free  --mega |grep Swap| cut -c 10-22| sed -e 's/^[ \t]*//'");
+    $SwapUsed = shell_exec("free  --mega |grep Swap| cut -c 20-32| sed -e 's/^[ \t]*//'");
+    $SwapFree = shell_exec("free --mega |grep Swap| cut -c 35-45 | sed -e 's/^[ \t]*//'");
     ?>
 
 <body>
@@ -26,19 +31,26 @@
         <th></th>
         <th scope="col">total</th>
         <th scope="col">used</th>
+        <th scope="col">free</th>
     </tr>
     <tr>
         <th scope="row">Mem</th>
         <td><?php echo $MemTotal ?></td>
         <td><?php echo $MemUsed ?></td>
+        <td><?php echo $MemFree ?></td>
     </tr>
     <tr>
         <th scope="row">Swap</th>
         <td><?php echo $SwapTotal ?></td>
         <td><?php echo $SwapUsed ?></td>
+        <td><?php echo $SwapFree ?></td>
     </tr>
 </table>
 </div>
 
+<canvas id="canvas">
+</canvas>
+
+<script src="{{ asset('assets/js/memory.js') }}"></script>
 </body>
 </html>
