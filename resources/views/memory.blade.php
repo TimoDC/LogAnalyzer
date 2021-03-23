@@ -43,7 +43,7 @@
     </tr>
     <tr>
         <th scope="row">Mem</th>
-        <td id="MemTotal"><?php echo $MemTotal ?>MB</td>
+        <td class="MemTotal"><?php echo $MemTotal ?>MB</td>
         <td id="MemUsed"><?php echo $MemUsed ?>MB</td>
         <td id="MemFree"><?php echo $MemFree ?>MB</td>
     </tr>
@@ -83,8 +83,13 @@
 </div>
 
 <div id="container">
-
-    <div><canvas id="memoryCanvas"></canvas></div>
+    <div>
+        <div class="label">
+            <h2>Memory Usage</h2>
+            <h2 class="MemTotal">%</h2>
+        </div>
+        <canvas id="memoryCanvas"></canvas>
+    </div>
     <div><canvas id="swapCanvas"></canvas></div>
     <div><canvas id="cpuCanvas"></canvas></div>
 </div>

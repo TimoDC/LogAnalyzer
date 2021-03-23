@@ -29,4 +29,15 @@ table{
     position: relative;
     width: 100%;
     height: auto;
+    z-index: 1;
 } 
+
+.label {
+    position: absolute;
+    text-align: center;
+    align-content: center;
+    vertical-align: bottom;
+    width: 100%;
+    top: 61%;
+    color:  #ff732d;
+}

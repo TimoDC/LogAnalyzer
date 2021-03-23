@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", init);
 function init() {
 
-let MemTotal = document.getElementById("MemTotal").innerText;
+let MemTotal = document.querySelector("tr .MemTotal").innerText;
 let MemUsed = document.getElementById("MemUsed").innerText;
 let MemFree = document.getElementById("MemFree").innerText;
 
@@ -29,8 +29,14 @@ console.log(dataCPU);
 createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage");
 createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage");
 createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage");
+
+addLabelToDoughnut("MemTotal", (parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2));
+
 }
 
+function addLabelToDoughnut(place, value) {
+    document.querySelector("#container .MemTotal").innerText = value + "%";
+}
 
 
 function createDoughnutChart(canvas, labels, data, title) {
