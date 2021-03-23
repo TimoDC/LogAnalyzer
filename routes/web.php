@@ -17,6 +17,9 @@ Route::get("/", "LogAnalyzerController@index") -> middleware("auth");
 
 Route::get("/apache", "apacheLogController@index") -> middleware("auth");
 
+Route::get('/memory', "MemoryController@index")->name('memory');
+
+
 Route::post("apache", "apacheLogController@processForm") -> middleware("auth");
 
 Auth::routes(["register" => false]);
