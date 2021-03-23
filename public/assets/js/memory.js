@@ -28,7 +28,7 @@ console.log(dataCPU);
 
 createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage");
 createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage");
-createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "Swap Usage");
+createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage");
 }
 
 
