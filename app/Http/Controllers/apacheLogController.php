@@ -21,7 +21,6 @@ class apacheLogController extends Controller
             $filename = $this -> changeName($filename, 1);
         }
         $filename = $request->file("file")->storeAs("logFiles", $filename);
-        $content2 = Storage::get($filename);
 
         $content = "<script>
         let promise = fetch('" . $filename . " ')
