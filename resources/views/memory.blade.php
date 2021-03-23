@@ -65,25 +65,27 @@
 <table>
     <tr>
         <th scope="row">CPU (user)</th>
-        <td id="MemFree"><?php echo $usr ?>%</td>
+        <td id="user"><?php echo $usr ?>%</td>
     </tr>
     <tr>
         <th scope="row">CPU (system)</th>
-        <td id="MemFree"><?php echo $sys ?>%</td>
-    </tr>
-    <tr>
-        <th scope="row">CPU (idle)</th>
-        <td id="MemFree"><?php echo $idle ?>%</td>
+        <td id="system"><?php echo $sys ?>%</td>
     </tr>
     <tr>
         <th scope="row">CPU (iowait)</th>
-        <td id="MemFree"><?php echo $iowait ?>%</td>
+        <td id="iowait"><?php echo $iowait ?>%</td>
+    </tr>
+    <tr>
+        <th scope="row">CPU (idle)</th>
+        <td id="idle"><?php echo $idle ?>%</td>
     </tr>
 </table>
 </div>
 
 <canvas id="memoryCanvas" height="50rem"></canvas>
 <canvas id="swapCanvas" height="50rem"></canvas>
+<canvas id="cpuCanvas" height="50rem"></canvas>
+
 
 <script src="{{ asset('assets/js/memory.js') }}"></script>
 </body>
