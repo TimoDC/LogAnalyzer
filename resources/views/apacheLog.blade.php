@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
 </head>
 
 <body>
@@ -13,14 +14,18 @@
     <form action="{{ asset('/apache') }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="file" name="file">
+        <label for="filename">Filename</label>
+        <input type="text" name="filename" id="filename">
         <button type="submit">Submit</button>
     </form>
 
     @isset ($content)
 
-    <p>{{ $content }}</p>
+    <p>{!! $content !!}</p> 
 
     @endisset
+
+    <script src="{{ asset('assets/js/apacheLog.js') }}"></script>
 </body>
 
 </html>
