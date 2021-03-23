@@ -35,9 +35,9 @@
     </tr>
     <tr>
         <th scope="row">Mem</th>
-        <td><?php echo $MemTotal ?></td>
-        <td><?php echo $MemUsed ?></td>
-        <td><?php echo $MemFree ?></td>
+        <td id="MemTotal"><?php echo $MemTotal ?></td>
+        <td id="MemUsed"><?php echo $MemUsed ?></td>
+        <td id="MemFree"><?php echo $MemFree ?></td>
     </tr>
     <tr>
         <th scope="row">Swap</th>
