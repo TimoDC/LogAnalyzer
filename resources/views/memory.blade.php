@@ -20,6 +20,13 @@
     $SwapTotal = shell_exec("free  --mega |grep Swap| cut -c 10-22| sed -e 's/^[ \t]*//'");
     $SwapUsed = shell_exec("free  --mega |grep Swap| cut -c 20-32| sed -e 's/^[ \t]*//'");
     $SwapFree = shell_exec("free --mega |grep Swap| cut -c 35-45 | sed -e 's/^[ \t]*//'");
+
+    $AmountProcesses = shell_exec("ps -e | wc -l");
+
+    $usr = shell_exec("mpstat |grep all | cut -c 20-25 | sed -e 's/^[ \t]*//'");
+    $sys = shell_exec("mpstat |grep all | cut -c 34-40 | sed -e 's/^[ \t]*//'");
+    $iowait = shell_exec("mpstat |grep all | cut -c 45-50 | sed -e 's/^[ \t]*//'");
+    $idle = shell_exec("mpstat |grep all | cut -c 90-100 | sed -e 's/^[ \t]*//'");
     ?>
 
 <body>
@@ -45,6 +52,32 @@
         <td id="SwapTotal"><?php echo $SwapTotal ?></td>
         <td id="SwapUsed"><?php echo $SwapUsed ?></td>
         <td id="SwapFree"><?php echo $SwapFree ?></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th scope="row">Amount of running processes</th>
+        <td id="MemFree"><?php echo $AmountProcesses ?></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th scope="row">CPU (user)</th>
+        <td id="MemFree"><?php echo $usr ?>%</td>
+    </tr>
+    <tr>
+        <th scope="row">CPU (system)</th>
+        <td id="MemFree"><?php echo $sys ?>%</td>
+    </tr>
+    <tr>
+        <th scope="row">CPU (idle)</th>
+        <td id="MemFree"><?php echo $idle ?>%</td>
+    </tr>
+    <tr>
+        <th scope="row">CPU (iowait)</th>
+        <td id="MemFree"><?php echo $iowait ?>%</td>
     </tr>
 </table>
 </div>
