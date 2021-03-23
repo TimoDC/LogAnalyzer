@@ -54,11 +54,15 @@ main section#authlogcharts h2 {
     text-align: left;
 }
 
-#appnamechart {
-    height: 300px;
-    width: 300px;
+#charts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 200px;
 }
 
-#appnamechart canvas {
-    margin-bottom: 100px;
+#appnamechart,
+#unsuccessfulattemptschart {
+    height: 400px;
+    width: 400px;
 }

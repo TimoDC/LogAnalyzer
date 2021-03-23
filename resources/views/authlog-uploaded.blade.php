@@ -27,12 +27,19 @@
         </table>
     </div>
 
-    <div id="appnamechart">
-        <canvas id="appname" width="400" height="400"></canvas>
+    <div id="charts">
+        <div id="appnamechart">
+            <canvas id="appname" width="400" height="400"></canvas>
+        </div>
+
+        <div id="unsuccessfulattemptschart">
+            <canvas id="unsuccessfulattempts" width="400" height="400"></canvas>
+        </div>
     </div>
 </section>
 @endsection
 
 @section("script")
+<script src="{{ asset('assets/js/palette.js') }}"></script>
 <script src="{{ asset('assets/js/authlog.js') }}"></script>
 @endsection

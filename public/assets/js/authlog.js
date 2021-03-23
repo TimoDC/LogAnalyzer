@@ -17,45 +17,124 @@ function showInfo() {
 
             showCountEntries(entries);
             showEntriesInTable(entries);
-            addPieChartForAppName(entries);
+            addChartForAppName(entries);
+
+            addChartForUnsuccessfulAttempts(entries);
         })
 }
 
-function addPieChartForAppName(entries) {
-    const appname = document.querySelector("#appnamechart canvas");
+function addChartForUnsuccessfulAttempts(entries) {
+    const unsuccessfulattempts = document.querySelector("#unsuccessfulattemptschart canvas");
 
-    let { cron, sshd, newsyslog, other } = countAppNames(entries);
+    let countUnsuccessfulAttempts = 0;
+    let unsuccessfulAttemptIps = [];
 
-    const appnameChart = CreateAppNameChart(appname, cron, sshd, newsyslog, other);
+    let arrayDuplicates = [];
+    let countUnsuccessfulAttemptIps = {};
+
+    for (let i = 0; i < entries.length; i++) {
+        if (unsuccessfulAttemptFound(entries, i)) {
+            const entry = entries[i];
+            const splitter = entry.split("from ");
+
+            let unsuccessfulAttemptIp = splitter[1];
+
+            if (spaceAfterIpFound(unsuccessfulAttemptIp)) {
+                unsuccessfulAttemptIp = makeValueIpOnly(unsuccessfulAttemptIp);
+            }
+
+            arrayDuplicates.push(unsuccessfulAttemptIp);
+
+            if (!unsuccessfulAttemptIps.includes(unsuccessfulAttemptIp)) {
+                unsuccessfulAttemptIps.push(unsuccessfulAttemptIp);
+            }
+
+            countUnsuccessfulAttempts++;
+        }
+    }
+
+    countIpDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptIps);
+
+    const unsuccessfulattemptsChart = createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIps, countUnsuccessfulAttempts);
 }
 
-function CreateAppNameChart(appname, cron, sshd, newsyslog, other) {
-    return new Chart(appname, {
+function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIps, countUnsuccessfulAttempts) {
+    return new Chart(unsuccessfulattempts, {
         type: 'pie',
         data: {
-            labels: ["CRON", "sshd", "newsyslog", "other"],
+            labels: unsuccessfulAttemptIps,
             datasets: [{
-                label: 'Pie App-Name',
-                data: [cron, sshd, newsyslog, other],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)'
-                ],
+                label: 'Unsuccessful Attempts',
+                data: Object.values(countUnsuccessfulAttemptIps),
+                backgroundColor: palette('tol', Object.values(countUnsuccessfulAttemptIps).length).map(function (hex) {
+                    return "#" + hex;
+                }),
                 borderWidth: 1
             }]
         },
         options: {
             title: {
                 display: true,
-                text: 'Pie App-Name'
+                text: `Unsuccessful Attempt IP's (total unsuccessful attempts: ${countUnsuccessfulAttempts})`
+            },
+            legend: {
+                display: true,
+                position: 'right'
+            }
+        }
+    });
+}
+
+function countIpDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptIps) {
+    arrayDuplicates.forEach(function (x) {
+        countUnsuccessfulAttemptIps[x] = (countUnsuccessfulAttemptIps[x] || 0) + 1;
+    });
+}
+
+function makeValueIpOnly(unsuccessfulAttemptIp) {
+    const spaceSplitter = unsuccessfulAttemptIp.split(" ");
+    unsuccessfulAttemptIp = spaceSplitter[0];
+    return unsuccessfulAttemptIp;
+}
+
+function spaceAfterIpFound(unsuccessfulAttemptIp) {
+    return unsuccessfulAttemptIp.includes(" ");
+}
+
+function unsuccessfulAttemptFound(entries, i) {
+    return entries[i].includes("Invalid user");
+}
+
+function addChartForAppName(entries) {
+    const appname = document.querySelector("#appnamechart canvas");
+
+    let { cron, sshd, other } = countAppNames(entries);
+
+    const appnameChart = CreateAppNameChart(appname, cron, sshd, other);
+}
+
+function CreateAppNameChart(appname, cron, sshd, other) {
+    return new Chart(appname, {
+        type: 'pie',
+        data: {
+            labels: ["CRON", "sshd", "other"],
+            datasets: [{
+                label: 'Pie App-Name',
+                data: [cron, sshd, other],
+                backgroundColor: palette('tol', [cron, sshd, other].length).map(function(hex) {
+                    return "#" + hex;
+                }),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'App-Name'
+            },
+            legend: {
+                display: true,
+                position: 'right'
             }
         }
     });
@@ -64,7 +143,6 @@ function CreateAppNameChart(appname, cron, sshd, newsyslog, other) {
 function countAppNames(entries) {
     let cron = 0;
     let sshd = 0;
-    let newsyslog = 0;
     let other = 0;
 
     for (let i = 0; i < entries.length; i++) {
@@ -83,15 +161,11 @@ function countAppNames(entries) {
             sshd++;
         }
 
-        else if (appname === "newsyslog") {
-            newsyslog++;
-        }
-
         else {
             other++;
         }
     }
-    return { cron, sshd, newsyslog, other };
+    return { cron, sshd, other };
 }
 
 function showEntriesInTable(entries) {
