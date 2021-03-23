@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', "LogAnalyzerController@index") -> middleware("auth");
 
-Route::get('/memory', "MemoryController@index");
+Route::get('/memory', "MemoryController@index")->name('memory');;
 
 Auth::routes(['register' => false]);
 
