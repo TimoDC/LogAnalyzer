@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', "LogAnalyzerController@index") -> middleware("auth");
 
+Route::get('/memory', "MemoryController@index")->name('memory');;
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
