@@ -9,3 +9,23 @@ table{
     margin-bottom: 1rem;
     width: 20%;
 }
+
+#container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+#container div {
+    justify-self: stretch;
+    align-self: stretch;
+    height:40vh;
+    width: 80vh;
+}
+
+#container canvas {
+    justify-self: stretch;
+    align-self: stretch;
+    height:40vh;
+    width: 80vh;
+} 

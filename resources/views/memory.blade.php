@@ -82,10 +82,12 @@
 </table>
 </div>
 
-<canvas id="memoryCanvas" height="50rem"></canvas>
-<canvas id="swapCanvas" height="50rem"></canvas>
-<canvas id="cpuCanvas" height="50rem"></canvas>
+<div id="container">
 
+    <div><canvas id="memoryCanvas"></canvas></div>
+    <div><canvas id="swapCanvas"></canvas></div>
+    <div><canvas id="cpuCanvas"></canvas></div>
+</div>
 
 <script src="{{ asset('assets/js/memory.js') }}"></script>
 </body>

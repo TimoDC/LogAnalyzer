@@ -56,6 +56,7 @@ function createDoughnutChart(canvas, labels, data, title) {
             }]
         },
         options: {
+            responsive: false,
             elements: {
                 center: {
                     display: true,
