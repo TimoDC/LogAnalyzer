@@ -18,6 +18,13 @@
             <li>Auth Logs</li>
             <li>Overview All Logs</li>
         </div>
+
+        <div>
+        <?php
+        echo shell_exec('free -h');
+        ?>
+        </div>
+
     </ul>
 </section>
 
