@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', "LogAnalyzerController@index") -> middleware("auth");
+Route::get("/", "LogAnalyzerController@index") -> middleware("auth");
+
+Route::get("/apache", "apacheLogController@index") -> middleware("auth");
 
 Route::get('/memory', "MemoryController@index")->name('memory');
 
-Auth::routes(['register' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post("apache", "apacheLogController@processForm") -> middleware("auth");
+
+Auth::routes(["register" => false]);
+
+Route::get("/home", [App\Http\Controllers\HomeController::class, 'index'])->name('home');
