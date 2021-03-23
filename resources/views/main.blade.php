@@ -15,7 +15,7 @@
 
         <div>
             <li>MySQL Logs</li>
-            <li>Auth Logs</li>
+            <li><a href="{{ route('authlogs') }}">Auth Logs</a></li>
             <li>Overview All Logs</li>
         </div>
     </ul>
