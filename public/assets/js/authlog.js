@@ -14,20 +14,20 @@ function showInfo() {
         .then(response => response.text())
         .then(function(result) {
             const auth = result;
-            
-            showCountEntries(auth);
+            const entries = auth.split("\n");
 
-            showEntriesInTable(auth);
+            showCountEntries(entries);
+
+            showEntriesInTable(entries);
         })
 }
 
-function showEntriesInTable(auth) {
-    const lines = auth.split("\n");
+function showEntriesInTable(entries) {
     const tablebody = document.querySelector("#entries tbody");
 
-    for (let i = 0; i < lines.length-1; i++) {
-        const line = lines[i];
-        const splitter = line.split(" ");
+    for (let i = 0; i < entries.length; i++) {
+        const entry = entries[i];
+        const splitter = entry.split(" ");
 
         const timestamp = `${splitter.shift()} ${splitter.shift()} ${splitter.shift()}`;
         const hostname = splitter.shift();
@@ -45,15 +45,8 @@ function showEntriesInTable(auth) {
     }
 }
 
-function showCountEntries(auth) {
-    let entries = 0;
-    for (let i = 0, n = auth.length; i < n; i++) {
-        if (auth[i] === '\n') {
-            entries++;
-        }
-    }
-
-    let countEntries = document.querySelector("#authlogcharts #entries h2 span");
-    countEntries.innerHTML += `${entries}`;
+function showCountEntries(entries) {
+    const countEntries = document.querySelector("#authlogcharts #entries h2 span");
+    countEntries.innerHTML += `${entries.length}`;
 }
 
