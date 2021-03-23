@@ -19,8 +19,11 @@ Route::get("/apache", "apacheLogController@index") -> middleware("auth");
 
 Route::get('/memory', "MemoryController@index")->name('memory');
 
+Route::post("/createDashBoard", "LogAnalyzerController@createDashBoard");
 
 Route::post("apache", "apacheLogController@processForm") -> middleware("auth");
+
+Route::get("/dashboard/{x}", "LogAnalyzerController@loadDashBoard") -> name("id");
 
 Auth::routes(["register" => false]);
 

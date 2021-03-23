@@ -29,7 +29,7 @@
         <div class="logInfo">
             <p></p>
         </div>
-        <div class="logChart">
+        <div class="logChart hidden">
             <div>
                 <p>IP Address</p>
                 <canvas id="ipChart"></canvas>
