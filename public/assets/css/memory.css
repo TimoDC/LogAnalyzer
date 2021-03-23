@@ -19,13 +19,14 @@ table{
 #container div {
     justify-self: stretch;
     align-self: stretch;
-    height:40vh;
-    width: 80vh;
+    width: 100%;
+    position: relative;
 }
 
 #container canvas {
     justify-self: stretch;
     align-self: stretch;
-    height:40vh;
-    width: 80vh;
+    position: relative;
+    width: 100%;
+    height: auto;
 } 
