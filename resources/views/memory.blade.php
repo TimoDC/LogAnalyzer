@@ -49,7 +49,7 @@
     </tr>
     <tr>
         <th scope="row">Swap</th>
-        <td id="SwapTotal"><?php echo $SwapTotal ?>MB</td>
+        <td class="SwapTotal"><?php echo $SwapTotal ?>MB</td>
         <td id="SwapUsed"><?php echo $SwapUsed ?>MB</td>
         <td id="SwapFree"><?php echo $SwapFree ?>MB</td>
     </tr>
@@ -90,8 +90,21 @@
         </div>
         <canvas id="memoryCanvas"></canvas>
     </div>
-    <div><canvas id="swapCanvas"></canvas></div>
-    <div><canvas id="cpuCanvas"></canvas></div>
+
+    <div>
+        <div class="label">
+            <h2>Swap Usage</h2>
+            <h2 class="SwapTotal">%</h2>
+        </div>
+        <canvas id="swapCanvas"></canvas>
+    </div>
+
+    <div>
+        <div class="label">
+            <h2>CPU Usage</h2>
+            <h2 class="cpuTotal">%</h2>
+        </div>
+        <canvas id="cpuCanvas"></canvas></div>
 </div>
 
 <script src="{{ asset('assets/js/memory.js') }}"></script>

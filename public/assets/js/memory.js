@@ -7,7 +7,7 @@ let MemTotal = document.querySelector("tr .MemTotal").innerText;
 let MemUsed = document.getElementById("MemUsed").innerText;
 let MemFree = document.getElementById("MemFree").innerText;
 
-let SwapTotal = document.getElementById("SwapTotal").innerText;
+let SwapTotal = document.querySelector("tr .SwapTotal").innerText;
 let SwapUsed = document.getElementById("SwapUsed").innerText;
 let SwapFree = document.getElementById("SwapFree").innerText;
 
@@ -21,7 +21,7 @@ let labelsCPU = ["user", "system", "iowait", "idle"]
 
 let dataMem = [(parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2), (parseInt(MemFree)/parseInt(MemTotal) *100).toFixed(2)];
 let dataSwap = [(parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2), (parseInt(SwapFree)/parseInt(SwapTotal) *100).toFixed(2)];
-let dataCPU = [parseInt(user),parseInt(system),parseInt(iowait),parseInt(idle)];
+let dataCPU = [parseFloat(user).toFixed(2),parseFloat(system).toFixed(2),parseFloat(iowait).toFixed(2),parseFloat(idle).toFixed(2)];
 console.log(dataMem);
 console.log(dataSwap);
 console.log(dataCPU);
@@ -31,11 +31,12 @@ createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage");
 createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage");
 
 addLabelToDoughnut("MemTotal", (parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2));
-
+addLabelToDoughnut("SwapTotal", (parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2));
+addLabelToDoughnut("cpuTotal", (parseFloat(user) + parseFloat(system)));
 }
 
 function addLabelToDoughnut(place, value) {
-    document.querySelector("#container .MemTotal").innerText = value + "%";
+    document.querySelector("#container ." + place).innerText = value + "%";
 }
 
 
