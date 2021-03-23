@@ -15,7 +15,7 @@ class AuthLogsController extends Controller
 
         $authlog = $data["authlog"] -> store("authlog");
 
-        return view("authlog-uploaded");
+        return view("authlog-uploaded", ["authlog" => $authlog]);
     }
 
     function validation(Request $request) {
