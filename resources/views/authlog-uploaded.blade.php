@@ -10,3 +10,7 @@
     <input type="hidden" id="authlog" name="authlog" value="{{ asset($authlog) }}">
 </section>
 @endsection
+
+@section("script")
+<script src="{{ asset('assets/js/authlog.js') }}"></script>
+@endsection
