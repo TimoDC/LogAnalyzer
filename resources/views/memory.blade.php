@@ -43,15 +43,15 @@
     </tr>
     <tr>
         <th scope="row">Mem</th>
-        <td id="MemTotal"><?php echo $MemTotal ?></td>
-        <td id="MemUsed"><?php echo $MemUsed ?></td>
-        <td id="MemFree"><?php echo $MemFree ?></td>
+        <td id="MemTotal"><?php echo $MemTotal ?>MB</td>
+        <td id="MemUsed"><?php echo $MemUsed ?>MB</td>
+        <td id="MemFree"><?php echo $MemFree ?>MB</td>
     </tr>
     <tr>
         <th scope="row">Swap</th>
-        <td id="SwapTotal"><?php echo $SwapTotal ?></td>
-        <td id="SwapUsed"><?php echo $SwapUsed ?></td>
-        <td id="SwapFree"><?php echo $SwapFree ?></td>
+        <td id="SwapTotal"><?php echo $SwapTotal ?>MB</td>
+        <td id="SwapUsed"><?php echo $SwapUsed ?>MB</td>
+        <td id="SwapFree"><?php echo $SwapFree ?>MB</td>
     </tr>
 </table>
 

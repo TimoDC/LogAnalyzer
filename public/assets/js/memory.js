@@ -19,8 +19,8 @@ let idle = document.getElementById("idle").innerText;
 let labelsMem = ["used", "free"];
 let labelsCPU = ["user", "system", "iowait", "idle"]
 
-let dataMem = [(MemUsed/MemTotal *100).toFixed(2), (MemFree/MemTotal *100).toFixed(2)];
-let dataSwap = [(SwapUsed/SwapTotal *100).toFixed(2), (SwapFree/SwapTotal *100).toFixed(2)];
+let dataMem = [(parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2), (parseInt(MemFree)/parseInt(MemTotal) *100).toFixed(2)];
+let dataSwap = [(parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2), (parseInt(SwapFree)/parseInt(SwapTotal) *100).toFixed(2)];
 let dataCPU = [parseInt(user),parseInt(system),parseInt(iowait),parseInt(idle)];
 console.log(dataMem);
 console.log(dataSwap);
