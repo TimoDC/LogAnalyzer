@@ -1,7 +1,21 @@
-main section {
+main section#authlogform {
+    width: 33%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main section#authlogcharts {
     margin-left: 20px;
 }
 
-main section h1 {
+main section#authlogform h1,
+main section#authlogcharts h1 {
     font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+main #authlogform form label,
+main #authlogform form input {
+    display: block;
+    margin-bottom: 10px;
 }
