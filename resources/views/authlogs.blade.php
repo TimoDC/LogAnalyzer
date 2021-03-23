@@ -5,11 +5,19 @@
 @endsection
 
 @section("main")
-<section>
+<section id="authlogform">
     <h1>Auth Logs</h1>
 
-    <form method="post" action="{{ route('upload-authlog') }}">
+    <form method="post" enctype="multipart/form-data" action="{{ route('upload-authlog') }}">
         @csrf
+
+        @if ($errors -> any())
+            <ul id="errors">
+                @foreach($errors -> all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
 
         <label for="authlog">Upload Auth Log</label>
         <input type="file" name="authlog" id="authlog" accept=".log" required>
