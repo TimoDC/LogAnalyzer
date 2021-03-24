@@ -8,6 +8,13 @@ let databaseAmounts = [];
 let users = [];
 let usersWithoutDuplicates = [];
 let userAmounts = [];
+let logins = [];
+let loginsWithoutDuplicates = [];
+let loginAmounts = [];
+
+let databaseChart = document.querySelector('#databaseChart');
+let userChart = document.querySelector('#userChart');
+let loginChart = document.querySelector('#loginChart');
 
 function init() {
     checkforResponse();
@@ -23,7 +30,10 @@ function checkforResponse() {
             filterConnectionStrings(content);
             fillAmountList(databasesWithoutDuplicates, databases, databaseAmounts);
             fillAmountList(usersWithoutDuplicates, users, userAmounts);
-            createPolarChart();
+            fillAmountList(loginsWithoutDuplicates, logins, loginAmounts);
+            createPolarChart(databaseChart, databasesWithoutDuplicates, databaseAmounts, 'Most used databases');
+            createPolarChart(userChart, usersWithoutDuplicates, userAmounts, 'Most used users');
+            createPolarChart(loginChart, loginsWithoutDuplicates, loginAmounts, 'Most used logins');
         });
     }
 }
@@ -43,30 +53,28 @@ function filterConnectionStrings(content) {
 
 function splitStringsInParts(string) {
     let parts = string.split(" ");
+
     createTable(parts);
-    filterDatabasesWithDuplicates(parts);
-    filterDatabasesWithoutDuplicates(parts);
-    filterUsersWithDuplicates(parts);
-    filterUsersWithoutDuplicates(parts);
+
+    let databasePart = parts[10];
+    let userPart = parts[8];
+    let loginPart = parts[6].split("\t")[1];
+    
+    filterWithDuplicates(databases, databasePart);
+    filterWithoutDuplicates(databasesWithoutDuplicates, databasePart);
+    filterWithDuplicates(users, userPart);
+    filterWithoutDuplicates(usersWithoutDuplicates, userPart);
+    filterWithDuplicates(logins, loginPart);
+    filterWithoutDuplicates(loginsWithoutDuplicates, loginPart);
 }
 
-function filterDatabasesWithDuplicates(parts) {
-    databases.push(parts[10]);
+function filterWithDuplicates(listToFilter, partIndex) {
+    listToFilter.push(partIndex);
 }
 
-function filterDatabasesWithoutDuplicates(parts) {
-    if (!databasesWithoutDuplicates.includes(parts[10])) {
-        databasesWithoutDuplicates.push(parts[10]);
-    }
-}
-
-function filterUsersWithDuplicates(parts) {
-    users.push(parts[8]);
-}
-
-function filterUsersWithoutDuplicates(parts) {
-    if (!usersWithoutDuplicates.includes(parts[8])) {
-        usersWithoutDuplicates.push(parts[8]);
+function filterWithoutDuplicates(listToFilter, partIndex) {
+    if (!listToFilter.includes(partIndex)) {
+        listToFilter.push(partIndex);
     }
 }
 
@@ -99,19 +107,15 @@ function fillAmountList(listWithoutDuplicates, listWithDuplicates, amountList) {
     });
 }
 
-function createPolarChart() {
+function createPolarChart(chart, label, data, title) {
 
-    let databaseChart = document.getElementById('databaseChart');
-    let userChart = document.getElementById('userChart');
-
-
-    new Chart(databaseChart, {
+    new Chart(chart, {
         type: 'doughnut',
         data: {
-            labels: databasesWithoutDuplicates,
+            labels: label,
             datasets: [{
                 label: '# of Votes',
-                data: databaseAmounts,
+                data: data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
@@ -134,40 +138,7 @@ function createPolarChart() {
         options: {
             title: {
                 display: true,
-                text: 'Most used databases'
-            }
-        }
-    });
-    new Chart(userChart, {
-        type: 'doughnut',
-        data: {
-            labels: usersWithoutDuplicates,
-            datasets: [{
-                label: '# of Votes',
-                data: userAmounts,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: 'Most used users'
+                text: title
             }
         }
     });

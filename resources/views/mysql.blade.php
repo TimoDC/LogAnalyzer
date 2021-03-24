@@ -36,6 +36,9 @@
         <div id="userCanvas">
             <canvas id="userChart"></canvas>
         </div>
+        <div id="loginCanvas">
+            <canvas id="loginChart"></canvas>
+        </div>
     </div>
 </div>
 @endisset

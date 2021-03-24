@@ -3,6 +3,7 @@ table {
     border-collapse: collapse;
     width: 50rem;
     text-align: center;
+    margin-left: 10rem;
   }
   
 table td, table th {
@@ -28,8 +29,8 @@ table th {
   flex-direction: row;
 }
 
-#databaseCanvas, #userCanvas{
-  width: 1000px;
+#databaseCanvas, #userCanvas, #loginCanvas{
+  width: 50rem;
 }
 
 #charts {
