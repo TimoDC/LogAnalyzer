@@ -11,24 +11,33 @@
 @isset ($content)
 
 <p id="logContent">{!! $content !!}</p>
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Login</th>
-            <th>User</th>
-            <th>Database</th>
-        </tr>
-    </thead>
-    <tbody id="logTable">
 
-    </tbody>
-</table>
+<div id="content">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Login</th>
+                <th>User</th>
+                <th>Database</th>
+            </tr>
+        </thead>
+        <tbody id="logTable">
 
-<canvas id="polarChart" height="50rem"></canvas>
+        </tbody>
+    </table>
 
+    <div id="charts">
+        <div id="databaseCanvas">
+            <canvas id="databaseChart"></canvas>
+        </div>
+        <div id="userCanvas">
+            <canvas id="userChart"></canvas>
+        </div>
+    </div>
+</div>
 @endisset
 
 @endsection

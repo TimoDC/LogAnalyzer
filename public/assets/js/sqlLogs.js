@@ -5,9 +5,27 @@ document.addEventListener("DOMContentLoaded", init);
 let databases = [];
 let databasesWithoutDuplicates = [];
 let databaseAmounts = [];
+let users = [];
+let usersWithoutDuplicates = [];
+let userAmounts = [];
 
 function init() {
     checkforResponse();
+}
+
+function checkforResponse() {
+    if (typeof promise === "undefined") {
+        setTimeout(() => {
+            checkforResponse();
+        }, 5000);
+    } else {
+        promise.then(content => {
+            filterConnectionStrings(content);
+            fillAmountList(databasesWithoutDuplicates, databases, databaseAmounts);
+            fillAmountList(usersWithoutDuplicates, users, userAmounts);
+            createPolarChart();
+        });
+    }
 }
 
 function filterConnectionStrings(content) {
@@ -28,6 +46,8 @@ function splitStringsInParts(string) {
     createTable(parts);
     filterDatabasesWithDuplicates(parts);
     filterDatabasesWithoutDuplicates(parts);
+    filterUsersWithDuplicates(parts);
+    filterUsersWithoutDuplicates(parts);
 }
 
 function filterDatabasesWithDuplicates(parts) {
@@ -37,6 +57,16 @@ function filterDatabasesWithDuplicates(parts) {
 function filterDatabasesWithoutDuplicates(parts) {
     if (!databasesWithoutDuplicates.includes(parts[10])) {
         databasesWithoutDuplicates.push(parts[10]);
+    }
+}
+
+function filterUsersWithDuplicates(parts) {
+    users.push(parts[8]);
+}
+
+function filterUsersWithoutDuplicates(parts) {
+    if (!usersWithoutDuplicates.includes(parts[8])) {
+        usersWithoutDuplicates.push(parts[8]);
     }
 }
 
@@ -54,52 +84,41 @@ function createTable(parts) {
     </tr>`
 }
 
-function makeDatabaseWithAmountDictionary() {
+function fillAmountList(listWithoutDuplicates, listWithDuplicates, amountList) {
 
-    databasesWithoutDuplicates.forEach(database => {
+    listWithoutDuplicates.forEach(item => {
         let amount = 0;
-        databases.forEach(database2 => {
-            if (database === database2) {
+        listWithDuplicates.forEach(item2 => {
+            if (item === item2) {
                 amount++;
             }
         });
-        if (!databaseAmounts.includes(database)) {
-            databaseAmounts.push(amount);
+        if (!amountList.includes(item)) {
+            amountList.push(amount);
         }
     });
 }
 
-function checkforResponse() {
-    if (typeof promise === "undefined") {
-        setTimeout(() => {
-            checkforResponse();
-        }, 5000);
-    } else {
-        promise.then(content => {
-            filterConnectionStrings(content);
-            makeDatabaseWithAmountDictionary();
-            createPolarChart();
-        });
-    }
-}
-
 function createPolarChart() {
 
-    let chart1 = document.getElementById('polarChart');
-    new Chart(chart1, {
-        type: 'polarArea',
+    let databaseChart = document.getElementById('databaseChart');
+    let userChart = document.getElementById('userChart');
+
+
+    new Chart(databaseChart, {
+        type: 'doughnut',
         data: {
             labels: databasesWithoutDuplicates,
             datasets: [{
                 label: '# of Votes',
                 data: databaseAmounts,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -116,6 +135,39 @@ function createPolarChart() {
             title: {
                 display: true,
                 text: 'Most used databases'
+            }
+        }
+    });
+    new Chart(userChart, {
+        type: 'doughnut',
+        data: {
+            labels: usersWithoutDuplicates,
+            datasets: [{
+                label: '# of Votes',
+                data: userAmounts,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Most used users'
             }
         }
     });
