@@ -1,6 +1,6 @@
 @extends("main")
 
-@section("apacheLog")
+@section("log")
 @isset ($content)
 
 {!! $content !!}
