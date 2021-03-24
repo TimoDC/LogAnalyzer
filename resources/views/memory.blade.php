@@ -22,10 +22,10 @@
     $SwapUsed = shell_exec("free  --mega |grep Swap| cut -c 20-32| sed -e 's/^[ \t]*//'");
     $SwapFree = shell_exec("free --mega |grep Swap| cut -c 35-45 | sed -e 's/^[ \t]*//'");
 
-    $DiskTotal = shell_exec("df -k | grep sda | awk '{print $2}'");
-    $DiskUsed = shell_exec("df -k | grep sda | awk '{print $3}'");
-    $DiskFree = shell_exec("df -k | grep sda | awk '{print $4}'");
-
+    $DiskTotal = shell_exec("df / | tail +2 | awk '{print $2/1000000}' OFMT='%.2f'");
+    $DiskUsed = shell_exec("df / | tail +2 | awk '{print $3/1000000}' OFMT='%.2f'");
+    $DiskFree = shell_exec("df / | tail +2 | awk '{print $4/1000000}' OFMT='%.2f'");
+    $DiskName = shell_exec("df / | tail +2 | awk '{print $1}'");
 
     $AmountProcesses = shell_exec("ps -e | wc -l");
 
@@ -37,10 +37,7 @@
 
 <body>
     <p><?php 
-
             echo $DiskTotal, $DiskFree, $DiskUsed;
-
-
             ?></p>
 
 <button class="btn" onclick="history.back()">Home</button>
@@ -90,6 +87,21 @@
         <tr>
             <th scope="row">CPU (idle)</th>
             <td id="idle"><?php echo $idle ?>%</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th></th>
+            <th scope="col">total</th>
+            <th scope="col">used</th>
+            <th scope="col">free</th>
+        </tr>
+        <tr>
+            <th scope="row"><?php echo $DiskName ?></th>
+            <td class="DiskTotal"><?php echo $DiskTotal ?>GB</td>
+            <td id="DiskUsed"><?php echo $DiskUsed ?>GB</td>
+            <td id="DiskFree"><?php echo $DiskFree ?>GB</td>
         </tr>
     </table>
 </div>
