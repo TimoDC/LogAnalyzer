@@ -22,7 +22,25 @@ function showInfo() {
             addChartForUnsuccessfulAttempts(entries);
             addChartForActivity(entries);
             addChartForUnsuccessfulUsernames(entries);
+
+            addTitleForTotalErrors(entries);
         })
+}
+
+function addTitleForTotalErrors(entries) {
+    const totalerrors = document.querySelector("#totalerrors");
+
+    let countErrors = 0;
+
+    for (let i = 0; i < entries.length; i++) {
+        if (entries[i].includes("error")) {
+            countErrors++;
+        }
+    }
+    totalerrors.innerHTML = `
+                                        <h1>${countErrors}</h1>
+                                        <p>Errors</p>
+                                    `;
 }
 
 function addChartForUnsuccessfulUsernames(entries) {

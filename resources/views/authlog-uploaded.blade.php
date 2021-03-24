@@ -28,10 +28,10 @@
     </div>
 
     <div class="totals">
-        <div id="totalunsuccessfulattempts">
-        </div>
-
         <div id="totalerrors">
+            </div>
+
+        <div id="totalunsuccessfulattempts">
         </div>
     </div>
 

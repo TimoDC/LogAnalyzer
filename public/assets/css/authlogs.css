@@ -70,3 +70,7 @@ main section#authlogcharts h2 {
 .totals {
     text-align: center;
 }
+
+#totalunsuccessfulattempts {
+    margin-right: 150px;
+}
