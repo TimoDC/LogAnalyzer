@@ -45,6 +45,7 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
     console.log("u moeder")
     console.log(chart3);
     new Chart(chart3, {
+        responsive: true,
         type: 'doughnut',
         data: {
             labels: labels,
@@ -67,11 +68,11 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
             responsive: false,
             elements: {
                 center: {
-                    text: centerLabel + "%",
+                    text: title +' ' + centerLabel +"%",
                     color: '#ffc7b6', // Default is #000000
                     fontStyle: 'Arial', // Default is Arial
-                    sidePadding: 20, // Default is 20 (as a percentage)
-                    minFontSize: false, // Default is 20 (in px), set to false and text will not wrap.
+                    sidePadding: 10, // Default is 20 (as a percentage)
+                    minFontSize: 13, // Default is 20 (in px), set to false and text will not wrap.
                     lineHeight: 25 // Default is 25 (in px), used for when text wraps
                 }
               },

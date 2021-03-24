@@ -18,6 +18,26 @@ table{
 }
 
 
+@media screen and (max-width: 1500px) {
+    #CanvasContainer {
+        position: relative;
+        width: available;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #CanvasContainer {
+        position: relative;
+        width: available;
+        display: grid;
+        grid-template-columns: 100%;
+    }
+}
+
+
+
 #CanvasContainer div {
     justify-self: stretch;
     align-self: stretch;
