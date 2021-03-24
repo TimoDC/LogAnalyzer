@@ -65,6 +65,8 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
             }]
         },
         options: {
+            //rotation: 1 * Math.PI,
+            //circumference: 1 * Math.PI,
             responsive: false,
             elements: {
                 center: {
