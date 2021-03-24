@@ -32,7 +32,7 @@
 <body>
 <a href="../"> Home </a>
 
-<div>
+<div id="tableContainer">
     
 <table>
     <tr>
@@ -82,7 +82,7 @@
 </table>
 </div>
 
-<div id="container">
+<div id="CanvasContainer">
     <div>
         <div class="label">
             <h2>Memory Usage</h2>

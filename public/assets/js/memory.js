@@ -36,7 +36,7 @@ addLabelToDoughnut("cpuTotal", (parseFloat(user) + parseFloat(system)));
 }
 
 function addLabelToDoughnut(place, value) {
-    document.querySelector("#container ." + place).innerText = value + "%";
+    document.querySelector("#CanvasContainer ." + place).innerText = value + "%";
 }
 
 

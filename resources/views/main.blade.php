@@ -35,6 +35,7 @@
     <section>
         <ul>
             <div>
+            @isset($dashboard)
             @if($dashboard -> apacheLogFile === "null"){
                 <li>Apache Logs</li>
             @endif
@@ -44,6 +45,7 @@
             @if($dashboard -> mysqlLogFile  === "null"){
                 <li>MySQL Logs</li>
             @endif
+            @endisset
             </div>
         </ul>
     </section>
