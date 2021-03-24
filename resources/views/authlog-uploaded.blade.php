@@ -54,6 +54,12 @@
             <canvas id="unsuccessfulusernames" width="400" height="400"></canvas>
         </div>
     </div>
+
+    <div class="charts">
+        <div id="commandschart">
+            <canvas id="commands" width="400" height="400"></canvas>
+        </div>
+    </div>
 </section>
 @endsection
 

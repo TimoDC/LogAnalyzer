@@ -22,9 +22,72 @@ function showInfo() {
             addChartForUnsuccessfulAttempts(entries);
             addChartForActivity(entries);
             addChartForUnsuccessfulUsernames(entries);
+            addChartForCommands(entries);
 
             addTitleForTotalErrors(entries);
         })
+}
+
+function addChartForCommands(entries) {
+    const commandscanvas = document.querySelector("#commandschart canvas");
+
+    let commands = [];
+
+    let arrayDuplicates = [];
+
+    let countCommands = {};
+    let countCommandsOrdered = [];
+
+    for (let i =0; i< entries.length;i++){
+        if(entries[i].includes("COMMAND")) {
+            const entry = entries[i];
+            const splitter = entry.split("COMMAND=");
+            const firstPartCommandSplitter = splitter[1].split(" ");
+            const commandOnlySplitter = firstPartCommandSplitter[0].split("/");
+
+            const command = commandOnlySplitter[3];
+
+            arrayDuplicates.push(command);
+        }
+    }
+
+    countDuplicatesInObject(arrayDuplicates, countCommands);
+
+    commands = sortObjectByCount(commands, countCommands);
+
+    sortCountDescending(countCommands, countCommandsOrdered);
+
+    const countManyCommands = countCommandsOrdered.length;
+
+    getTop12(commands, countCommandsOrdered);
+
+    createCommandsChart(commandscanvas, commands, countCommandsOrdered, countManyCommands);
+}
+
+function createCommandsChart(commandscanvas, commands, countCommandsOrdered, countManyCommands) {
+    return new Chart(commandscanvas, {
+        type: 'pie',
+        data: {
+            labels: commands,
+            datasets: [{
+                label: 'Most Used Commands',
+                data: countCommandsOrdered,
+                backgroundColor: palette('tol', countCommandsOrdered.length).map(function (hex) {
+                    return "#" + hex;
+                })
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: `Top 12 Most Used Commands (total used commands: ${countManyCommands})`
+            },
+            legend: {
+                display: true,
+                position: 'right'
+            }
+        }
+    });
 }
 
 function addTitleForTotalErrors(entries) {
@@ -77,7 +140,7 @@ function addChartForUnsuccessfulUsernames(entries) {
 
     getTop12(unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
 
-    const unsuccessfulusernamesChart = createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames);
+    createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames);
 }
 
 function createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames) {
@@ -133,7 +196,7 @@ function addChartForActivity(entries) {
 
     orderObjectToArray(countHours, countHoursOrdered);
 
-    const activityChar = createActivityChart(activity, arrayHours, countHoursOrdered);
+    createActivityChart(activity, arrayHours, countHoursOrdered);
 }
 
 function createActivityChart(activity, arrayHours, countHoursOrdered) {
@@ -222,7 +285,7 @@ function addChartForUnsuccessfulAttempts(entries) {
 
     getTop12(unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
 
-    const unsuccessfulattemptsChart = createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countIps);
+    createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countIps);
 }
 
 function addTitleForTotalUnsuccessfulAttempts(countUnsuccessfulAttempts) {
@@ -340,7 +403,7 @@ function addChartForAppName(entries) {
 
     getTop12(arrayAppNames, countAppNamesOrdered);
 
-    const appnameChart = CreateAppNameChart(appname, arrayAppNames, countAppNamesOrdered, countApps);
+    CreateAppNameChart(appname, arrayAppNames, countAppNamesOrdered, countApps);
 }
 
 function CreateAppNameChart(appname, arrayAppNames, countAppNamesOrdered, countApps) {
