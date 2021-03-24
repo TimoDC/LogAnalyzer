@@ -84,27 +84,16 @@
 
 <div id="CanvasContainer">
     <div>
-        <div class="label">
-            <h2>Memory Usage</h2>
-            <h2 class="MemTotal">%</h2>
-        </div>
         <canvas id="memoryCanvas"></canvas>
     </div>
 
     <div>
-        <div class="label">
-            <h2>Swap Usage</h2>
-            <h2 class="SwapTotal">%</h2>
-        </div>
         <canvas id="swapCanvas"></canvas>
     </div>
 
     <div>
-        <div class="label">
-            <h2>CPU Usage</h2>
-            <h2 class="cpuTotal">%</h2>
-        </div>
-        <canvas id="cpuCanvas"></canvas></div>
+        <canvas id="cpuCanvas"></canvas>
+    </div>
 </div>
 
 <script src="{{ asset('assets/js/memory.js') }}"></script>
