@@ -62,7 +62,11 @@
     </div>
 
     <div class="logInfo">
-        <p></p>
+        <p class="logAmount"></p>
+        <p class="ipAmount"></p>
+        <p class="mostUsedOS"></p>
+        <p class="mostUsedBrowser"></p>
+        <p class="mostRequestUrl"></p>
     </div>
     <div class="logChart hidden">
         <div class="hidden">

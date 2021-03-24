@@ -35,7 +35,6 @@ function showOrHideLog() {
 function showLog(input) {
     let name = input.name;
     let chartClass = name + "Chart";
-    console.log(chartClass);
     let chart = document.querySelector("#" + chartClass);
     chart.parentElement.classList.remove("hidden");
 }
@@ -62,8 +61,7 @@ function checkforResponse() {
 function analyseLog(content) {
     document.querySelector(".logChart").classList.remove("hidden");
     let logs = content.split("\n");
-    let p = document.querySelector(".logInfo p");
-    p.innerHTML = "Log Count: " + logs.length;
+    setLogAmount(logs);
     for (let log of logs) {
         if (log !== "") {
             let items = log.split(" ");
@@ -81,6 +79,7 @@ function analyseLog(content) {
             browser.push(items[21].split("/")[0])
         }
     }
+    setIpAmount();
     //chart2(ips, "ipChart", "doughnut");
     chart(ips, "ipChart", "doughnut");
     chart(identityClient, "identityClientChart", "doughnut");
@@ -98,12 +97,14 @@ function analyseLog(content) {
 function chart(list, chartId, type) {
     let ctx = document.getElementById(chartId).getContext('2d');
     let listOfDifferentItems = getListOfDifferentItems(list);
+    let data = getAmountOfDifferentItem(listOfDifferentItems, list)
+    let fiveMostUsed = fiveMostUsedItems(listOfDifferentItems, data);
     let chart = new Chart(ctx, {
         // The type of chart we want to create
         type: type,
         // The data for our dataset
         data: {
-            labels: listOfDifferentItems,
+            labels: fiveMostUsed,
             datasets: [{
                 label: 'IP',
                 backgroundColor: [
@@ -122,7 +123,7 @@ function chart(list, chartId, type) {
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
-                data: getAmountOfDifferentItem(listOfDifferentItems, list)
+                data: getAmountOfDifferentItem(fiveMostUsed, list)
             }]
         },
         // Configuration options go here
@@ -130,11 +131,10 @@ function chart(list, chartId, type) {
     });
 }
 
-
 function getListOfDifferentItems(list) {
     let newItemList = []
     list.forEach((item) => {
-        if (!newItemList.includes(item) && newItemList.length < 5) {
+        if (!newItemList.includes(item)) {
             newItemList.push(item);
         }
     })
@@ -153,4 +153,41 @@ function getAmountOfDifferentItem(newItemList, valueList) {
         amountList.push(amount);
     });
     return amountList;
+}
+
+function setLogAmount(logs) {
+    let logAmount = document.querySelector(".logAmount");
+    logAmount.innerHTML = "Log Count: " + logs.length;
+}
+
+function setIpAmount() {
+    let ipList = getListOfDifferentItems(ips);
+    let amountList = getAmountOfDifferentItem(ipList, ips);
+    let ip = getMostUsedItems(ips, amountList)
+    document.querySelector(".ipAmount").innerHTML = "Most Commen IP: " + ip;
+}
+
+function getMostUsedItems(ips, amounts) {
+    let max = 0;
+    let ip = "";
+    amounts.forEach(item => {
+        if (item > max) {
+            max = item
+        }
+    })
+    ip = ips[amounts.indexOf(max)];
+    return ip;
+}
+
+function fiveMostUsedItems(items, amounts) {
+    let fiveMostCommonItems = []
+    for (let i = 0; i < 5; i++) {
+        let commonItem = getMostUsedItems(items, amounts);
+        if (commonItem !== undefined) {
+            fiveMostCommonItems.push(commonItem);
+        }
+        items.splice(items.indexOf(commonItem), 1);
+        amounts = amounts.splice(items.indexOf(commonItem), 1);
+    }
+    return fiveMostCommonItems
 }
