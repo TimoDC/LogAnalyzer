@@ -28,6 +28,7 @@ tr:nth-child(even){background-color: #f2f2f2;}
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     height: auto;
+    margin-bottom: 2vw;
 }
 
 @media screen and (max-width: 1500px) {

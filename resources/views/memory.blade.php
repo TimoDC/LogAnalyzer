@@ -44,6 +44,24 @@
 
 <button class="btn" onclick="history.back()">Home</button>
 
+<div id="CanvasContainer">
+    <div>
+        <canvas id="memoryCanvas"></canvas>
+    </div>
+
+    <div>
+        <canvas id="swapCanvas"></canvas>
+    </div>
+
+    <div>
+        <canvas id="cpuCanvas"></canvas>
+    </div>
+
+    <div>
+        <canvas id="diskCanvas"></canvas>
+    </div>
+</div>
+
 <div id="tableContainer">
     <table>
         <tr>
@@ -125,24 +143,6 @@
             <td id="idle"><?php echo $cpuSpeed ?></td>
         </tr>
     </table>
-</div>
-
-<div id="CanvasContainer">
-    <div>
-        <canvas id="memoryCanvas"></canvas>
-    </div>
-
-    <div>
-        <canvas id="swapCanvas"></canvas>
-    </div>
-
-    <div>
-        <canvas id="cpuCanvas"></canvas>
-    </div>
-
-    <div>
-        <canvas id="diskCanvas"></canvas>
-    </div>
 </div>
 
 <script src="{{ asset('assets/js/memory.js') }}"></script>
