@@ -8,30 +8,23 @@
 
 @section("main")
 
-<form action="{{ asset('/mysql') }}" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="file">
-    <input type="text" name="filename" id="filename">
-    <button type="submit">Submit</button>
-</form>
-
 @isset ($content)
 
 <p id="logContent">{!! $content !!}</p>
 <table>
-<thead>
-<tr>
-<th>Id</th>
-<th>Date</th>
-<th>Time</th>
-<th>Login</th>
-<th>User</th>
-<th>Database</th>
-</tr>
-</thead>
-<tbody id="logTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Login</th>
+            <th>User</th>
+            <th>Database</th>
+        </tr>
+    </thead>
+    <tbody id="logTable">
 
-</tbody>
+    </tbody>
 </table>
 
 <canvas id="polarChart" height="50rem"></canvas>
