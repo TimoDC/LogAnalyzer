@@ -3,7 +3,6 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-
 let MemTotal = document.querySelector("tr .MemTotal").innerText;
 let MemUsed = document.getElementById("MemUsed").innerText;
 let MemFree = document.getElementById("MemFree").innerText;
@@ -39,15 +38,6 @@ createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage", (parseIn
 createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage", (parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2));
 createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (parseFloat(user) + parseFloat(system)).toFixed(2));
 createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (parseInt(DiskUsed)/parseInt(DiskTotal) *100).toFixed(2));
-
-//addLabelToDoughnut("MemTotal", (parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2));
-//addLabelToDoughnut("SwapTotal", (parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2));
-//addLabelToDoughnut("cpuTotal", (parseFloat(user) + parseFloat(system)));
-}
-
-function addLabelToDoughnut(place, value) {
-    document.querySelector("#CanvasContainer ." + place).innerText = value + "%";
-}
 
 function createDoughnutChart(canvas, labels, data, title, centerLabel) {
     const chart3 = document.getElementById(canvas);
