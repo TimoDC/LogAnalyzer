@@ -41,6 +41,10 @@
         <div id="activitychart">
             <canvas id="activity" width="400" height="400"></canvas>
         </div>
+
+        <div id="unsuccessfulusernameschart">
+            <canvas id="unsuccessfulusernames" width="400" height="400"></canvas>
+        </div>
     </div>
 </section>
 @endsection

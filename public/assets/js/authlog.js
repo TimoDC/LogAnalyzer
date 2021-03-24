@@ -17,10 +17,74 @@ function showInfo() {
 
             showCountEntries(entries);
             showEntriesInTable(entries);
+
             addChartForAppName(entries);
             addChartForUnsuccessfulAttempts(entries);
-            addChartForActivity(entries);            
+            addChartForActivity(entries);
+            addChartForUnsuccessfulUsernames(entries);
         })
+}
+
+function addChartForUnsuccessfulUsernames(entries) {
+    const unsuccessfulusernames = document.querySelector("#unsuccessfulusernameschart canvas");
+
+    let unsuccessfulAttemptUsernames = [];
+
+    let arrayDuplicates = [];
+
+    let countUnsuccessfulAttemptUsernames = {};
+    let countUnsuccessfulAttemptUsernamesOrdered = [];
+
+    for (let i = 0; i < entries.length; i++) {
+        if (unsuccessfulAttemptFound(entries, i)) {
+            const entry = entries[i];
+            const splitter = entry.split("Invalid user ");
+
+            const stringAfterUser = splitter[1];
+            const spaceSplitter = stringAfterUser.split(" ");
+
+            const unsuccessfulAttemptUsername = spaceSplitter[0];
+
+            arrayDuplicates.push(unsuccessfulAttemptUsername);
+        }
+    }
+
+    countDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptUsernames);
+
+    unsuccessfulAttemptUsernames = sortObjectByCount(unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernames);
+
+    sortCountDescending(countUnsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
+
+    getTop12(unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
+
+    const unsuccessfulusernamesChart = createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
+}
+
+function createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered) {
+    return new Chart(unsuccessfulusernames, {
+        type: 'pie',
+        data: {
+            labels: unsuccessfulAttemptUsernames,
+            datasets: [{
+                label: 'Unsuccessful Attempts',
+                data: countUnsuccessfulAttemptUsernamesOrdered,
+                backgroundColor: palette('tol', countUnsuccessfulAttemptUsernamesOrdered.length).map(function (hex) {
+                    return "#" + hex;
+                }),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: `Top 12 Unsuccessful Attempt Usernames`
+            },
+            legend: {
+                display: true,
+                position: 'right'
+            }
+        }
+    });
 }
 
 function addChartForActivity(entries) {
@@ -60,7 +124,7 @@ function createActivityChart(activity, arrayHours, countHoursOrdered) {
             datasets: [{
                 label: 'Entries Per Hour',
                 data: countHoursOrdered,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                backgroundColor: 'rgba(255, 99, 132, 0.8)'
             }]
         },
         options: {
@@ -127,7 +191,7 @@ function addChartForUnsuccessfulAttempts(entries) {
 
     countDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptIps);
 
-    unsuccessfulAttemptIps = sortIpsByCount(unsuccessfulAttemptIps, countUnsuccessfulAttemptIps);
+    unsuccessfulAttemptIps = sortObjectByCount(unsuccessfulAttemptIps, countUnsuccessfulAttemptIps);
 
     sortCountDescending(countUnsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
 
@@ -152,11 +216,11 @@ function sortCountDescending(countUnsuccessfulAttemptIps, countUnsuccessfulAttem
     countUnsuccessfulAttemptIpsOrdered.sort((a, b) => a - b).reverse();
 }
 
-function sortIpsByCount(unsuccessfulAttemptIps, countUnsuccessfulAttemptIps) {
-    unsuccessfulAttemptIps = Object.keys(countUnsuccessfulAttemptIps);
+function sortObjectByCount(sortedArray, object) {
+    sortedArray = Object.keys(object);
 
-    unsuccessfulAttemptIps.sort(function (a, b) { return countUnsuccessfulAttemptIps[b] - countUnsuccessfulAttemptIps[a]; });
-    return unsuccessfulAttemptIps;
+    sortedArray.sort(function (a, b) { return object[b] - object[a]; });
+    return sortedArray;
 }
 
 function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countUnsuccessfulAttempts) {
