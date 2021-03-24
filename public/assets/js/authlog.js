@@ -47,7 +47,7 @@ function addChartForActivity(entries) {
 
     countDuplicatesInObject(arrayDuplicates, countHours);
 
-    orderObject(countHours, countHoursOrdered);
+    orderObjectToArray(countHours, countHoursOrdered);
 
     const activityChar = createActivityChart(activity, arrayHours, countHoursOrdered);
 }
@@ -89,11 +89,11 @@ function createActivityChart(activity, arrayHours, countHoursOrdered) {
     });
 }
 
-function orderObject(object, orderedObject) {
+function orderObjectToArray(object, orderedArray) {
     Object.keys(object)
         .sort()
         .forEach(function (v) {
-            orderedObject.push(object[v]);
+            orderedArray.push(object[v]);
         });
 }
 
@@ -104,7 +104,9 @@ function addChartForUnsuccessfulAttempts(entries) {
     let unsuccessfulAttemptIps = [];
 
     let arrayDuplicates = [];
+
     let countUnsuccessfulAttemptIps = {};
+    let countUnsuccessfulAttemptIpsOrdered = [];
 
     for (let i = 0; i < entries.length; i++) {
         if (unsuccessfulAttemptFound(entries, i)) {
@@ -119,28 +121,53 @@ function addChartForUnsuccessfulAttempts(entries) {
 
             arrayDuplicates.push(unsuccessfulAttemptIp);
 
-            if (!unsuccessfulAttemptIps.includes(unsuccessfulAttemptIp)) {
-                unsuccessfulAttemptIps.push(unsuccessfulAttemptIp);
-            }
-
             countUnsuccessfulAttempts++;
         }
     }
 
     countDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptIps);
 
-    const unsuccessfulattemptsChart = createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIps, countUnsuccessfulAttempts);
+    unsuccessfulAttemptIps = sortIpsByCount(unsuccessfulAttemptIps, countUnsuccessfulAttemptIps);
+
+    sortCountDescending(countUnsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
+
+    getTop12(unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
+
+    const unsuccessfulattemptsChart = createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countUnsuccessfulAttempts);
 }
 
-function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIps, countUnsuccessfulAttempts) {
+function getTop12(unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered) {
+    while (unsuccessfulAttemptIps.length > 12) {
+        unsuccessfulAttemptIps.pop();
+        countUnsuccessfulAttemptIpsOrdered.pop();
+    }
+}
+
+function sortCountDescending(countUnsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered) {
+    Object.keys(countUnsuccessfulAttemptIps)
+        .forEach(function (v) {
+            countUnsuccessfulAttemptIpsOrdered.push(countUnsuccessfulAttemptIps[v]);
+        });
+
+    countUnsuccessfulAttemptIpsOrdered.sort((a, b) => a - b).reverse();
+}
+
+function sortIpsByCount(unsuccessfulAttemptIps, countUnsuccessfulAttemptIps) {
+    unsuccessfulAttemptIps = Object.keys(countUnsuccessfulAttemptIps);
+
+    unsuccessfulAttemptIps.sort(function (a, b) { return countUnsuccessfulAttemptIps[b] - countUnsuccessfulAttemptIps[a]; });
+    return unsuccessfulAttemptIps;
+}
+
+function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countUnsuccessfulAttempts) {
     return new Chart(unsuccessfulattempts, {
         type: 'pie',
         data: {
             labels: unsuccessfulAttemptIps,
             datasets: [{
                 label: 'Unsuccessful Attempts',
-                data: Object.values(countUnsuccessfulAttemptIps),
-                backgroundColor: palette('tol', Object.values(countUnsuccessfulAttemptIps).length).map(function (hex) {
+                data: countUnsuccessfulAttemptIpsOrdered,
+                backgroundColor: palette('tol', countUnsuccessfulAttemptIpsOrdered.length).map(function (hex) {
                     return "#" + hex;
                 }),
                 borderWidth: 1
@@ -149,7 +176,7 @@ function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttem
         options: {
             title: {
                 display: true,
-                text: `Unsuccessful Attempt IP's (total unsuccessful attempts: ${countUnsuccessfulAttempts})`
+                text: `Top 12 Unsuccessful Attempt IP's (total unsuccessful attempts: ${countUnsuccessfulAttempts})`
             },
             legend: {
                 display: true,
