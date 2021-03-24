@@ -25,6 +25,10 @@ Route::post("apache", "apacheLogController@processForm") -> middleware("auth");
 
 Route::get("/dashboard/{x}", "LogAnalyzerController@loadDashBoard") -> name("id");
 
+Route::post("/addLogFile/{x}", "LogAnalyzerController@addLogFile") -> name("id") -> middleware("auth");
+
+Route::get("/dashboard/{x}/apache", "apacheLogController@index") -> name("id");
+
 Auth::routes(["register" => false]);
 
 Route::get("/home", [App\Http\Controllers\HomeController::class, 'index'])->name('home');

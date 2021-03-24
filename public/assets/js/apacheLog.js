@@ -17,7 +17,6 @@ let userAgent = [];
 
 function init() {
     checkforResponse();
-    
 }
 
 function checkforResponse() {
