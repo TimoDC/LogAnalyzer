@@ -60,6 +60,7 @@ main section#authlogcharts h2 {
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 100px;
+    width: 80%;
 }
 
 .charts div {

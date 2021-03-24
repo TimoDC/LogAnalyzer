@@ -307,20 +307,51 @@ function unsuccessfulAttemptFound(entries, i) {
 function addChartForAppName(entries) {
     const appname = document.querySelector("#appnamechart canvas");
 
-    let { cron, sshd, other } = countAppNames(entries);
+    let appnamesplitter;
 
-    const appnameChart = CreateAppNameChart(appname, cron, sshd, other);
+    let arrayAppNames = [];
+    let arrayDuplicates = [];
+    let countAppNames = {};
+    let countAppNamesOrdered = [];
+
+    for (let i = 0; i < entries.length; i++) {
+        const entry = entries[i];
+        const splitter = entry.split(" ");
+        const fullappname = splitter[4];
+        
+        if (fullappname.includes("[")) {
+            appnamesplitter= fullappname.split("[");
+        } else {
+            appnamesplitter = fullappname.split(":");
+        }
+
+        const appname = appnamesplitter[0];
+
+        arrayDuplicates.push(appname);
+    }
+
+    countDuplicatesInObject(arrayDuplicates, countAppNames);
+
+    arrayAppNames = sortObjectByCount(arrayAppNames, countAppNames);
+
+    sortCountDescending(countAppNames, countAppNamesOrdered);
+
+    const countApps = countAppNamesOrdered.length;
+
+    getTop12(arrayAppNames, countAppNamesOrdered);
+
+    const appnameChart = CreateAppNameChart(appname, arrayAppNames, countAppNamesOrdered, countApps);
 }
 
-function CreateAppNameChart(appname, cron, sshd, other) {
+function CreateAppNameChart(appname, arrayAppNames, countAppNamesOrdered, countApps) {
     return new Chart(appname, {
         type: 'pie',
         data: {
-            labels: ["CRON", "sshd", "other"],
+            labels: arrayAppNames,
             datasets: [{
                 label: 'Pie App-Name',
-                data: [cron, sshd, other],
-                backgroundColor: palette('tol', [cron, sshd, other].length).map(function(hex) {
+                data: countAppNamesOrdered,
+                backgroundColor: palette('tol', countAppNamesOrdered.length).map(function(hex) {
                     return "#" + hex;
                 }),
                 borderWidth: 1
@@ -329,7 +360,7 @@ function CreateAppNameChart(appname, cron, sshd, other) {
         options: {
             title: {
                 display: true,
-                text: 'App-Name'
+                text: `Top 12 App-Names (total app-names: ${countApps})`
             },
             legend: {
                 display: true,
@@ -339,38 +370,10 @@ function CreateAppNameChart(appname, cron, sshd, other) {
     });
 }
 
-function countAppNames(entries) {
-    let cron = 0;
-    let sshd = 0;
-    let other = 0;
-
-    for (let i = 0; i < entries.length; i++) {
-        const entry = entries[i];
-        const splitter = entry.split(" ");
-
-        const fullappname = splitter[4];
-        const appnamesplitter = fullappname.split("[");
-        const appname = appnamesplitter[0];
-
-        if (appname === "CRON") {
-            cron++;
-        }
-
-        else if (appname === "sshd") {
-            sshd++;
-        }
-
-        else {
-            other++;
-        }
-    }
-    return { cron, sshd, other };
-}
-
 function showEntriesInTable(entries) {
     const tablebody = document.querySelector("#entries tbody");
 
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < entries.length; i++) {
         const entry = entries[i];
         const splitter = entry.split(" ");
 
