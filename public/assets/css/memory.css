@@ -1,0 +1,32 @@
+td,th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+table{
+    margin-bottom: 1rem;
+    width: 20%;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+#container div {
+    justify-self: stretch;
+    align-self: stretch;
+    width: 100%;
+    position: relative;
+}
+
+#container canvas {
+    justify-self: stretch;
+    align-self: stretch;
+    position: relative;
+    width: 100%;
+    height: auto;
+} 

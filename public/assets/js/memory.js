@@ -2,20 +2,33 @@
 
 document.addEventListener("DOMContentLoaded", init);
 function init() {
-let labels = ["used", "free"];
+
 let MemTotal = document.getElementById("MemTotal").innerText;
 let MemUsed = document.getElementById("MemUsed").innerText;
 let MemFree = document.getElementById("MemFree").innerText;
+
 let SwapTotal = document.getElementById("SwapTotal").innerText;
 let SwapUsed = document.getElementById("SwapUsed").innerText;
 let SwapFree = document.getElementById("SwapFree").innerText;
-let data1 = [MemUsed/MemTotal *100, MemFree/MemTotal *100];
-let data2 = [SwapUsed/SwapTotal *100, SwapFree/SwapTotal *100];
-console.log(data1);
-console.log(data2);
 
-createDoughnutChart('memoryCanvas', labels, data1, "Memory Usage");
-createDoughnutChart('swapCanvas', labels, data2, "Swap Usage");
+let user = document.getElementById("user").innerText;
+let system = document.getElementById("system").innerText;
+let iowait = document.getElementById("iowait").innerText;
+let idle = document.getElementById("idle").innerText;
+
+let labelsMem = ["used", "free"];
+let labelsCPU = ["user", "system", "iowait", "idle"]
+
+let dataMem = [(parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2), (parseInt(MemFree)/parseInt(MemTotal) *100).toFixed(2)];
+let dataSwap = [(parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2), (parseInt(SwapFree)/parseInt(SwapTotal) *100).toFixed(2)];
+let dataCPU = [parseInt(user),parseInt(system),parseInt(iowait),parseInt(idle)];
+console.log(dataMem);
+console.log(dataSwap);
+console.log(dataCPU);
+
+createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage");
+createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage");
+createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "Swap Usage");
 }
 
 
@@ -43,6 +56,7 @@ function createDoughnutChart(canvas, labels, data, title) {
             }]
         },
         options: {
+            responsive: false,
             elements: {
                 center: {
                     display: true,
@@ -55,7 +69,7 @@ function createDoughnutChart(canvas, labels, data, title) {
                 callbacks: {
                     label: function (tooltipItems, data) {
                         var i = tooltipItems.index;
-                        return data.labels[i] + ": " + data.datasets[0].data[i].toFixed(2) + " %";
+                        return data.labels[i] + ": " + data.datasets[0].data[i] + " %";
                     }
                 } 
             },          

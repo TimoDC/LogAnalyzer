@@ -13,13 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', "LogAnalyzerController@index") -> middleware("auth");
+Route::get("/", "LogAnalyzerController@index") -> middleware("auth");
 
-Auth::routes(['register' => false]);
+Route::get("/apache", "apacheLogController@index") -> middleware("auth");
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/memory', "MemoryController@index")->name('memory');
+
+Route::post("/createDashBoard", "LogAnalyzerController@createDashBoard");
+
+Route::post("apache", "apacheLogController@processForm") -> middleware("auth");
+
+Route::get("/dashboard/{x}", "LogAnalyzerController@loadDashBoard") -> name("id");
+
+Route::post("/addLogFile/{x}", "LogAnalyzerController@addLogFile") -> name("id") -> middleware("auth");
+
+Route::get("/dashboard/{x}/apache", "apacheLogController@index") -> name("id");
+
+Auth::routes(["register" => false]);
+
+Route::get("/home", [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/sqllogs', "MySQLController@index");
-Route::post('/mysql', "MySQLController@processForm");
 
-Route::get('/memory', "MemoryController@index")->name('memory');;
+Route::post('/mysql', "MySQLController@processForm");
