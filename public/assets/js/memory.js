@@ -3,22 +3,24 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-let MemTotal = document.querySelector("tr .MemTotal").innerText;
-let MemUsed = document.getElementById("MemUsed").innerText;
-let MemFree = document.getElementById("MemFree").innerText;
+let MemTotal = document.querySelector("tr .MemTotal").innerHTML;
+let MemUsed = document.getElementById("MemUsed").innerHTML;
+let MemFree = document.getElementById("MemFree").innerHTML;
 
-let SwapTotal = document.querySelector("tr .SwapTotal").innerText;
-let SwapUsed = document.getElementById("SwapUsed").innerText;
-let SwapFree = document.getElementById("SwapFree").innerText;
+console.log(MemTotal);
 
-let user = document.getElementById("user").innerText;
-let system = document.getElementById("system").innerText;
-let iowait = document.getElementById("iowait").innerText;
-let idle = document.getElementById("idle").innerText;
+let SwapTotal = document.querySelector("tr .SwapTotal").innerHTML;
+let SwapUsed = document.getElementById("SwapUsed").innerHTML;
+let SwapFree = document.getElementById("SwapFree").innerHTML;
 
-let DiskTotal = document.querySelector("tr .DiskTotal").innerText;
-let DiskUsed = document.getElementById("DiskUsed").innerText;
-let DiskFree = document.getElementById("DiskFree").innerText;
+let user = document.getElementById("user").innerHTML;
+let system = document.getElementById("system").innerHTML;
+let iowait = document.getElementById("iowait").innerHTML;
+let idle = document.getElementById("idle").innerHTML;
+
+let DiskTotal = document.querySelector("tr .DiskTotal").innerHTML;
+let DiskUsed = document.getElementById("DiskUsed").innerHTML;
+let DiskFree = document.getElementById("DiskFree").innerHTML;
 
 let labelsMem = ["used", "free"];
 let labelsCPU = ["user", "system", "iowait", "idle"]

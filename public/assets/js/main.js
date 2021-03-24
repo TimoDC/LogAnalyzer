@@ -4,7 +4,7 @@ document.querySelector("#settingsButton").addEventListener("click", showSettings
 document.querySelector(".settings .close").addEventListener("click", hideSettingsPopup);
 document.querySelector("#newDashboardButton").addEventListener("click", openNewDashboardPopup);
 document.querySelector(".close").addEventListener("click", closeNewDashboardPopup);
-document.querySelector("#sql").addEventListener("click", showSqlLogPage);
+//document.querySelector("#sql").addEventListener("click", showSqlLogPage);
 
 function openNewDashboardPopup() {
     console.log("werkt");
