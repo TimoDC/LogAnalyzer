@@ -33,6 +33,11 @@
     $sys = shell_exec("mpstat |grep all | awk '{print $5}'");
     $iowait = shell_exec("mpstat |grep all | awk '{print $6}'");
     $idle = shell_exec("mpstat |grep all | awk '{print $12}'");
+
+    $hostname = shell_exec("uname -h");
+    $kernelRelease = shell_exec("uname -r");
+    $cpuModel = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $4,$5,$6}'");
+    $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}");
     ?>
 
 <body>
