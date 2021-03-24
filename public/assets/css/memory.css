@@ -11,8 +11,10 @@ table{
 }
 
 #CanvasContainer {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    height: auto;
 }
 
 
@@ -24,8 +26,7 @@ table{
 }
 
 #CanvasContainer canvas {
-    justify-self: stretch;
-    align-self: stretch;
+
     position: relative;
     width: 100%;
     height: auto;
@@ -38,11 +39,10 @@ table{
     align-content: center;
     vertical-align: bottom;
     width: 100%;
-    top: 61%;
+    top: 62%;
     color:  #ffc7b6;
-    font-size: 0.85vw;
+    font-size: 0.8vw;
 }
-
 
 
 .btn {
@@ -63,5 +63,4 @@ table{
 
 body {
     padding: 1rem;
-    
   }
