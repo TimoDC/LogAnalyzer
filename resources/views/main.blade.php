@@ -31,8 +31,9 @@
 
         <a href="#" id="settingsButton">Settings</a>
     </aside>
+
+    <div class="log">
     @isset($board)
-    <div>
         <form action="/addLogFile/{{ $board -> id }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="logFile">
@@ -50,11 +51,11 @@
             </select>
             <button type="submit">Submit</button>
         </form>
-    </div>
 
     <section>
         <ul>
             <div>
+                @isset($dashboard)
                 @if($board -> apacheLogFile !== NULL)
                 <li><a href="/dashboard/{{ $board -> id }}/apache">Apache Logs</a></li>
                 @endif
@@ -64,11 +65,14 @@
                 @if($board -> mysqlLogFile !== NULL)
                 <li><a href="/dashboard/{{ $board -> id }}/mysql">MySQL Logs</a></li>
                 @endif
+                @endisset
             </div>
         </ul>
     </section>
     @endisset()
 
+    @yield('apacheLog')
+    </div>
 </main>
 
 
