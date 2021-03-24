@@ -12,7 +12,7 @@
 
         <div id="dashboardButtons">
             @foreach ($dashboards as $dashboard)
-                <a href="/dashboard/{{ $dashboard -> id }}">{{ $dashboard -> name }}</a>
+            <a href="/dashboard/{{ $dashboard -> id }}">{{ $dashboard -> name }}</a>
             @endforeach
         </div>
 
@@ -31,23 +31,43 @@
 
         <a href="#" id="settingsButton">Settings</a>
     </aside>
+    @isset($board)
+    <div>
+        <form action="/addLogFile/{{ $board -> id }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="file" name="logFile">
+            <label for="LogType">Log Type</label>
+            <select name="LogType" id="LogType">
+                @if($board -> apacheLogFile === NULL)
+                <option value="Apache">Apache</option>
+                @endif
+                @if($board -> authLogFile === NULL)
+                <option value="Auth">Auth</option>
+                @endif
+                @if($board -> mysqlLogFile === NULL)
+                <option value="MySQL">MySQL</option>
+                @endif
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
     <section>
         <ul>
             <div>
-            @if($dashboard -> apacheLogFile === "null"){
-                <li>Apache Logs</li>
-            @endif
-            @if($dashboard -> authLogFile === "null"){
-                <li>Auth Logs</li>
-            @endif
-            @if($dashboard -> mysqlLogFile  === "null"){
-                <li>MySQL Logs</li>
-            @endif
+                @if($board -> apacheLogFile !== NULL)
+                <li><a href="/dashboard/{{ $board -> id }}/apache">Apache Logs</a></li>
+                @endif
+                @if($board -> authLogFile !== NULL)
+                <li><a href="/dashboard/{{ $board -> id }}/auth">Auth Logs</a></li>
+                @endif
+                @if($board -> mysqlLogFile !== NULL)
+                <li><a href="/dashboard/{{ $board -> id }}/mysql">MySQL Logs</a></li>
+                @endif
             </div>
         </ul>
     </section>
-
+    @endisset()
 
 </main>
 
