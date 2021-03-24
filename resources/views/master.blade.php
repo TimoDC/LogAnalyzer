@@ -75,5 +75,6 @@
 
     <footer>&copy; 2021 - LogAnalyzer</footer>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    @yield("scripts")
 </body>
 </html>

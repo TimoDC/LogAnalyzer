@@ -1,10 +1,10 @@
 "use strict";
 
-
 document.querySelector("#settingsButton").addEventListener("click", showSettingsPopup);
 document.querySelector(".settings .close").addEventListener("click", hideSettingsPopup);
 document.querySelector("#newDashboardButton").addEventListener("click", openNewDashboardPopup);
 document.querySelector(".close").addEventListener("click", closeNewDashboardPopup);
+document.querySelector("#sql").addEventListener("click", showSqlLogPage);
 
 function openNewDashboardPopup() {
     console.log("werkt");
@@ -36,4 +36,8 @@ function showSettingsPopup() {
 function hideSettingsPopup() {
     document.querySelector(".settings").classList.add("hidden");
     removeBackgroundTransparency();
+}
+
+function showSqlLogPage() {
+    window.location = "../sqllogs"
 }

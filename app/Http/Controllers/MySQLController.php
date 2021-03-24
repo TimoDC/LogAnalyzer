@@ -18,7 +18,13 @@ class MySQLController extends Controller
             $filename = $this -> changeName($filename, 1);
         }
         $filename = $request->file("file")->storeAs("logFiles", $filename);
-        $content = Storage::get($filename);
+
+        $content = "<script>
+        let promise = fetch('" . $filename . " ')
+            .then(response => response.text())
+        </script>
+        ";
+
         return view("mysql", ["content" => $content]);
     }
 

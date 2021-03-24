@@ -14,7 +14,7 @@
         </div>
 
         <div>
-            <li>MySQL Logs</li>
+            <li id="sql">MySQL Logs</li>
             <li>Auth Logs</li>
             <li>Overview All Logs</li>
         </div>
