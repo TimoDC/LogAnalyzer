@@ -36,9 +36,6 @@
     ?>
 
 <body>
-    <p><?php 
-            echo $DiskTotal, $DiskFree, $DiskUsed;
-            ?></p>
 
 <button class="btn" onclick="history.back()">Home</button>
 
@@ -117,6 +114,10 @@
 
     <div>
         <canvas id="cpuCanvas"></canvas>
+    </div>
+
+    <div>
+        <canvas id="diskCanvas"></canvas>
     </div>
 </div>
 

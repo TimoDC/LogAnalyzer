@@ -17,19 +17,28 @@ let system = document.getElementById("system").innerText;
 let iowait = document.getElementById("iowait").innerText;
 let idle = document.getElementById("idle").innerText;
 
+let DiskTotal = document.querySelector("tr .DiskTotal").innerText;
+let DiskUsed = document.getElementById("DiskUsed").innerText;
+let DiskFree = document.getElementById("DiskFree").innerText;
+
 let labelsMem = ["used", "free"];
 let labelsCPU = ["user", "system", "iowait", "idle"]
 
 let dataMem = [(parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2), (parseInt(MemFree)/parseInt(MemTotal) *100).toFixed(2)];
 let dataSwap = [(parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2), (parseInt(SwapFree)/parseInt(SwapTotal) *100).toFixed(2)];
 let dataCPU = [parseFloat(user).toFixed(2),parseFloat(system).toFixed(2),parseFloat(iowait).toFixed(2),parseFloat(idle).toFixed(2)];
+let dataDisk = [(parseInt(DiskUsed)/parseInt(DiskTotal) *100).toFixed(2), (parseInt(DiskFree)/parseInt(DiskTotal) *100).toFixed(2)];
+
 console.log(dataMem);
 console.log(dataSwap);
 console.log(dataCPU);
+console.log(dataDisk);
+console.log("ur moms ur dad");
 
 createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage", (parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2));
 createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage", (parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2));
 createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (parseFloat(user) + parseFloat(system)).toFixed(2));
+createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (parseInt(DiskUsed)/parseInt(DiskTotal) *100).toFixed(2));
 
 //addLabelToDoughnut("MemTotal", (parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2));
 //addLabelToDoughnut("SwapTotal", (parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2));
@@ -54,12 +63,14 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
                 backgroundColor: [
                     'rgba(254, 116, 47, 0.35)',
                     'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)'
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(193, 219, 178, 0.45)'
                 ],
                 borderColor: [
                     'rgba(254, 116, 47, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)'
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(169, 223, 197, 0.2)'
                 ],
                 borderWidth: 1
             }]
