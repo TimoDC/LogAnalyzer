@@ -55,12 +55,14 @@ function addChartForUnsuccessfulUsernames(entries) {
 
     sortCountDescending(countUnsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
 
+    const countUsernames = countUnsuccessfulAttemptUsernamesOrdered.length;
+
     getTop12(unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
 
-    const unsuccessfulusernamesChart = createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
+    const unsuccessfulusernamesChart = createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames);
 }
 
-function createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered) {
+function createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames) {
     return new Chart(unsuccessfulusernames, {
         type: 'pie',
         data: {
@@ -77,7 +79,7 @@ function createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAtt
         options: {
             title: {
                 display: true,
-                text: `Top 12 Unsuccessful Attempt Usernames`
+                text: `Top 12 Unsuccessful Attempt Usernames (total usernames: ${countUsernames})`
             },
             legend: {
                 display: true,
@@ -165,6 +167,7 @@ function addChartForUnsuccessfulAttempts(entries) {
     const unsuccessfulattempts = document.querySelector("#unsuccessfulattemptschart canvas");
 
     let countUnsuccessfulAttempts = 0;
+
     let unsuccessfulAttemptIps = [];
 
     let arrayDuplicates = [];
@@ -189,15 +192,28 @@ function addChartForUnsuccessfulAttempts(entries) {
         }
     }
 
+    addTitleForTotalUnsuccessfulAttempts(countUnsuccessfulAttempts);
+
     countDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptIps);
 
     unsuccessfulAttemptIps = sortObjectByCount(unsuccessfulAttemptIps, countUnsuccessfulAttemptIps);
 
     sortCountDescending(countUnsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
 
+    const countIps = countUnsuccessfulAttemptIpsOrdered.length;
+
     getTop12(unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
 
-    const unsuccessfulattemptsChart = createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countUnsuccessfulAttempts);
+    const unsuccessfulattemptsChart = createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countIps);
+}
+
+function addTitleForTotalUnsuccessfulAttempts(countUnsuccessfulAttempts) {
+    const totalunsuccessfulattempts = document.querySelector("#totalunsuccessfulattempts");
+
+    totalunsuccessfulattempts.innerHTML = `
+                                            <h1>${countUnsuccessfulAttempts}</h1>
+                                            <p>Unsuccessful Attempts</p>
+                                            `;
 }
 
 function getTop12(unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered) {
@@ -223,7 +239,7 @@ function sortObjectByCount(sortedArray, object) {
     return sortedArray;
 }
 
-function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countUnsuccessfulAttempts) {
+function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countIps) {
     return new Chart(unsuccessfulattempts, {
         type: 'pie',
         data: {
@@ -240,7 +256,7 @@ function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttem
         options: {
             title: {
                 display: true,
-                text: `Top 12 Unsuccessful Attempt IP's (total unsuccessful attempts: ${countUnsuccessfulAttempts})`
+                text: `Top 12 Unsuccessful Attempt IP's (total IP's: ${countIps})`
             },
             legend: {
                 display: true,

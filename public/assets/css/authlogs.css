@@ -54,7 +54,8 @@ main section#authlogcharts h2 {
     text-align: left;
 }
 
-.charts {
+.charts,
+.totals {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -64,4 +65,8 @@ main section#authlogcharts h2 {
 .charts div {
     height: 400px;
     width: 400px;
+}
+
+.totals {
+    text-align: center;
 }

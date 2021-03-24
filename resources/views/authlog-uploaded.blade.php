@@ -27,6 +27,14 @@
         </table>
     </div>
 
+    <div class="totals">
+        <div id="totalunsuccessfulattempts">
+        </div>
+
+        <div id="totalerrors">
+        </div>
+    </div>
+
     <div class="charts">
         <div id="appnamechart">
             <canvas id="appname" width="400" height="400"></canvas>
