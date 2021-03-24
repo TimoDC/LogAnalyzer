@@ -34,7 +34,7 @@
     $iowait = shell_exec("mpstat |grep all | awk '{print $6}'");
     $idle = shell_exec("mpstat |grep all | awk '{print $12}'");
 
-    $hostname = shell_exec("uname -h");
+    $hostname = shell_exec("uname -n");
     $kernelRelease = shell_exec("uname -r");
     $cpuModel = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $4,$5,$6}'");
     $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}");
@@ -104,6 +104,25 @@
             <td class="DiskTotal"><?php echo $DiskTotal ?>GB</td>
             <td id="DiskUsed"><?php echo $DiskUsed ?>GB</td>
             <td id="DiskFree"><?php echo $DiskFree ?>GB</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th scope="row">Hostname</th>
+            <td id="user"><?php echo $hostname ?></td>
+        </tr>
+        <tr>
+            <th scope="row">Kernel Release</th>
+            <td id="system"><?php echo $kernelRelease ?></td>
+        </tr>
+        <tr>
+            <th scope="row">CPU Model</th>
+            <td id="iowait"><?php echo $cpuModel ?></td>
+        </tr>
+        <tr>
+            <th scope="row">CPU Speed</th>
+            <td id="idle"><?php echo $cpuSpeed ?></td>
         </tr>
     </table>
 </div>
