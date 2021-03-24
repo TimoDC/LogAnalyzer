@@ -1,6 +1,7 @@
 "use strict"
 
 document.addEventListener("DOMContentLoaded", init);
+
 function init() {
 
 let MemTotal = document.querySelector("tr .MemTotal").innerText;
@@ -38,7 +39,6 @@ addLabelToDoughnut("cpuTotal", (parseFloat(user) + parseFloat(system)));
 function addLabelToDoughnut(place, value) {
     document.querySelector("#CanvasContainer ." + place).innerText = value + "%";
 }
-
 
 function createDoughnutChart(canvas, labels, data, title) {
     const chart3 = document.getElementById(canvas);

@@ -31,7 +31,7 @@
 
 <body>
 
-<button class="btn">Home</button>
+<button class="btn" onclick="history.back()">Home</button>
 
 <div id="tableContainer">
     <table>
