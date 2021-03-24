@@ -11,14 +11,6 @@
 
 <body>
 
-    <form action="{{ asset('/apache') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file">
-        <label for="filename">Filename</label>
-        <input type="text" name="filename" id="filename">
-        <button type="submit">Submit</button>
-    </form>
-
     @isset ($content)
 
     <p>{!! $content !!}</p>
