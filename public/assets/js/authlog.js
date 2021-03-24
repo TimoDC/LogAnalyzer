@@ -18,9 +18,83 @@ function showInfo() {
             showCountEntries(entries);
             showEntriesInTable(entries);
             addChartForAppName(entries);
-
             addChartForUnsuccessfulAttempts(entries);
+            addChartForActivity(entries);            
         })
+}
+
+function addChartForActivity(entries) {
+    const activity = document.querySelector("#activitychart canvas");
+
+    let arrayHours = [];
+    let arrayDuplicates = [];
+    let countHours = {};
+    let countHoursOrdered = [];
+
+    for (let i = 0; i < entries.length; i++) {
+        const entry = entries[i];
+        const splitter = entry.split(" ");
+        const time = splitter[2].split(":");
+
+        const hour = time[0];
+
+        arrayDuplicates.push(hour);
+
+        if (!arrayHours.includes(hour)) {
+            arrayHours.push(hour);
+        }
+    }
+
+    countDuplicatesInObject(arrayDuplicates, countHours);
+
+    orderObject(countHours, countHoursOrdered);
+
+    const activityChar = createActivityChart(activity, arrayHours, countHoursOrdered);
+}
+
+function createActivityChart(activity, arrayHours, countHoursOrdered) {
+    return new Chart(activity, {
+        type: 'line',
+        data: {
+            labels: arrayHours,
+            datasets: [{
+                label: 'Entries Per Hour',
+                data: countHoursOrdered,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Activity Per Hour'
+            },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'hours'
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'entries'
+                    }
+                }]
+            }
+        }
+    });
+}
+
+function orderObject(object, orderedObject) {
+    Object.keys(object)
+        .sort()
+        .forEach(function (v) {
+            orderedObject.push(object[v]);
+        });
 }
 
 function addChartForUnsuccessfulAttempts(entries) {
@@ -53,7 +127,7 @@ function addChartForUnsuccessfulAttempts(entries) {
         }
     }
 
-    countIpDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptIps);
+    countDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptIps);
 
     const unsuccessfulattemptsChart = createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIps, countUnsuccessfulAttempts);
 }
@@ -85,9 +159,9 @@ function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttem
     });
 }
 
-function countIpDuplicatesInObject(arrayDuplicates, countUnsuccessfulAttemptIps) {
-    arrayDuplicates.forEach(function (x) {
-        countUnsuccessfulAttemptIps[x] = (countUnsuccessfulAttemptIps[x] || 0) + 1;
+function countDuplicatesInObject(duplicates, mapCount) {
+    duplicates.forEach(function (x) {
+        mapCount[x] = (mapCount[x] || 0) + 1;
     });
 }
 
