@@ -1,3 +1,16 @@
+body {
+    padding: 1rem;
+  }
+
+/*---------------------*/
+/*        TABLE        */
+/*---------------------*/
+
+table{
+    margin-bottom: 1rem;
+    width: 350px;
+}
+
 td,th {
     border: 1px solid #ddd;
     padding: 8px;
@@ -5,10 +18,10 @@ td,th {
 
 tr:nth-child(even){background-color: #f2f2f2;}
 
-table{
-    margin-bottom: 1rem;
-    width: 350px;
-}
+
+/*---------------------*/
+/*       CANVAS        */
+/*---------------------*/
 
 #CanvasContainer {
     position: relative;
@@ -16,7 +29,6 @@ table{
     grid-template-columns: 1fr 1fr 1fr;
     height: auto;
 }
-
 
 @media screen and (max-width: 1500px) {
     #CanvasContainer {
@@ -34,7 +46,6 @@ table{
     }
 }
 
-
 #CanvasContainer div {
     justify-self: stretch;
     align-self: stretch;
@@ -50,17 +61,10 @@ table{
     z-index: 1;
 } 
 
-.label {
-    position: absolute;
-    text-align: center;
-    align-content: center;
-    vertical-align: bottom;
-    width: 100%;
-    top: 62%;
-    color:  #ffc7b6;
-    font-size: 0.8vw;
-}
 
+/*---------------------*/
+/*        BUTTON       */
+/*---------------------*/
 
 .btn {
     background-color: #ffc7b6;
@@ -77,7 +81,3 @@ table{
     color: #ffc7b6;
   }
 
-
-body {
-    padding: 1rem;
-  }
