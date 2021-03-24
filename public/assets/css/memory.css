@@ -7,7 +7,7 @@ tr:nth-child(even){background-color: #f2f2f2;}
 
 table{
     margin-bottom: 1rem;
-    width: 20%;
+    width: 350px;
 }
 
 #CanvasContainer {
@@ -21,7 +21,6 @@ table{
 @media screen and (max-width: 1500px) {
     #CanvasContainer {
         position: relative;
-        width: available;
         display: grid;
         grid-template-columns: 50% 50%;
     }
@@ -30,12 +29,10 @@ table{
 @media screen and (max-width: 1200px) {
     #CanvasContainer {
         position: relative;
-        width: available;
         display: grid;
         grid-template-columns: 100%;
     }
 }
-
 
 
 #CanvasContainer div {
