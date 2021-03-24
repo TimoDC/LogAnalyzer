@@ -71,7 +71,7 @@
     </section>
     @endisset()
 
-    @yield('apacheLog')
+    @yield('log')
     </div>
 </main>
 
