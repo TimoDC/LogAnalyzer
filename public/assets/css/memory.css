@@ -1,3 +1,16 @@
+body {
+    padding: 1rem;
+  }
+
+/*---------------------*/
+/*        TABLE        */
+/*---------------------*/
+
+table{
+    margin-bottom: 1rem;
+    width: 350px;
+}
+
 td,th {
     border: 1px solid #ddd;
     padding: 8px;
@@ -5,28 +18,66 @@ td,th {
 
 tr:nth-child(even){background-color: #f2f2f2;}
 
-table{
-    margin-bottom: 1rem;
-    width: 20%;
-}
 
-#container {
+/*---------------------*/
+/*       CANVAS        */
+/*---------------------*/
+
+#CanvasContainer {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    height: auto;
 }
 
+@media screen and (max-width: 1500px) {
+    #CanvasContainer {
+        position: relative;
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+}
 
-#container div {
+@media screen and (max-width: 1200px) {
+    #CanvasContainer {
+        position: relative;
+        display: grid;
+        grid-template-columns: 100%;
+    }
+}
+
+#CanvasContainer div {
     justify-self: stretch;
     align-self: stretch;
     width: 100%;
     position: relative;
 }
 
-#container canvas {
-    justify-self: stretch;
-    align-self: stretch;
+#CanvasContainer canvas {
+
     position: relative;
     width: 100%;
     height: auto;
+    z-index: 1;
 } 
+
+
+/*---------------------*/
+/*        BUTTON       */
+/*---------------------*/
+
+.btn {
+    background-color: #ffc7b6;
+    border-color: #Fcb08b;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #ffc7b6;
+  }
+

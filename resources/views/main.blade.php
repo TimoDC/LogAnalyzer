@@ -55,6 +55,7 @@
     <section>
         <ul>
             <div>
+                @isset($dashboard)
                 @if($board -> apacheLogFile !== NULL)
                 <li><a href="/dashboard/{{ $board -> id }}/apache">Apache Logs</a></li>
                 @endif
@@ -64,6 +65,7 @@
                 @if($board -> mysqlLogFile !== NULL)
                 <li><a href="/dashboard/{{ $board -> id }}/mysql">MySQL Logs</a></li>
                 @endif
+                @endisset
             </div>
         </ul>
     </section>
