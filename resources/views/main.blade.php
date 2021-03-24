@@ -31,8 +31,9 @@
 
         <a href="#" id="settingsButton">Settings</a>
     </aside>
+
+    <div class="log">
     @isset($board)
-    <div>
         <form action="/addLogFile/{{ $board -> id }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="logFile">
@@ -50,7 +51,6 @@
             </select>
             <button type="submit">Submit</button>
         </form>
-    </div>
 
     <section>
         <ul>
@@ -71,6 +71,8 @@
     </section>
     @endisset()
 
+    @yield('apacheLog')
+    </div>
 </main>
 
 
