@@ -3,26 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\dashboard;
 
 class AuthLogsController extends Controller
 {
-    function index() {
-        return view("authlogs");
-    }
-
-    function upload(Request $request) {
-        $data = $this -> validation($request);
-
-        $authlog = $data["authlog"] -> store("authlog");
-
-        return view("authlog-uploaded", ["authlog" => $authlog]);
-    }
-
-    function validation(Request $request) {
-        $rules = [
-            "authlog" => "required"
-        ];
-
-        return $request -> validate($rules);
+    function index(int $id) {
+        $dashboard = dashboard::find($id);
+        $dashboards = dashboard::all();
+        $authlog = $dashboard -> authLogFile;
+        return view("authlogs", ["authlog" => $authlog, "dashboards" => $dashboards, "board" => $dashboard]);
     }
 }

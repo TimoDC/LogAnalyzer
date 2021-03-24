@@ -66,8 +66,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
-        public_path('authlog') => storage_path('app/authlog'),
+        public_path('logFiles') => storage_path('app/logFiles'),
     ],
 
 ];

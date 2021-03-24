@@ -1,0 +1,36 @@
+.logChart{
+
+}
+
+.logChart{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.logChart div{
+    width: 30rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.logItems{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2rem;
+    border-bottom: solid black 3px;
+}
+
+.logItems div{
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+}
+
+.logInfo{
+    margin: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: solid black 3px;
+}
