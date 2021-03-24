@@ -1,6 +1,15 @@
 section {
-    width: 60%;
-    margin-right: auto;
+    /*width: 60%;
+    margin-right: auto;*/
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-left: solid black 3px;
+    border-right: solid black 3px;
+}
+
+section a{
+  text-decoration: none;
+  color: black;
 }
 
 section ul div {
@@ -16,7 +25,7 @@ section ul li {
     width: 150px;
     border: 2px solid black;
     border-radius: 10px;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     text-align: center;
 }
 
@@ -166,4 +175,32 @@ input:checked + .slider:before {
 .darkMode {
   display: flex;
   flex-direction: row;
+}
+
+.log{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form{
+  text-align: center;
+}
+
+form select,button {
+  background-color: transparent;
+  width: 7rem;
+  height: 1.5rem;
+  color: #00a7e7;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+form{
+  padding: 2rem;
+  border: solid black 3px;
+}
+
+.logContainer{
+  border: solid black 3px;
 }
