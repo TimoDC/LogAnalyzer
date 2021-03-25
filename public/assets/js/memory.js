@@ -7,8 +7,6 @@ let MemTotal = document.querySelector("tr .MemTotal").innerHTML;
 let MemUsed = document.getElementById("MemUsed").innerHTML;
 let MemFree = document.getElementById("MemFree").innerHTML;
 
-console.log(MemTotal);
-
 let SwapTotal = document.querySelector("tr .SwapTotal").innerHTML;
 let SwapUsed = document.getElementById("SwapUsed").innerHTML;
 let SwapFree = document.getElementById("SwapFree").innerHTML;
@@ -30,12 +28,6 @@ let dataSwap = [(parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2), (parse
 let dataCPU = [parseFloat(user).toFixed(2),parseFloat(system).toFixed(2),parseFloat(iowait).toFixed(2),parseFloat(idle).toFixed(2)];
 let dataDisk = [(parseInt(DiskUsed)/parseInt(DiskTotal) *100).toFixed(2), (parseInt(DiskFree)/parseInt(DiskTotal) *100).toFixed(2)];
 
-console.log(dataMem);
-console.log(dataSwap);
-console.log(dataCPU);
-console.log(dataDisk);
-console.log("ur moms ur dad");
-
 createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage", (parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2));
 createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage", (parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2));
 createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (parseFloat(user) + parseFloat(system)).toFixed(2));
@@ -44,8 +36,7 @@ createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (parseInt(D
 
 function createDoughnutChart(canvas, labels, data, title, centerLabel) {
     const chart3 = document.getElementById(canvas);
-    console.log("u moeder")
-    console.log(chart3);
+    //console.log(chart3);
     new Chart(chart3, {
         responsive: true,
         type: 'doughnut',
