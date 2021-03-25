@@ -13,31 +13,47 @@
 <p id="logContent">{!! $content !!}</p>
 
 <div id="content">
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Login</th>
-                <th>User</th>
-                <th>Database</th>
-            </tr>
-        </thead>
-        <tbody id="logTable">
+    <div id="tables">
+        <table id="connectionTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Login</th>
+                    <th>User</th>
+                    <th>Database</th>
+                </tr>
+            </thead>
+            <tbody id="logTable">
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
+        <table id="prepareTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Query</th>
+                </tr>
+            </thead>
+            <tbody id="logTable">
+
+            </tbody>
+        </table>
+    </div>
     <div id="charts">
-        <div id="databaseCanvas">
+        <div class="canvas">
             <canvas id="databaseChart"></canvas>
         </div>
-        <div id="userCanvas">
+        <div class="canvas">
             <canvas id="userChart"></canvas>
         </div>
-        <div id="loginCanvas">
+        <div class="canvas">
             <canvas id="loginChart"></canvas>
+        </div>
+        <div class="canvas">
+            <canvas id="queryChart"></canvas>
         </div>
     </div>
 </div>
