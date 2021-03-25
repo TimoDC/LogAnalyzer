@@ -74,8 +74,4 @@
     @yield('log')
     </div>
 </main>
-
-
-
-
 @endsection

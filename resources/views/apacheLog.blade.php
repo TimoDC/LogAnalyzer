@@ -62,13 +62,40 @@
     </div>
 
     <div class="logInfo">
-        <p class="logAmount"></p>
-        <p class="ipAmount"></p>
-        <p class="mostUsedOS"></p>
-        <p class="mostUsedBrowser"></p>
-        <p class="mostRequestUrl"></p>
+        <div>
+            <p>Amount Of Logs:</p>
+            <p class="logAmount"></p>
+        </div>
+        <div>
+            <p>Most Common Visitor:</p>
+            <p class="visitorIp"></p>
+        </div>
+        <div>
+            <p>Most Used Operating System:</p>
+            <p class="mostUsedOS"></p>
+        </div>
+        <div>
+            <p>Most used Browser:</p>
+            <p class="mostUsedBrowser"></p>
+        </div>
+        <div>
+            <p>Most Requested URL:</p>
+            <p class="mostRequestUrl"></p>
+        </div>
+        <div>
+            <p>Amount Of Unique Visitors:</p>
+            <p class="uniqueVisitors"></p>
+        </div>
+        <div>
+            <p>Amount Of Client Side Errors:</p>
+            <p class="clientSideErrors"></p>
+        </div>
+        <div>
+            <p>Amount Of Server Side Errors:</p>
+            <p class="serverSideErrors"></p>
+        </div>
     </div>
-    <div class="logChart hidden">
+    <div class="logChart">
         <div class="hidden">
             <p>IP Address</p>
             <canvas id="ipChart"></canvas>

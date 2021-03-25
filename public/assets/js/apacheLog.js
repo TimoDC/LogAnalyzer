@@ -58,6 +58,14 @@ function checkforResponse() {
     }
 }
 
+function createUserAgent(items, startAmount){
+    let userAgent = "";
+    for(let i = startAmount; i < items.length; i++){
+        userAgent += items[i] + " ";
+    }
+    return userAgent;
+}
+
 function analyseLog(content) {
     document.querySelector(".logChart").classList.remove("hidden");
     let logs = content.split("\n");
@@ -75,30 +83,56 @@ function analyseLog(content) {
             responseCode.push(items[8])
             requestSize.push(items[9])
             requestedUrl.push(items[10])
-            OS.push(items[12].split("(")[1])
-            browser.push(items[21].split("/")[0])
+            if(items.length > 12){
+                OS.push(items[12].replace("(", "").replace(")", ""))
+                let useragent = createUserAgent(items, 11)
+                if(useragent.includes("OPR")){
+                    browser.push("Opera");
+                }else if(useragent.includes("Firefox")){
+                    browser.push("FireFox");
+                }else if(useragent.includes("Edg")){
+                    browser.push("Edge");
+                }else if(useragent.includes("Chrome")){
+                    browser.push("Chrome");
+                }else{
+                    browser.push("Not Found")
+                }
+            }else{
+                OS.push("Not Found");
+                browser.push(items[11].split("/")[0].replace("\"", ""))
+            }
         }
     }
-    setIpAmount();
-    //chart2(ips, "ipChart", "doughnut");
-    chart(ips, "ipChart", "doughnut");
+    setBasicLogInfo();
+    chart(ips, "ipChart", "bar");
     chart(identityClient, "identityClientChart", "doughnut");
     chart(userid, "useridChart", "doughnut");
     chart(time, "timeChart", "doughnut");
     chart(verbs, "verbsChart", "doughnut");
-    chart(requestedFile, "requestedFileChart", "doughnut");
+    chart(requestedFile, "requestedFileChart", "line");
     chart(httpCode, "httpCodeChart", "doughnut");
-    chart(responseCode, "responseCodeChart", "doughnut");
-    chart(requestSize, "requestSizeChart", "doughnut");
-    chart(requestedUrl, "requestedUrlChart", "doughnut");
+    chart(responseCode, "responseCodeChart", "bar");
+    chart(requestSize, "requestSizeChart", "line");
+    chart(requestedUrl, "requestedUrlChart", "bar");
     chart(OS, "OSChart", "doughnut");
     chart(browser, "browserChart", "doughnut");
 }
+
+function setBasicLogInfo() {
+    setIpAmount();
+    setMostUsedOS();
+    setMostUsedBrowser();
+    setMostRequestUrl();
+    setUniqueVisitors();
+    setClientSideErrors();
+    setServerSideErrors();
+}
+
 function chart(list, chartId, type) {
     let ctx = document.getElementById(chartId).getContext('2d');
     let listOfDifferentItems = getListOfDifferentItems(list);
     let data = getAmountOfDifferentItem(listOfDifferentItems, list)
-    let fiveMostUsed = fiveMostUsedItems(listOfDifferentItems, data);
+    let fiveMostUsed = fiveMostUsedItems(listOfDifferentItems, data).sort(function(a, b){return a-b});
     let chart = new Chart(ctx, {
         // The type of chart we want to create
         type: type,
@@ -157,17 +191,63 @@ function getAmountOfDifferentItem(newItemList, valueList) {
 
 function setLogAmount(logs) {
     let logAmount = document.querySelector(".logAmount");
-    logAmount.innerHTML = "Log Count: " + logs.length;
+    logAmount.innerHTML = logs.length;
 }
 
 function setIpAmount() {
     let ipList = getListOfDifferentItems(ips);
     let amountList = getAmountOfDifferentItem(ipList, ips);
-    let ip = getMostUsedItems(ips, amountList)
-    document.querySelector(".ipAmount").innerHTML = "Most Commen IP: " + ip;
+    let ip = getMostUsedItems(ipList, amountList)
+    document.querySelector(".visitorIp").innerHTML = ip;
 }
 
-function getMostUsedItems(ips, amounts) {
+function setMostUsedOS() {
+    let OSList = getListOfDifferentItems(OS);
+    let amountList = getAmountOfDifferentItem(OSList, OS);
+    let OperatingS = getMostUsedItems(OSList, amountList)
+    document.querySelector(".mostUsedOS").innerHTML = OperatingS;
+}
+
+function setMostUsedBrowser() {
+    let browserList = getListOfDifferentItems(browser);
+    let amountList = getAmountOfDifferentItem(browserList, browser);
+    let browsers = getMostUsedItems(browserList, amountList)
+    document.querySelector(".mostUsedBrowser").innerHTML = browsers;
+}
+
+function setMostRequestUrl() {
+    let requestedUrlList = getListOfDifferentItems(requestedUrl);
+    let amountList = getAmountOfDifferentItem(requestedUrlList, requestedUrl);
+    let url = getMostUsedItems(requestedUrlList, amountList)
+    document.querySelector(".mostRequestUrl").innerHTML = url;
+}
+
+function setUniqueVisitors() {
+    let uniqueVisitors = getListOfDifferentItems(ips);
+    document.querySelector(".uniqueVisitors").innerHTML =  uniqueVisitors.length;
+}
+
+function setClientSideErrors() {
+    let amount = 0;
+    responseCode.forEach(code => {
+        if (code.startsWith("4")) {
+            amount += 1;
+        }
+    })
+    document.querySelector(".clientSideErrors").innerHTML = amount;
+}
+
+function setServerSideErrors() {
+    let amount = 0;
+    responseCode.forEach(code => {
+        if (code.startsWith("5")) {
+            amount += 1;
+        }
+    })
+    document.querySelector(".serverSideErrors").innerHTML = amount;
+}
+
+function getMostUsedItems(items, amounts) {
     let max = 0;
     let ip = "";
     amounts.forEach(item => {
@@ -175,7 +255,9 @@ function getMostUsedItems(ips, amounts) {
             max = item
         }
     })
-    ip = ips[amounts.indexOf(max)];
+    console.log(max)
+    ip = items[amounts.indexOf(max)];
+    console.log(amounts)
     return ip;
 }
 
@@ -186,8 +268,19 @@ function fiveMostUsedItems(items, amounts) {
         if (commonItem !== undefined) {
             fiveMostCommonItems.push(commonItem);
         }
-        items.splice(items.indexOf(commonItem), 1);
-        amounts = amounts.splice(items.indexOf(commonItem), 1);
+        let index = items.indexOf(commonItem)
+        items = remove(items,index)
+        amounts = remove(amounts,index)
     }
     return fiveMostCommonItems
+}
+
+function remove(list, index){
+    let newList = []
+    for(let i = 0; i < list.length; i++){
+        if(i !== index){
+            newList.push(list[i])
+        }
+    }
+    return newList
 }
