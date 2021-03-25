@@ -45,7 +45,7 @@
 
 @endsection
 
-@section("scripts")
+@section("script")
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
     <script src="{{ asset('assets/js/sqlLogs.js') }}"></script>
 @endsection
