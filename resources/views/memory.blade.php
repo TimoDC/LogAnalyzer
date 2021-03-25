@@ -88,7 +88,7 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <div>
+    <div id="processContainer">
         <h2>Processes</h2>
         <p><?php echo $AmountProcesses ?></p>
     </div>

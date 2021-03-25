@@ -92,3 +92,12 @@ tr:nth-child(even){background-color: #f2f2f2;}
 .log {
     margin: 1vw;
 }
+
+#processContainer {
+    text-align: center;
+    width: 50%;
+}
+
+#processContainer p {
+    font-size: 8vw;
+}
