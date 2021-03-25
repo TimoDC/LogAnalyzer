@@ -36,10 +36,6 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
 
 
 @section('content')
-
-
-
-
     <div id="CanvasContainer">
         <div>
             <canvas id="memoryCanvas"></canvas>
@@ -140,8 +136,11 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
             </tr>
         </table>
     </div>
-    <script src="{{ asset('assets/js/memory.js') }}"></script>
 
+@stop
+
+    @section('script')
+    <script src="{{ asset('assets/js/memory.js') }}"></script>
 @stop
 
 
