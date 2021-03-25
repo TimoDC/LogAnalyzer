@@ -30,6 +30,7 @@ function showInfo() {
 
 function addChartForCommands(entries) {
     const commandscanvas = document.querySelector("#commandschart canvas");
+    const label = "Most Used Commands";
 
     let commands = [];
 
@@ -64,7 +65,9 @@ function addChartForCommands(entries) {
     } else {
         getTop12(commands, countCommandsOrdered);
 
-        createCommandsChart(commandscanvas, commands, countCommandsOrdered, countManyCommands);
+        const text = `Top 12 Most Used Commands (total used commands: ${countManyCommands})`;
+
+        createPieChart(commandscanvas, commands, countCommandsOrdered, label, text);
     }
 }
 
@@ -72,15 +75,15 @@ function noEnoughData(count) {
     return count < 1;
 }
 
-function createCommandsChart(commandscanvas, commands, countCommandsOrdered, countManyCommands) {
-    return new Chart(commandscanvas, {
+function createPieChart(canvas, labels, data, label, text) {
+    return new Chart(canvas, {
         type: 'pie',
         data: {
-            labels: commands,
+            labels: labels,
             datasets: [{
-                label: 'Most Used Commands',
-                data: countCommandsOrdered,
-                backgroundColor: palette('tol', countCommandsOrdered.length).map(function (hex) {
+                label: label,
+                data: data,
+                backgroundColor: palette('tol', data.length).map(function (hex) {
                     return "#" + hex;
                 })
             }]
@@ -88,14 +91,14 @@ function createCommandsChart(commandscanvas, commands, countCommandsOrdered, cou
         options: {
             title: {
                 display: true,
-                text: `Top 12 Most Used Commands (total used commands: ${countManyCommands})`
+                text: text
             },
             legend: {
                 display: true,
                 position: 'right'
             }
         }
-    });
+    })
 }
 
 function addTitleForTotalErrors(entries) {
@@ -115,7 +118,8 @@ function addTitleForTotalErrors(entries) {
 }
 
 function addChartForUnsuccessfulUsernames(entries) {
-    const unsuccessfulusernames = document.querySelector("#unsuccessfulusernameschart canvas");
+    const unsuccessfulusernamescanvas = document.querySelector("#unsuccessfulusernameschart canvas");
+    const label = 'Unsuccessful Attempts';
 
     let unsuccessfulAttemptUsernames = [];
 
@@ -151,35 +155,10 @@ function addChartForUnsuccessfulUsernames(entries) {
     } else {
         getTop12(unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
 
-        createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames);
-    }
-}
+        const text = `Top 12 Unsuccessful Attempt Usernames (total usernames: ${countUsernames})`;
 
-function createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames) {
-    return new Chart(unsuccessfulusernames, {
-        type: 'pie',
-        data: {
-            labels: unsuccessfulAttemptUsernames,
-            datasets: [{
-                label: 'Unsuccessful Attempts',
-                data: countUnsuccessfulAttemptUsernamesOrdered,
-                backgroundColor: palette('tol', countUnsuccessfulAttemptUsernamesOrdered.length).map(function (hex) {
-                    return "#" + hex;
-                }),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: `Top 12 Unsuccessful Attempt Usernames (total usernames: ${countUsernames})`
-            },
-            legend: {
-                display: true,
-                position: 'right'
-            }
-        }
-    });
+        createPieChart(unsuccessfulusernamescanvas, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, label, text);
+    }
 }
 
 function addChartForActivity(entries) {
@@ -257,7 +236,8 @@ function orderObjectToArray(object, orderedArray) {
 }
 
 function addChartForUnsuccessfulAttempts(entries) {
-    const unsuccessfulattempts = document.querySelector("#unsuccessfulattemptschart canvas");
+    const unsuccessfulattemptscanvas = document.querySelector("#unsuccessfulattemptschart canvas");
+    const label = 'Unsuccessful Attempts';
 
     let countUnsuccessfulAttempts = 0;
 
@@ -300,7 +280,9 @@ function addChartForUnsuccessfulAttempts(entries) {
     } else {
         getTop12(unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
 
-        createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countIps);
+        const text = `Top 12 Unsuccessful Attempt IP's (total IP's: ${countIps})`;
+
+        createPieChart(unsuccessfulattemptscanvas, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, label, text);
     }
 }
 
@@ -336,33 +318,6 @@ function sortObjectByCount(sortedArray, object) {
     return sortedArray;
 }
 
-function createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countIps) {
-    return new Chart(unsuccessfulattempts, {
-        type: 'pie',
-        data: {
-            labels: unsuccessfulAttemptIps,
-            datasets: [{
-                label: 'Unsuccessful Attempts',
-                data: countUnsuccessfulAttemptIpsOrdered,
-                backgroundColor: palette('tol', countUnsuccessfulAttemptIpsOrdered.length).map(function (hex) {
-                    return "#" + hex;
-                }),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: `Top 12 Unsuccessful Attempt IP's (total IP's: ${countIps})`
-            },
-            legend: {
-                display: true,
-                position: 'right'
-            }
-        }
-    });
-}
-
 function countDuplicatesInObject(duplicates, mapCount) {
     duplicates.forEach(function (x) {
         mapCount[x] = (mapCount[x] || 0) + 1;
@@ -384,7 +339,8 @@ function unsuccessfulAttemptFound(entries, i) {
 }
 
 function addChartForAppName(entries) {
-    const appname = document.querySelector("#appnamechart canvas");
+    const appnamecanvas = document.querySelector("#appnamechart canvas");
+    const label = 'Pie App-Name';
 
     let appnamesplitter;
 
@@ -419,34 +375,9 @@ function addChartForAppName(entries) {
 
     getTop12(arrayAppNames, countAppNamesOrdered);
 
-    CreateAppNameChart(appname, arrayAppNames, countAppNamesOrdered, countApps);
-}
+    const text = `Top 12 App-Names (total app-names: ${countApps})`;
 
-function CreateAppNameChart(appname, arrayAppNames, countAppNamesOrdered, countApps) {
-    return new Chart(appname, {
-        type: 'pie',
-        data: {
-            labels: arrayAppNames,
-            datasets: [{
-                label: 'Pie App-Name',
-                data: countAppNamesOrdered,
-                backgroundColor: palette('tol', countAppNamesOrdered.length).map(function(hex) {
-                    return "#" + hex;
-                }),
-                borderWidth: 1
-            }]
-        },
-        options: {
-            title: {
-                display: true,
-                text: `Top 12 App-Names (total app-names: ${countApps})`
-            },
-            legend: {
-                display: true,
-                position: 'right'
-            }
-        }
-    });
+    createPieChart(appnamecanvas, arrayAppNames, countAppNamesOrdered, label, text);
 }
 
 function showEntriesInTable(entries) {
