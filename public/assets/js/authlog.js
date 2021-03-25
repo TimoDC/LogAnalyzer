@@ -1,6 +1,6 @@
 "use strict"
 
-const AUTHLOG = document.querySelector("#authlogcharts input[type='hidden']").value.toLowerCase();
+const AUTHLOG = document.querySelector("#authlogcharts input[type='hidden']").value;
 
 document.addEventListener("DOMContentLoaded", init);
 
