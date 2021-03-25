@@ -29,6 +29,8 @@ Route::post("/addLogFile/{x}", "LogAnalyzerController@addLogFile") -> name("id")
 
 Route::get("/dashboard/{x}/apache", "apacheLogController@index") -> name("id");
 
+Route::get("/dashboard/{x}/apache2", "apacheLogController@index2") -> name("id");
+
 Route::get('/dashboard/{x}/auth', 'AuthLogsController@index') -> name('authlogs');
 
 Auth::routes(["register" => false]);

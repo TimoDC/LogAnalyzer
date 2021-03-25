@@ -37,6 +37,8 @@ class LogAnalyzerController extends Controller
             $dashboard -> authLogFile = $filename;
         }elseif($request -> input("LogType") === "MySQL"){
             $dashboard -> mysqlLogFile = $filename;
+        }elseif($request -> input("LogType") === "Apache2"){
+            $dashboard -> apacheErrorLogFile = $filename;
         }else{
             return redirect() -> back()->withErrors(['msg', 'Invalid FileType']);
         }

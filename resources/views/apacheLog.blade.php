@@ -64,11 +64,11 @@
             <label for="parameter">Parameter</label>
         </div>
         <div class="parameterKey">
-            <input type="checkbox" id="parameterKey" name="parameterKey" value="parameterKey" checked>
+            <input type="checkbox" id="parameterKey" name="parameterKey" value="parameterKey">
             <label for="parameterKey">Parameter Keys</label>
         </div>
         <div class="parameterValue">
-            <input type="checkbox" id="parameterValue" name="parameterValue" value="parameterValue" checked>
+            <input type="checkbox" id="parameterValue" name="parameterValue" value="parameterValue">
             <label for="parameterValue">Parameter Values</label>
         </div>
     </div>
@@ -157,7 +157,7 @@
             <canvas id="browserChart"></canvas>
         </div>
         <div class="hidden">
-            <p>Parameter Keys</p>
+            <p>Parameter</p>
             <canvas id="parameterChart"></canvas>
         </div>
         <div class="hidden">

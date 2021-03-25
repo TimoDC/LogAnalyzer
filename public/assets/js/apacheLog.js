@@ -104,24 +104,24 @@ function analyseLog(content) {
         }
     }
     setBasicLogInfo();
-    chart(ips, "ipChart", "bar");
-    chart(identityClient, "identityClientChart", "doughnut");
-    chart(userid, "useridChart", "doughnut");
-    chart(time, "timeChart", "doughnut");
-    chart(verbs, "verbsChart", "doughnut");
-    chart(requestedFile, "requestedFileChart", "line");
-    chart(httpCode, "httpCodeChart", "doughnut");
-    chart(responseCode, "responseCodeChart", "bar");
-    chart(requestSize, "requestSizeChart", "line");
-    chart(requestedUrl, "requestedUrlChart", "bar");
-    chart(OS, "OSChart", "doughnut");
-    chart(browser, "browserChart", "doughnut");
+    chart(ips, "ipChart", "bar", "IP");
+    chart(identityClient, "identityClientChart", "doughnut", "identity Client");
+    chart(userid, "useridChart", "doughnut", "UserId");
+    chart(time, "timeChart", "doughnut", "Time");
+    chart(verbs, "verbsChart", "doughnut", "Verbs");
+    chart(requestedFile, "requestedFileChart", "line", "Requested Files");
+    chart(httpCode, "httpCodeChart", "doughnut", "HTTP Codes");
+    chart(responseCode, "responseCodeChart", "bar", "Response Code");
+    chart(requestSize, "requestSizeChart", "line", "Request Size");
+    chart(requestedUrl, "requestedUrlChart", "bar", "Requested URL'S");
+    chart(OS, "OSChart", "doughnut", "Operating Systems");
+    chart(browser, "browserChart", "doughnut", "Browsers");
     let keys = keysChart();
-    chart(keys, "parameterKeyChart", "bar")
+    chart(keys, "parameterKeyChart", "bar", "Keys")
     let values = valuesChart();
-    chart(values, "parameterValueChart", "bar")
+    chart(values, "parameterValueChart", "bar", "Values")
     let params = parameterChart()
-    chart(params, "parameterChart", "bar")
+    chart(params, "parameterChart", "bar", "Parameters")
 }
 
 function setBasicLogInfo() {
@@ -134,7 +134,7 @@ function setBasicLogInfo() {
     setServerSideErrors();
 }
 
-function chart(list, chartId, type) {
+function chart(list, chartId, type, label) {
     let ctx = document.getElementById(chartId).getContext('2d');
     let listOfDifferentItems = getListOfDifferentItems(list);
     let data = getAmountOfDifferentItem(listOfDifferentItems, list)
@@ -146,7 +146,7 @@ function chart(list, chartId, type) {
         data: {
             labels: fiveMostUsed,
             datasets: [{
-                label: 'IP',
+                label: label,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.8)',
                     'rgba(54, 162, 235, 0.8)',
