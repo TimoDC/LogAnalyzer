@@ -41,7 +41,10 @@
             <label for="LogType">Log Type</label>
             <select name="LogType" id="LogType">
                 @if($board -> apacheLogFile === NULL)
-                <option value="Apache">Apache</option>
+                <option value="Apache">Apache Access</option>
+                @endif
+                @if($board -> apacheErrorLogFile === NULL)
+                <option value="Apache2">Apache Error</option>
                 @endif
                 @if($board -> authLogFile === NULL)
                 <option value="Auth">Auth</option>
@@ -58,7 +61,10 @@
             <div>
                 @isset($dashboard)
                 @if($board -> apacheLogFile !== NULL)
-                <li><a href="/dashboard/{{ $board -> id }}/apache">Apache Logs</a></li>
+                <li><a href="/dashboard/{{ $board -> id }}/apache">Apache Access Logs</a></li>
+                @endif
+                @if($board -> apacheErrorLogFile !== NULL)
+                <li><a href="/dashboard/{{ $board -> id }}/apache2">Apache Error Logs</a></li>
                 @endif
                 @if($board -> authLogFile !== NULL)
                 <li><a href="/dashboard/{{ $board -> id }}/auth">Auth Logs</a></li>
@@ -73,6 +79,7 @@
     @endisset()
 
     @yield('log')
+    @yield('apache2')
     @yield('content')
     </div>
 </main>

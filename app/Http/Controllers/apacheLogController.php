@@ -22,4 +22,17 @@ class apacheLogController extends Controller
         ";
         return view("apacheLog", ["content" => $content, "dashboards" => $dashboards, "board" => $dashboard]);
     }
+
+    function index2(int $id)
+    {
+        $dashboard = dashboard::find($id);
+        $dashboards = dashboard::all();
+        $filename = $dashboard -> apacheErrorLogFile;
+        $content = "<script>
+        let promise = fetch('/" . $filename . " ')
+            .then(response => response.text())
+        </script>
+        ";
+        return view("apache2", ["content" => $content, "dashboards" => $dashboards, "board" => $dashboard]);
+    }
 }
