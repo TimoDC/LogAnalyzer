@@ -32,9 +32,9 @@ tr:nth-child(even){background-color: #f2f2f2;}
 
 #plainTextContainer {
     display: grid;
-    grid-template-columns: 50% 50%;
-    height: 50%;
-    margin-bottom: 2vw;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin: 2vw;
+    position: relative;
 }
 
 /* @media screen and (max-width: 1500px) {
@@ -110,18 +110,58 @@ tr:nth-child(even){background-color: #f2f2f2;}
 }
 
 #processContainer, #memoryContainer, #diskContainer, #swapContainer {
+    display: flex;
     text-align: center;
-    width: 50%;
+    width: 80%;
+    flex-direction: column ;
+    justify-content:center;  
+    background-color: white;
 }
+
 
 #processContainer p {
-    font-size: 8vw;
+    font-size: 4vw;
+    color: #ffc7b6;
 }
 
-#memoryContainer p, #diskContainer p {
-    font-size: 4vw;
+#memoryContainer p, #diskContainer p, #swapContainer p {
+    font-size: 2vw;
+    color: #ffc7b6;
 }
 
 span {
     font-weight: bold;
+}
+
+
+.glowing {
+    --border-width: 3px;
+    position: relative;
+    align-items: center;
+    background: #222;
+    border-radius: var(--border-width);
+  }
+  .glowing::after {
+    position: absolute;
+    content: "";
+    top: calc(-1 * var(--border-width));
+    left: calc(-1 * var(--border-width));
+    z-index: -1;
+    width: calc(100% + var(--border-width) * 2);
+    height: calc(100% + var(--border-width) * 2);
+    background: linear-gradient(60deg, #d4ecfc, #ffc7b6, #CCB2DB, );
+    background-size: 300% 300%;
+    background-position: 0 50%;
+    border-radius: calc(2 * var(--border-width));
+    animation: moveGradient 4s alternate infinite;
+  }
+  
+  @keyframes moveGradient {
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  button:focus {
+    outline: none;
 }
