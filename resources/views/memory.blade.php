@@ -81,16 +81,16 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <table>
-        <tr>
-            <th scope="row">Amount of running processes</th>
-            <td id="MemFree"><?php echo $AmountProcesses ?></td>
-        </tr>
-    </table>
+    <div id="memoryContainer">
+        <h2>Memory Usage</h2>
+        <p><span><?php echo $MemUsed?>MB</span></p>
+        <h3>Total Memory <span><?php echo $MemTotal?>MB</span></h3>
+    </div>
+
 
     <div id="processContainer">
         <h2>Processes</h2>
-        <p><?php echo $AmountProcesses ?></p>
+        <p><span><?php echo $AmountProcesses ?></span></p>
     </div>
 
 

@@ -93,11 +93,19 @@ tr:nth-child(even){background-color: #f2f2f2;}
     margin: 1vw;
 }
 
-#processContainer {
+#processContainer, #memoryContainer {
     text-align: center;
     width: 50%;
 }
 
 #processContainer p {
     font-size: 8vw;
+}
+
+#memoryContainer p {
+    font-size: 4vw;
+}
+
+span {
+    font-weight: bold;
 }
