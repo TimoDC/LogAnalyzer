@@ -30,6 +30,13 @@ tr:nth-child(even){background-color: #f2f2f2;}
     margin-bottom: 2vw;
 }
 
+#plainTextContainer {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 50%;
+    margin-bottom: 2vw;
+}
+
 /* @media screen and (max-width: 1500px) {
     #CanvasContainer {
         position: relative;
@@ -40,6 +47,14 @@ tr:nth-child(even){background-color: #f2f2f2;}
 
 @media screen and (max-width: 1200px) {
     #CanvasContainer {
+        position: relative;
+        display: grid;
+        grid-template-columns: 100%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #plainTextContainer {
         position: relative;
         display: grid;
         grid-template-columns: 100%;
@@ -85,15 +100,16 @@ tr:nth-child(even){background-color: #f2f2f2;}
   }
 
 
-.hidden {
-    visibility: hidden;
+#CanvasContainer.hidden, #buttonContainer.hidden, .hidden {
+    display:none
 }
+
 
 .log {
     margin: 1vw;
 }
 
-#processContainer, #memoryContainer {
+#processContainer, #memoryContainer, #diskContainer, #swapContainer {
     text-align: center;
     width: 50%;
 }
@@ -102,7 +118,7 @@ tr:nth-child(even){background-color: #f2f2f2;}
     font-size: 8vw;
 }
 
-#memoryContainer p {
+#memoryContainer p, #diskContainer p {
     font-size: 4vw;
 }
 

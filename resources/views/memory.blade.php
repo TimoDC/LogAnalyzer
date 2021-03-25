@@ -60,6 +60,33 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
 </div>
 
 <div class="hidden" id="tableContainer">
+
+    <div class="plainTextContainer">
+    <div id="memoryContainer">
+        <h2>Memory Usage</h2>
+        <p><span><?php echo $MemUsed?>MB</span></p>
+        <h3>Total Memory <span><?php echo $MemTotal?>MB</span></h3>
+    </div>
+
+    <div id="swapContainer">
+        <h2>Swap Usage</h2>
+        <p><span><?php echo $SwapUsed?>MB</span></p>
+        <h3>Total Swap <span><?php echo $SwapTotal?>MB</span></h3>
+    </div>
+
+
+    <div id="processContainer">
+        <h2>Processes</h2>
+        <p><span><?php echo $AmountProcesses ?></span></p>
+    </div>
+
+    <div id="diskContainer">
+        <h2>Disk Usage</h2>
+        <p><span><?php echo $DiskUsed?>GB</span></p>
+        <h3>Total Disk Space <span><?php echo $DiskTotal?>GB</span></h3>
+    </div>
+    </div>
+
     <table>
         <tr>
             <th></th>
@@ -81,19 +108,6 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <div id="memoryContainer">
-        <h2>Memory Usage</h2>
-        <p><span><?php echo $MemUsed?>MB</span></p>
-        <h3>Total Memory <span><?php echo $MemTotal?>MB</span></h3>
-    </div>
-
-
-    <div id="processContainer">
-        <h2>Processes</h2>
-        <p><span><?php echo $AmountProcesses ?></span></p>
-    </div>
-
-
     <table>
         <tr>
             <th scope="row">CPU (user)</th>
@@ -113,7 +127,7 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <table>
+    <table class="hidden">
         <tr>
             <th></th>
             <th scope="col">total</th>
