@@ -33,4 +33,26 @@
     margin: 2rem;
     padding-bottom: 1rem;
     border-bottom: solid black 3px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.logInfo div{
+    border: solid black 2px;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    width: 15rem;
+}
+
+.logInfo div p{
+    font-weight: bold;
+}
+
+.logInfo div p:last-of-type{
+    color: rgb(74, 243, 7);
+}
+
+.logInfo div p:first-of-type{
+    margin-bottom: 0.5rem;
 }

@@ -76,8 +76,4 @@
     @yield('content')
     </div>
 </main>
-
-
-
-
 @endsection

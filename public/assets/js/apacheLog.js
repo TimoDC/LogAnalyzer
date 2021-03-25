@@ -35,7 +35,6 @@ function showOrHideLog() {
 function showLog(input) {
     let name = input.name;
     let chartClass = name + "Chart";
-    console.log(chartClass);
     let chart = document.querySelector("#" + chartClass);
     chart.parentElement.classList.remove("hidden");
 }
@@ -59,11 +58,18 @@ function checkforResponse() {
     }
 }
 
+function createUserAgent(items, startAmount){
+    let userAgent = "";
+    for(let i = startAmount; i < items.length; i++){
+        userAgent += items[i] + " ";
+    }
+    return userAgent;
+}
+
 function analyseLog(content) {
     document.querySelector(".logChart").classList.remove("hidden");
     let logs = content.split("\n");
-    let p = document.querySelector(".logInfo p");
-    p.innerHTML = "Log Count: " + logs.length;
+    setLogAmount(logs);
     for (let log of logs) {
         if (log !== "") {
             let items = log.split(" ");
@@ -77,33 +83,68 @@ function analyseLog(content) {
             responseCode.push(items[8])
             requestSize.push(items[9])
             requestedUrl.push(items[10])
-            OS.push(items[12].split("(")[1])
-            browser.push(items[21].split("/")[0])
+            if(items.length > 12){
+                OS.push(items[12].replace("(", "").replace(")", ""))
+                let useragent = createUserAgent(items, 11)
+                if(useragent.includes("OPR")){
+                    browser.push("Opera");
+                }else if(useragent.includes("Firefox")){
+                    browser.push("FireFox");
+                }else if(useragent.includes("Edg")){
+                    browser.push("Edge");
+                }else if(useragent.includes("Chrome")){
+                    browser.push("Chrome");
+                }else{
+                    browser.push("Not Found")
+                }
+            }else{
+                OS.push("Not Found");
+                browser.push(items[11].split("/")[0].replace("\"", ""))
+            }
         }
     }
-    //chart2(ips, "ipChart", "doughnut");
-    chart(ips, "ipChart", "doughnut");
+    setBasicLogInfo();
+    chart(ips, "ipChart", "bar");
     chart(identityClient, "identityClientChart", "doughnut");
     chart(userid, "useridChart", "doughnut");
     chart(time, "timeChart", "doughnut");
     chart(verbs, "verbsChart", "doughnut");
-    chart(requestedFile, "requestedFileChart", "doughnut");
+    chart(requestedFile, "requestedFileChart", "line");
     chart(httpCode, "httpCodeChart", "doughnut");
-    chart(responseCode, "responseCodeChart", "doughnut");
-    chart(requestSize, "requestSizeChart", "doughnut");
-    chart(requestedUrl, "requestedUrlChart", "doughnut");
+    chart(responseCode, "responseCodeChart", "bar");
+    chart(requestSize, "requestSizeChart", "line");
+    chart(requestedUrl, "requestedUrlChart", "bar");
     chart(OS, "OSChart", "doughnut");
     chart(browser, "browserChart", "doughnut");
+    let keys = keysChart();
+    chart(keys, "parameterKeyChart", "bar")
+    let values = valuesChart();
+    chart(values, "parameterValueChart", "bar")
+    let params = parameterChart()
+    chart(params, "parameterChart", "bar")
 }
+
+function setBasicLogInfo() {
+    setIpAmount();
+    setMostUsedOS();
+    setMostUsedBrowser();
+    setMostRequestUrl();
+    setUniqueVisitors();
+    setClientSideErrors();
+    setServerSideErrors();
+}
+
 function chart(list, chartId, type) {
     let ctx = document.getElementById(chartId).getContext('2d');
     let listOfDifferentItems = getListOfDifferentItems(list);
+    let data = getAmountOfDifferentItem(listOfDifferentItems, list)
+    let fiveMostUsed = fiveMostUsedItems(listOfDifferentItems, data).sort(function(a, b){return a-b});
     let chart = new Chart(ctx, {
         // The type of chart we want to create
         type: type,
         // The data for our dataset
         data: {
-            labels: listOfDifferentItems,
+            labels: fiveMostUsed,
             datasets: [{
                 label: 'IP',
                 backgroundColor: [
@@ -122,7 +163,7 @@ function chart(list, chartId, type) {
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
-                data: getAmountOfDifferentItem(listOfDifferentItems, list)
+                data: getAmountOfDifferentItem(fiveMostUsed, list)
             }]
         },
         // Configuration options go here
@@ -130,11 +171,44 @@ function chart(list, chartId, type) {
     });
 }
 
+function parameterChart(id){
+    let parameters = []
+    requestedFile.forEach((item) => {
+        if(item.includes("?")){
+            let params = item.split("?")[1];
+            if(params.includes("&")){
+                let split= params.split("&");
+                split.forEach(element => {
+                    if(id === undefined){
+                        parameters.push(element);
+                    }else{
+                        parameters.push(element.split("=")[id]);
+                    }
+                });
+            }else{
+                if(id === undefined){
+                    parameters.push(params);
+                }else{
+                    parameters.push(params.split("=")[id]);
+                }
+            }
+        }
+    })
+    return parameters;
+}
+
+function keysChart(){
+    return parameterChart(0)
+}
+
+function valuesChart(){
+    return parameterChart(1)
+}
 
 function getListOfDifferentItems(list) {
     let newItemList = []
     list.forEach((item) => {
-        if (!newItemList.includes(item) && newItemList.length < 5) {
+        if (!newItemList.includes(item)) {
             newItemList.push(item);
         }
     })
@@ -153,4 +227,99 @@ function getAmountOfDifferentItem(newItemList, valueList) {
         amountList.push(amount);
     });
     return amountList;
+}
+
+function setLogAmount(logs) {
+    let logAmount = document.querySelector(".logAmount");
+    logAmount.innerHTML = logs.length;
+}
+
+function setIpAmount() {
+    let ipList = getListOfDifferentItems(ips);
+    let amountList = getAmountOfDifferentItem(ipList, ips);
+    let ip = getMostUsedItems(ipList, amountList)
+    document.querySelector(".visitorIp").innerHTML = ip;
+}
+
+function setMostUsedOS() {
+    let OSList = getListOfDifferentItems(OS);
+    let amountList = getAmountOfDifferentItem(OSList, OS);
+    let OperatingS = getMostUsedItems(OSList, amountList)
+    document.querySelector(".mostUsedOS").innerHTML = OperatingS;
+}
+
+function setMostUsedBrowser() {
+    let browserList = getListOfDifferentItems(browser);
+    let amountList = getAmountOfDifferentItem(browserList, browser);
+    let browsers = getMostUsedItems(browserList, amountList)
+    document.querySelector(".mostUsedBrowser").innerHTML = browsers;
+}
+
+function setMostRequestUrl() {
+    let requestedUrlList = getListOfDifferentItems(requestedUrl);
+    let amountList = getAmountOfDifferentItem(requestedUrlList, requestedUrl);
+    let url = getMostUsedItems(requestedUrlList, amountList)
+    document.querySelector(".mostRequestUrl").innerHTML = url;
+}
+
+function setUniqueVisitors() {
+    let uniqueVisitors = getListOfDifferentItems(ips);
+    document.querySelector(".uniqueVisitors").innerHTML =  uniqueVisitors.length;
+}
+
+function setClientSideErrors() {
+    let amount = 0;
+    responseCode.forEach(code => {
+        if (code.startsWith("4")) {
+            amount += 1;
+        }
+    })
+    document.querySelector(".clientSideErrors").innerHTML = amount;
+}
+
+function setServerSideErrors() {
+    let amount = 0;
+    responseCode.forEach(code => {
+        if (code.startsWith("5")) {
+            amount += 1;
+        }
+    })
+    document.querySelector(".serverSideErrors").innerHTML = amount;
+}
+
+
+function getMostUsedItems(items, amounts) {
+    let max = 0;
+    let ip = "";
+    amounts.forEach(item => {
+        if (item > max) {
+            max = item
+        }
+    })
+    ip = items[amounts.indexOf(max)];
+    return ip;
+}
+
+function fiveMostUsedItems(items, amounts) {
+    let fiveMostCommonItems = []
+    for (let i = 0; i < 5; i++) {
+        let commonItem = getMostUsedItems(items, amounts);
+        if (commonItem !== undefined) {
+            fiveMostCommonItems.push(commonItem);
+        }
+        let index = items.indexOf(commonItem)
+        items = remove(items,index)
+        amounts = remove(amounts,index)
+    }
+    return fiveMostCommonItems
+}
+
+function remove(list, index){
+    let newList = []
+    for(let i = 0; i < list.length; i++){
+        if(i !== index){
+            newList.push(list[i])
+        }
+    }
+    return newList
 }
