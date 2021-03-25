@@ -37,6 +37,10 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
 
 
 @section('content')
+<div id="buttonContainer">
+<button class="btn" id="selected">Charts</button>
+<button class="btn">Plain Text</button>
+</div>
 <div id="CanvasContainer">
     <div>
         <canvas id="memoryCanvas"></canvas>
@@ -83,6 +87,12 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
             <td id="MemFree"><?php echo $AmountProcesses ?></td>
         </tr>
     </table>
+
+    <div>
+        <h2>Processes</h2>
+        <p><?php echo $AmountProcesses ?></p>
+    </div>
+
 
     <table>
         <tr>
