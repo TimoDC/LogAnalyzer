@@ -60,7 +60,34 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
 </div>
 
 <div class="hidden" id="tableContainer">
-    <table>
+
+    <div id="plainTextContainer">
+    <div id="memoryContainer" class="glowing">
+        <h2>Memory Usage</h2>
+        <p><span><?php echo $MemUsed?>MB</span></p>
+        <h3>Total Memory <span><?php echo $MemTotal?>MB</span></h3>
+    </div>
+
+    <div id="swapContainer" class="glowing">
+        <h2>Swap Usage</h2>
+        <p><span><?php echo $SwapUsed?>MB</span></p>
+        <h3>Total Swap <span><?php echo $SwapTotal?>MB</span></h3>
+    </div>
+
+
+    <div id="processContainer" class="glowing">
+        <h2>Processes</h2>
+        <p><span><?php echo $AmountProcesses ?></span></p>
+    </div>
+
+    <div id="diskContainer" class="glowing">
+        <h2>Disk Usage</h2>
+        <p><span><?php echo $DiskUsed?>GB</span></p>
+        <h3>Total Disk Space <span><?php echo $DiskTotal?>GB</span></h3>
+    </div>
+    </div>
+
+    <table class="hidden">
         <tr>
             <th></th>
             <th scope="col">total</th>
@@ -81,20 +108,7 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <table>
-        <tr>
-            <th scope="row">Amount of running processes</th>
-            <td id="MemFree"><?php echo $AmountProcesses ?></td>
-        </tr>
-    </table>
-
-    <div>
-        <h2>Processes</h2>
-        <p><?php echo $AmountProcesses ?></p>
-    </div>
-
-
-    <table>
+    <table class="hidden">
         <tr>
             <th scope="row">CPU (user)</th>
             <td id="user"><?php echo $usr ?>%</td>
@@ -113,7 +127,7 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <table>
+    <table class="hidden">
         <tr>
             <th></th>
             <th scope="col">total</th>
@@ -128,7 +142,7 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <table>
+    <table id="systemContainer"> 
         <tr>
             <th scope="row">Hostname</th>
             <td id="user"><?php echo $hostname ?></td>
@@ -146,6 +160,9 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
             <td id="idle"><?php echo $cpuSpeed ?></td>
         </tr>
     </table>
+
+
+
 </div>
 @stop
 
