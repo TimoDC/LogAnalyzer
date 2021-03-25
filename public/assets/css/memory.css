@@ -92,6 +92,7 @@ tr:nth-child(even){background-color: #f2f2f2;}
 
 .btn {
     background-color: white;
+    border-color: #Fcb08b;
     color: #ffc7b6;
     padding: 12px 16px;
     font-size: 16px;
@@ -149,7 +150,7 @@ span {
     z-index: -1;
     width: calc(100% + var(--border-width) * 2);
     height: calc(100% + var(--border-width) * 2);
-    background: linear-gradient(60deg, #d4ecfc, #ffc7b6, #CCB2DB, );
+    background: linear-gradient(90deg, #d4ecfc, #ffc7b6, #CCB2DB, #D3CDFC);
     background-size: 300% 300%;
     background-position: 0 50%;
     border-radius: calc(2 * var(--border-width));
@@ -165,3 +166,5 @@ span {
   button:focus {
     outline: none;
 }
+
+  
