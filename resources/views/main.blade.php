@@ -2,10 +2,11 @@
 
 @section("css")
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
+@yield('scripts')
 @endsection
 
 @section("main")
-
+@yield('php')
 <main>
     <aside>
         <a id="newDashboardButton">New Dashboard</a>
@@ -72,6 +73,7 @@
     @endisset()
 
     @yield('log')
+    @yield('content')
     </div>
 </main>
 
