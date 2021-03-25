@@ -2,6 +2,7 @@
 
 @section("css")
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}" />
+@yield('scripts')
 @endsection
 
 @section("main")
