@@ -1,6 +1,10 @@
 "use strict"
 
 document.addEventListener("DOMContentLoaded", init);
+document.querySelectorAll(".btn").forEach(elem => {
+  elem.addEventListener("click", selectButton);
+});
+
 
 function init() {
   let memTotal = parseInt(document.querySelector("tr .MemTotal").innerHTML);
@@ -23,7 +27,7 @@ function init() {
   let labelsMem = ["used", "free"];
   let labelsCPU = ["user", "system", "iowait", "idle"]
 
-  let dataMem = [(memUsed / memTotal* 100).toFixed(2), (memFree / memTotal * 100).toFixed(2)];
+  let dataMem = [(memUsed / memTotal * 100).toFixed(2), (memFree / memTotal * 100).toFixed(2)];
   let dataSwap = [(swapUsed / swapTotal * 100).toFixed(2), (swapFree / swapTotal * 100).toFixed(2)];
   let dataCPU = [user.toFixed(2), system.toFixed(2), iowait.toFixed(2), idle.toFixed(2)];
   let dataDisk = [(diskUsed / diskTotal * 100).toFixed(2), (diskFree / diskTotal * 100).toFixed(2)];
@@ -33,6 +37,23 @@ function init() {
   createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (user + system).toFixed(2));
   createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (diskUsed / diskTotal * 100).toFixed(2));
 }
+
+function selectButton(e) {
+  console.log("jema");
+  console.log(e.target)
+
+  var header = document.getElementById("buttonContainer");
+  console.log(header);
+  var btns = header.getElementsByClassName("btn");
+  console.log(btns);
+  for (var i = 0; i < btns.length; i++) {
+      var current = document.getElementById("selected");
+      console.log(current);
+      current.removeAttribute("id");
+      this.setAttribute("id", "selected");
+    };
+}
+
 
 function createDoughnutChart(canvas, labels, data, title, centerLabel) {
   const chart3 = document.getElementById(canvas);
