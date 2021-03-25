@@ -3,19 +3,24 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
+let MemTotal = document.querySelector("tr .MemTotal").innerHTML;
+let MemUsed = document.getElementById("MemUsed").innerHTML;
+let MemFree = document.getElementById("MemFree").innerHTML;
 
-let MemTotal = document.querySelector("tr .MemTotal").innerText;
-let MemUsed = document.getElementById("MemUsed").innerText;
-let MemFree = document.getElementById("MemFree").innerText;
+console.log(MemTotal);
 
-let SwapTotal = document.querySelector("tr .SwapTotal").innerText;
-let SwapUsed = document.getElementById("SwapUsed").innerText;
-let SwapFree = document.getElementById("SwapFree").innerText;
+let SwapTotal = document.querySelector("tr .SwapTotal").innerHTML;
+let SwapUsed = document.getElementById("SwapUsed").innerHTML;
+let SwapFree = document.getElementById("SwapFree").innerHTML;
 
-let user = document.getElementById("user").innerText;
-let system = document.getElementById("system").innerText;
-let iowait = document.getElementById("iowait").innerText;
-let idle = document.getElementById("idle").innerText;
+let user = document.getElementById("user").innerHTML;
+let system = document.getElementById("system").innerHTML;
+let iowait = document.getElementById("iowait").innerHTML;
+let idle = document.getElementById("idle").innerHTML;
+
+let DiskTotal = document.querySelector("tr .DiskTotal").innerHTML;
+let DiskUsed = document.getElementById("DiskUsed").innerHTML;
+let DiskFree = document.getElementById("DiskFree").innerHTML;
 
 let labelsMem = ["used", "free"];
 let labelsCPU = ["user", "system", "iowait", "idle"]
@@ -23,21 +28,18 @@ let labelsCPU = ["user", "system", "iowait", "idle"]
 let dataMem = [(parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2), (parseInt(MemFree)/parseInt(MemTotal) *100).toFixed(2)];
 let dataSwap = [(parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2), (parseInt(SwapFree)/parseInt(SwapTotal) *100).toFixed(2)];
 let dataCPU = [parseFloat(user).toFixed(2),parseFloat(system).toFixed(2),parseFloat(iowait).toFixed(2),parseFloat(idle).toFixed(2)];
+let dataDisk = [(parseInt(DiskUsed)/parseInt(DiskTotal) *100).toFixed(2), (parseInt(DiskFree)/parseInt(DiskTotal) *100).toFixed(2)];
+
 console.log(dataMem);
 console.log(dataSwap);
 console.log(dataCPU);
+console.log(dataDisk);
+console.log("ur moms ur dad");
 
 createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage", (parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2));
 createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage", (parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2));
 createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (parseFloat(user) + parseFloat(system)).toFixed(2));
-
-//addLabelToDoughnut("MemTotal", (parseInt(MemUsed)/parseInt(MemTotal) *100).toFixed(2));
-//addLabelToDoughnut("SwapTotal", (parseInt(SwapUsed)/parseInt(SwapTotal) *100).toFixed(2));
-//addLabelToDoughnut("cpuTotal", (parseFloat(user) + parseFloat(system)));
-}
-
-function addLabelToDoughnut(place, value) {
-    document.querySelector("#CanvasContainer ." + place).innerText = value + "%";
+createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (parseInt(DiskUsed)/parseInt(DiskTotal) *100).toFixed(2));
 }
 
 function createDoughnutChart(canvas, labels, data, title, centerLabel) {
@@ -54,17 +56,21 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
                 backgroundColor: [
                     'rgba(254, 116, 47, 0.35)',
                     'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)'
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(193, 219, 178, 0.45)'
                 ],
                 borderColor: [
                     'rgba(254, 116, 47, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)'
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(169, 223, 197, 0.2)'
                 ],
                 borderWidth: 1
             }]
         },
         options: {
+            //rotation: 1 * Math.PI,
+            //circumference: 1 * Math.PI,
             responsive: false,
             elements: {
                 center: {
