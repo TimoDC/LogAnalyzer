@@ -6,7 +6,7 @@
 @endsection
 
 @section("main")
-
+@yield('php')
 <main>
     <aside>
         <a id="newDashboardButton">New Dashboard</a>

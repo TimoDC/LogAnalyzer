@@ -5,8 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 @stop
 
-
-@section('content')
+@section('php')
 <?php
 $MemTotal = shell_exec("free --mega |grep Mem| cut -c 10-22 | sed -e 's/^[ \t]*//'");
 $MemUsed = shell_exec("free  --mega |grep Mem| cut -c 20-32 | sed -e 's/^[ \t]*//'");
@@ -33,6 +32,11 @@ $kernelRelease = shell_exec("uname -r");
 $cpuModel = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $4,$5,$6}'");
 $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}");
 ?>
+@stop
+
+
+@section('content')
+
 
 
 
