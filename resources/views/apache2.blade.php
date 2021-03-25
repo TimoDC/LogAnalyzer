@@ -56,7 +56,7 @@
         </div>
         <div>
             <p>Most Common SQL Injection Payload:</p>
-            <p class="clientSideErrors"></p>
+            <p class="SQLIPayload"></p>
         </div>
         <div>
             <p>PHP Injection Attempts:</p>
@@ -69,12 +69,16 @@
             <canvas id="ipChart"></canvas>
         </div>
         <div class="hidden">
-            <p>identity Client</p>
-            <canvas id="identityClientChart"></canvas>
+            <p>XSS Payloads</p>
+            <canvas id="XSSChart"></canvas>
         </div>
         <div class="hidden">
-            <p>User ID</p>
-            <canvas id="useridChart"></canvas>
+            <p>SQL Injection</p>
+            <canvas id="SQLIChart"></canvas>
+        </div>
+        <div class="hidden">
+            <p>PHP Injection</p>
+            <canvas id="PHPIChart"></canvas>
         </div>
     </div>
     <script src="{{ asset('assets/js/apacheLog2.js') }}"></script>

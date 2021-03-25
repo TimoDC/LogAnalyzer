@@ -9,6 +9,7 @@ let hackingAttempts = []
 let IPS = []
 let XSSPayloads = []
 let SQLIPayloads = []
+let PHPIPayloads = []
 
 function init() {
     checkforResponse();
@@ -59,19 +60,24 @@ function analyseLog(content) {
     setLogAmount(logs);
     for (let log of logs) {
         if (log !== "") {
-            if(log.includes("XSS Attack Detected")){
+            if(log.includes("\"XSS Attack Detected via libinjection\"")){
                 XSS.push(log);
                 hackingAttempts.push(log);
-            }else if(log.includes("SQL Injection Attack")){
+            }else if(log.includes("\"SQL Injection Attack") && !log.includes("REQUEST_HEADERS")){
                 SQLI.push(log);
                 hackingAttempts.push(log);
-            }else if(log.includes("attack-phpi")){
+            }else if(log.includes("\"PHP Injection Attack:")){
                 PHPI.push(log);
                 hackingAttempts.push(log);
             }
         }
     }
+
     setBasicLogInfo();
+    chart(IPS, "ipChart", "doughnut", "IP");
+    chart(XSSPayloads, "XSSChart", "bar", "XSS Payloads");
+    chart(SQLIPayloads, "SQLIChart", "bar", "SQL Injection");
+    chart(PHPIPayloads, "PHPIChart", "doughnut", "PHP Injection");
 }
 
 function setBasicLogInfo() {
@@ -82,6 +88,7 @@ function setBasicLogInfo() {
     setHackerIp();
     setXSSPayload();
     setSQLIPayload();
+    setPHPIPayload();
 }
 
 function setLogAmount(logs){
@@ -111,13 +118,37 @@ function setHackerIp(){
     });
     let differentIP = getListOfDifferentItems(IPS);
     let ipAmounts = getAmountOfDifferentItem(differentIP, IPS);
-    let fiveMostUsed = XMostUsedItems(differentIP, ipAmounts, 1).sort(function(a, b){return a-b});
-    document.querySelector(".hackerIp").innerHTML = fiveMostUsed[0];
+    let mostUsed = XMostUsedItems(differentIP, ipAmounts, 1).sort(function(a, b){return a-b});
+    document.querySelector(".hackerIp").innerHTML = mostUsed[0];
     
 }
 
 function setXSSPayload(){
-    console.log(XSS)
+    XSS.forEach(log => {
+        XSSPayloads.push((log.split("[data ")[1].split(": ")[2].split("\"")[0]).replace("\\\\x22", "\"").replace("\\\\x22", "\""))
+    })
+
+    let differentXSSPayloads = getListOfDifferentItems(XSSPayloads);
+    let XSSPayloadAmounts = getAmountOfDifferentItem(differentXSSPayloads, XSS);
+    let mostUsed = XMostUsedItems(differentXSSPayloads, XSSPayloadAmounts, 1).sort(function(a, b){return a-b});
+    document.querySelector(".XSSPayload").innerText = mostUsed[0];
+}
+
+function setSQLIPayload(){
+    SQLI.forEach(log => {
+        SQLIPayloads.push(log.split("[data ")[1].split(": ")[2].split("\"")[0].replace("\\\\x22", "\"").replace("\\\\x22", "\""))
+    })
+    let differentSQLIPayloads = getListOfDifferentItems(SQLIPayloads);
+    let SQLIPayloadAmounts = getAmountOfDifferentItem(differentSQLIPayloads, SQLI);
+    let mostUsed = XMostUsedItems(differentSQLIPayloads, SQLIPayloadAmounts, 1).sort(function(a, b){return a-b});
+    document.querySelector(".SQLIPayload").innerText = mostUsed[0];
+
+}
+
+function setPHPIPayload(){
+    PHPI.forEach(log => {
+        PHPIPayloads.push(log.split("[data ")[1].split(": ")[2].split("\"")[0].replace("\\\\x22", "\"").replace("\\\\x22", "\""))
+    })
 }
 
 function getListOfDifferentItems(list) {
@@ -179,4 +210,41 @@ function remove(list, index){
         }
     }
     return newList
+}
+
+function chart(list, chartId, type, label) {
+    let ctx = document.getElementById(chartId).getContext('2d');
+    let listOfDifferentItems = getListOfDifferentItems(list);
+    let data = getAmountOfDifferentItem(listOfDifferentItems, list)
+    let fiveMostUsed = XMostUsedItems(listOfDifferentItems, data, 5).sort(function(a, b){return a-b});
+    let chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: type,
+        // The data for our dataset
+        data: {
+            labels: fiveMostUsed,
+            datasets: [{
+                label: label,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                data: getAmountOfDifferentItem(fiveMostUsed, list)
+            }]
+        },
+        // Configuration options go here
+        options: {}
+    });
 }
