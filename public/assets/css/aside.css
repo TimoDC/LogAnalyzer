@@ -1,6 +1,6 @@
 aside {
     width: 20%;
-    border-right: 1px solid black; 
+    border-right: 3px solid black; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -19,8 +19,8 @@ aside a {
 
 #newDashboardButton {
     border: 1px solid black;
-    padding: 50px;
-    margin-bottom: 10px;
+    padding: 2rem;
+    margin-bottom: 1rem;
 }
 
 #dashboardButtons {
@@ -33,5 +33,5 @@ aside a {
 }
 
 a:hover {
-    background-color: #00A7E7;
+    background-color:  #00A7E7;
 }

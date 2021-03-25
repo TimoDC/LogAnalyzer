@@ -3,13 +3,12 @@ section {
     margin-right: auto;*/
     padding-top: 2rem;
     padding-bottom: 2rem;
-    border-left: solid black 3px;
     border-right: solid black 3px;
 }
 
 section a{
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 section ul div {
@@ -184,24 +183,40 @@ input:checked + .slider:before {
 }
 
 form{
-  text-align: center;
-}
-
-form select,button {
-  background-color: transparent;
-  width: 7rem;
-  height: 1.5rem;
-  color: #00a7e7;
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-form{
+  display: flex;
+  justify-content: space-around;
   padding: 2rem;
-  border: solid black 3px;
+  border-right: solid black 3px;
+  border-top: solid black 3px;
+  border-bottom: solid black 3px;
+}
+
+form label{
+  color: white;
+}
+
+form select,button{
+  background-color: transparent;
+  width: 10rem;
+  height: 1.5rem;
+  color: rgb(74, 243, 7);
+  font-size: 1rem;
+}
+
+form ,input[type="file"]{
+  height: 1.5rem;
+  color: rgb(74, 243, 7);
+  font-size: 1rem;
 }
 
 .logContainer{
-  border: solid black 3px;
+  border-right: solid black 3px;
+  border-bottom: solid black 3px;
+  border-top: solid black 3px;
   margin-bottom: 3.5rem;
+}
+
+aside a{
+  color: rgba(255, 255, 255, 0.877);
+  border: solid rgb(0, 0, 0) 1px;
 }

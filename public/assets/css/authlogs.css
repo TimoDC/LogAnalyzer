@@ -60,6 +60,7 @@ main section#authlogcharts h2 {
 .charts div {
     height: 400px;
     width: 400px;
+    box-shadow: 5px 10px 8px #000000;
 }
 
 .totals {
