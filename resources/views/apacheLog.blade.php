@@ -59,6 +59,18 @@
             <input type="checkbox" id="browser" name="browser" value="browser" checked>
             <label for="browser">Browser</label>
         </div>
+        <div class="parameter">
+            <input type="checkbox" id="parameter" name="parameter" value="parameter" checked>
+            <label for="parameter">Parameter</label>
+        </div>
+        <div class="parameterKey">
+            <input type="checkbox" id="parameterKey" name="parameterKey" value="parameterKey" checked>
+            <label for="parameterKey">Parameter Keys</label>
+        </div>
+        <div class="parameterValue">
+            <input type="checkbox" id="parameterValue" name="parameterValue" value="parameterValue" checked>
+            <label for="parameterValue">Parameter Values</label>
+        </div>
     </div>
 
     <div class="logInfo">
@@ -143,6 +155,18 @@
         <div class="hidden">
             <p>Browser</p>
             <canvas id="browserChart"></canvas>
+        </div>
+        <div class="hidden">
+            <p>Parameter Keys</p>
+            <canvas id="parameterChart"></canvas>
+        </div>
+        <div class="hidden">
+            <p>Parameter Keys</p>
+            <canvas id="parameterKeyChart"></canvas>
+        </div>
+        <div class="hidden">
+            <p>Parameter Values</p>
+            <canvas id="parameterValueChart"></canvas>
         </div>
 
 

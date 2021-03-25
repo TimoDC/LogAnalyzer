@@ -116,6 +116,12 @@ function analyseLog(content) {
     chart(requestedUrl, "requestedUrlChart", "bar");
     chart(OS, "OSChart", "doughnut");
     chart(browser, "browserChart", "doughnut");
+    let keys = keysChart();
+    chart(keys, "parameterKeyChart", "bar")
+    let values = valuesChart();
+    chart(values, "parameterValueChart", "bar")
+    let params = parameterChart()
+    chart(params, "parameterChart", "bar")
 }
 
 function setBasicLogInfo() {
@@ -163,6 +169,40 @@ function chart(list, chartId, type) {
         // Configuration options go here
         options: {}
     });
+}
+
+function parameterChart(id){
+    let parameters = []
+    requestedFile.forEach((item) => {
+        if(item.includes("?")){
+            let params = item.split("?")[1];
+            if(params.includes("&")){
+                let split= params.split("&");
+                split.forEach(element => {
+                    if(id === undefined){
+                        parameters.push(element);
+                    }else{
+                        parameters.push(element.split("=")[id]);
+                    }
+                });
+            }else{
+                if(id === undefined){
+                    parameters.push(params);
+                }else{
+                    parameters.push(params.split("=")[id]);
+                }
+            }
+        }
+    })
+    return parameters;
+}
+
+function keysChart(){
+    return parameterChart(0)
+}
+
+function valuesChart(){
+    return parameterChart(1)
 }
 
 function getListOfDifferentItems(list) {
@@ -247,6 +287,7 @@ function setServerSideErrors() {
     document.querySelector(".serverSideErrors").innerHTML = amount;
 }
 
+
 function getMostUsedItems(items, amounts) {
     let max = 0;
     let ip = "";
@@ -255,9 +296,7 @@ function getMostUsedItems(items, amounts) {
             max = item
         }
     })
-    console.log(max)
     ip = items[amounts.indexOf(max)];
-    console.log(amounts)
     return ip;
 }
 
