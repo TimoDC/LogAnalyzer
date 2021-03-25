@@ -59,9 +59,17 @@ function addChartForCommands(entries) {
 
     const countManyCommands = countCommandsOrdered.length;
 
-    getTop12(commands, countCommandsOrdered);
+    if (noEnoughData(countManyCommands)) {
+        document.querySelector("#commandschart").innerHTML = "<p>Not enough data for a most used commands chart</p>";
+    } else {
+        getTop12(commands, countCommandsOrdered);
 
-    createCommandsChart(commandscanvas, commands, countCommandsOrdered, countManyCommands);
+        createCommandsChart(commandscanvas, commands, countCommandsOrdered, countManyCommands);
+    }
+}
+
+function noEnoughData(count) {
+    return count < 1;
 }
 
 function createCommandsChart(commandscanvas, commands, countCommandsOrdered, countManyCommands) {
@@ -138,9 +146,13 @@ function addChartForUnsuccessfulUsernames(entries) {
 
     const countUsernames = countUnsuccessfulAttemptUsernamesOrdered.length;
 
-    getTop12(unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
+    if (noEnoughData(countUsernames)) {
+        document.querySelector("#unsuccessfulusernameschart").innerHTML = "<p>Not enough data for an unsuccessful usernames chart</p>";
+    } else {
+        getTop12(unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered);
 
-    createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames);
+        createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames);
+    }
 }
 
 function createUnsuccessfulUsernamesChart(unsuccessfulusernames, unsuccessfulAttemptUsernames, countUnsuccessfulAttemptUsernamesOrdered, countUsernames) {
@@ -283,9 +295,13 @@ function addChartForUnsuccessfulAttempts(entries) {
 
     const countIps = countUnsuccessfulAttemptIpsOrdered.length;
 
-    getTop12(unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
+    if (noEnoughData(countIps)) {
+        document.querySelector("#unsuccessfulattemptschart").innerHTML = "<p>Not enough data for an unsuccessful IP's chart</p>";
+    } else {
+        getTop12(unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered);
 
-    createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countIps);
+        createUnsuccessfulAttemptsChart(unsuccessfulattempts, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, countIps);
+    }
 }
 
 function addTitleForTotalUnsuccessfulAttempts(countUnsuccessfulAttempts) {

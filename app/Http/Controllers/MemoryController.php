@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;   
+use \App\Models\dashboard;
 
 class MemoryController extends Controller
 {
     function index(){
-        return view("memory");
+        $dashboards = dashboard::all();
+        return view("memory", ["dashboards" => $dashboards]);
     }
 }
