@@ -72,6 +72,7 @@
     @endisset()
 
     @yield('log')
+    @yield('content')
     </div>
 </main>
 

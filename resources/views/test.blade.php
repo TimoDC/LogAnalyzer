@@ -29,8 +29,6 @@ $cpuModel = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $4,$5,$6}'")
 $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}");
 ?>
 
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/memory.css') }}" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 
 
     <div id="CanvasContainer">
@@ -136,3 +134,34 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
     <script src="{{ asset('assets/js/memory.js') }}"></script>
 
 @stop
+
+
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/memory.css') }}" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+
+<?php
+$MemTotal = shell_exec("free --mega |grep Mem| cut -c 10-22 | sed -e 's/^[ \t]*//'");
+$MemUsed = shell_exec("free  --mega |grep Mem| cut -c 20-32 | sed -e 's/^[ \t]*//'");
+$MemFree = shell_exec("free --mega |grep Mem| cut -c 35-45 | sed -e 's/^[ \t]*//'");
+
+$SwapTotal = shell_exec("free  --mega |grep Swap| cut -c 10-22| sed -e 's/^[ \t]*//'");
+$SwapUsed = shell_exec("free  --mega |grep Swap| cut -c 20-32| sed -e 's/^[ \t]*//'");
+$SwapFree = shell_exec("free --mega |grep Swap| cut -c 35-45 | sed -e 's/^[ \t]*//'");
+
+$DiskTotal = shell_exec("df / | tail +2 | awk '{print $2/1000000}' OFMT='%.2f'");
+$DiskUsed = shell_exec("df / | tail +2 | awk '{print $3/1000000}' OFMT='%.2f'");
+$DiskFree = shell_exec("df / | tail +2 | awk '{print $4/1000000}' OFMT='%.2f'");
+$DiskName = shell_exec("df / | tail +2 | awk '{print $1}'");
+
+$AmountProcesses = shell_exec("ps -e | wc -l");
+
+$usr = shell_exec("mpstat |grep all | awk '{print $3}'");
+$sys = shell_exec("mpstat |grep all | awk '{print $5}'");
+$iowait = shell_exec("mpstat |grep all | awk '{print $6}'");
+$idle = shell_exec("mpstat |grep all | awk '{print $12}'");
+
+$hostname = shell_exec("uname -n");
+$kernelRelease = shell_exec("uname -r");
+$cpuModel = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $4,$5,$6}'");
+$cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}");
+?>
