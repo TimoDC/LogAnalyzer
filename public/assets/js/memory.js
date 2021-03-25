@@ -3,35 +3,35 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  let MemTotal = parseInt(document.querySelector("tr .MemTotal").innerHTML);
-  let MemUsed = parseInt(document.getElementById("MemUsed").innerHTML);
-  let MemFree = parseInt(document.getElementById("MemFree").innerHTML);
+  let memTotal = parseInt(document.querySelector("tr .MemTotal").innerHTML);
+  let memUsed = parseInt(document.getElementById("MemUsed").innerHTML);
+  let memFree = parseInt(document.getElementById("MemFree").innerHTML);
 
-  let SwapTotal = parseInt(document.querySelector("tr .SwapTotal").innerHTML);
-  let SwapUsed = parseInt(document.getElementById("SwapUsed").innerHTML);
-  let SwapFree = parseInt(document.getElementById("SwapFree").innerHTML);
+  let swapTotal = parseInt(document.querySelector("tr .SwapTotal").innerHTML);
+  let swapUsed = parseInt(document.getElementById("SwapUsed").innerHTML);
+  let swapFree = parseInt(document.getElementById("SwapFree").innerHTML);
 
   let user = parseFloat(document.getElementById("user").innerHTML);
   let system = parseFloat(document.getElementById("system").innerHTML);
   let iowait = parseFloat(document.getElementById("iowait").innerHTML);
   let idle = parseFloat(document.getElementById("idle").innerHTML);
 
-  let DiskTotal = parseInt(document.querySelector("tr .DiskTotal").innerHTML);
-  let DiskUsed = parseInt(document.getElementById("DiskUsed").innerHTML);
-  let DiskFree = parseInt(document.getElementById("DiskFree").innerHTML);
+  let diskTotal = parseInt(document.querySelector("tr .DiskTotal").innerHTML);
+  let diskUsed = parseInt(document.getElementById("DiskUsed").innerHTML);
+  let diskFree = parseInt(document.getElementById("DiskFree").innerHTML);
 
   let labelsMem = ["used", "free"];
   let labelsCPU = ["user", "system", "iowait", "idle"]
 
-  let dataMem = [(MemUsed / MemTotal* 100).toFixed(2), (MemFree / MemTotal * 100).toFixed(2)];
-  let dataSwap = [(SwapUsed / SwapTotal * 100).toFixed(2), (SwapFree / SwapTotal * 100).toFixed(2)];
+  let dataMem = [(memUsed / memTotal* 100).toFixed(2), (memFree / memTotal * 100).toFixed(2)];
+  let dataSwap = [(swapUsed / swapTotal * 100).toFixed(2), (swapFree / swapTotal * 100).toFixed(2)];
   let dataCPU = [user.toFixed(2), system.toFixed(2), iowait.toFixed(2), idle.toFixed(2)];
-  let dataDisk = [(DiskUsed / DiskTotal * 100).toFixed(2), (DiskFree / DiskTotal * 100).toFixed(2)];
+  let dataDisk = [(diskUsed / diskTotal * 100).toFixed(2), (diskFree / diskTotal * 100).toFixed(2)];
 
-  createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage", (MemUsed / MemTotal * 100).toFixed(2));
-  createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage", (SwapUsed / SwapTotal * 100).toFixed(2));
+  createDoughnutChart('memoryCanvas', labelsMem, dataMem, "Memory Usage", (memUsed / memTotal * 100).toFixed(2));
+  createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage", (swapUsed / swapTotal * 100).toFixed(2));
   createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (user + system).toFixed(2));
-  createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (DiskUsed / DiskTotal * 100).toFixed(2));
+  createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (diskUsed / diskTotal * 100).toFixed(2));
 }
 
 function createDoughnutChart(canvas, labels, data, title, centerLabel) {
