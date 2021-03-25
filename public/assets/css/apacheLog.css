@@ -11,6 +11,10 @@
 
 .logChart div{
     width: 30rem;
+    margin-right: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    box-shadow: 5px 10px 8px #000000;
 }
 
 .hidden {
@@ -42,7 +46,8 @@
     border: solid black 2px;
     margin-bottom: 1rem;
     padding: 1.5rem;
-    width: 15rem;
+    width: 14rem;
+    box-shadow: 5px 10px 8px #000000;
 }
 
 .logInfo div p{

@@ -1,7 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
+html{
+    height: 88%;
+}
+
 body {
+    height: 100%;
     font-family: "Nunito", sans-serif;
+    background-color: rgba(0, 0, 0, 0.925);
+    color: rgba(255, 255, 255, 0.877);
 }
 
 header h1 {
@@ -13,4 +20,5 @@ header h1 {
 
 main {
     display: flex;
+    height: 100%;
 }
