@@ -39,20 +39,30 @@ function init() {
 }
 
 function selectButton(e) {
-  console.log("jema");
-  console.log(e.target)
-
   var header = document.getElementById("buttonContainer");
-  console.log(header);
   var btns = header.getElementsByClassName("btn");
-  console.log(btns);
   for (var i = 0; i < btns.length; i++) {
       var current = document.getElementById("selected");
-      console.log(current);
       current.removeAttribute("id");
       this.setAttribute("id", "selected");
+      console.log(this.innerHTML);
     };
+  displayContent(this.innerHTML);
 }
+
+function displayContent(choice) {
+  switch(choice) {
+    case "Plain Text":
+      document.getElementById("tableContainer").classList.remove("hidden");
+      document.getElementById("CanvasContainer").classList.add("hidden");
+      break;
+    case "Charts":
+      document.getElementById("CanvasContainer").classList.remove("hidden");
+      document.getElementById("tableContainer").classList.add("hidden");
+      break;
+  }
+}
+
 
 
 function createDoughnutChart(canvas, labels, data, title, centerLabel) {
