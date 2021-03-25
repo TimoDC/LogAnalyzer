@@ -59,12 +59,55 @@
             <input type="checkbox" id="browser" name="browser" value="browser" checked>
             <label for="browser">Browser</label>
         </div>
+        <div class="parameter">
+            <input type="checkbox" id="parameter" name="parameter" value="parameter" checked>
+            <label for="parameter">Parameter</label>
+        </div>
+        <div class="parameterKey">
+            <input type="checkbox" id="parameterKey" name="parameterKey" value="parameterKey" checked>
+            <label for="parameterKey">Parameter Keys</label>
+        </div>
+        <div class="parameterValue">
+            <input type="checkbox" id="parameterValue" name="parameterValue" value="parameterValue" checked>
+            <label for="parameterValue">Parameter Values</label>
+        </div>
     </div>
 
     <div class="logInfo">
-        <p></p>
+        <div>
+            <p>Amount Of Logs:</p>
+            <p class="logAmount"></p>
+        </div>
+        <div>
+            <p>Most Common Visitor:</p>
+            <p class="visitorIp"></p>
+        </div>
+        <div>
+            <p>Most Used Operating System:</p>
+            <p class="mostUsedOS"></p>
+        </div>
+        <div>
+            <p>Most used Browser:</p>
+            <p class="mostUsedBrowser"></p>
+        </div>
+        <div>
+            <p>Most Requested URL:</p>
+            <p class="mostRequestUrl"></p>
+        </div>
+        <div>
+            <p>Amount Of Unique Visitors:</p>
+            <p class="uniqueVisitors"></p>
+        </div>
+        <div>
+            <p>Amount Of Client Side Errors:</p>
+            <p class="clientSideErrors"></p>
+        </div>
+        <div>
+            <p>Amount Of Server Side Errors:</p>
+            <p class="serverSideErrors"></p>
+        </div>
     </div>
-    <div class="logChart hidden">
+    <div class="logChart">
         <div class="hidden">
             <p>IP Address</p>
             <canvas id="ipChart"></canvas>
@@ -112,6 +155,18 @@
         <div class="hidden">
             <p>Browser</p>
             <canvas id="browserChart"></canvas>
+        </div>
+        <div class="hidden">
+            <p>Parameter Keys</p>
+            <canvas id="parameterChart"></canvas>
+        </div>
+        <div class="hidden">
+            <p>Parameter Keys</p>
+            <canvas id="parameterKeyChart"></canvas>
+        </div>
+        <div class="hidden">
+            <p>Parameter Values</p>
+            <canvas id="parameterValueChart"></canvas>
         </div>
 
 
