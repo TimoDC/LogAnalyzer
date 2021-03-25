@@ -87,7 +87,7 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
     </div>
     </div>
 
-    <table>
+    <table class="hidden">
         <tr>
             <th></th>
             <th scope="col">total</th>
@@ -108,7 +108,7 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <table>
+    <table class="hidden">
         <tr>
             <th scope="row">CPU (user)</th>
             <td id="user"><?php echo $usr ?>%</td>
@@ -142,7 +142,7 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
         </tr>
     </table>
 
-    <table>
+    <table id="systemContainer"> 
         <tr>
             <th scope="row">Hostname</th>
             <td id="user"><?php echo $hostname ?></td>
@@ -160,6 +160,9 @@ $cpuSpeed = shell_exec("cat /proc/cpuinfo | grep name | awk '{print $7,$8,$9'}")
             <td id="idle"><?php echo $cpuSpeed ?></td>
         </tr>
     </table>
+
+
+
 </div>
 @stop
 
