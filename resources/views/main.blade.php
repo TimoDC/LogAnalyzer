@@ -36,6 +36,11 @@
             @csrf
             <input type="file" name="logFile">
             <div>
+                <label for="OSFile">Use System Logs</label>
+                <input type="checkbox" name="OSFile" id="OSFile">
+            </div>
+            
+            <div>
                 <label for="LogType">Log Type: </label>
                 <select name="LogType" id="LogType">
                     @if($board -> apacheLogFile === NULL)

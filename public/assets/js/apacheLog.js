@@ -47,14 +47,13 @@ function hideLog(input) {
 }
 
 function checkforResponse() {
-    if (typeof promise === "undefined") {
+    if (document.querySelector("#content") === "undefined") {
         setTimeout(() => {
             checkforResponse();
         }, 5000);
     } else {
-        promise.then(content => {
-            analyseLog(content);
-        });
+        console.log(document.querySelector("#content"));
+        analyseLog(document.querySelector("#content").innerText);
     }
 }
 
@@ -71,7 +70,7 @@ function analyseLog(content) {
     let logs = content.split("\n");
     setLogAmount(logs);
     for (let log of logs) {
-        if (log !== "") {
+        if (log !== "" && log.length >= 2) {
             let items = log.split(" ");
             ips.push(items[0])
             identityClient.push(items[1])
