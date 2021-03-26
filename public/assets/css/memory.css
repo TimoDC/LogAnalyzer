@@ -68,6 +68,11 @@ tr:nth-child(even){background-color: #f2f2f2;}
     width: 90%;
     position: relative;
     margin-bottom: 1vw;
+    margin-right: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    box-shadow: 5px 10px 8px #000000;
+
 }
 
 #CanvasContainer canvas {

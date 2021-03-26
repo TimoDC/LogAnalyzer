@@ -76,16 +76,16 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
       datasets: [{
         data: data,
         backgroundColor: [
-          'rgb(255,206,182)',
-          'rgb(215,236,251)',
-          'rgb(255,245,221)',
-          'rgb(227,239,220)'
+          'rgb(209,83,106)',
+          'rgb(47,134,192)',
+          'rgb(208,169,73)',
+          'rgb(64,158,158)'
         ],
         borderColor: [
-          'rgb(254, 116, 47)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 206, 86)',
-          'rgb(169, 223, 197)'
+          'rgb(179, 55, 82)',
+          'rgb(0, 109, 165)',
+          'rgb(179, 143, 47)',
+          'rgb(29, 132, 132)'
         ],
         borderWidth: 1
       }]
@@ -95,7 +95,7 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
       elements: {
         center: {
           text: title + ' ' + centerLabel + "%",
-          color: '#ffc7b6',
+          color: 'white',
           fontStyle: 'Arial',
           sidePadding: 10,
           minFontSize: 13,
@@ -115,7 +115,14 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
       title: {
         display: true,
         text: title,
-        fontSize: 20
+        fontSize: 20,
+        fontColor: "white",
+      },
+      legend: {
+        labels: {
+          fontColor: "white",
+        }
+
       }
     }
   });
