@@ -48,6 +48,7 @@
     padding: 1.5rem;
     width: 14rem;
     box-shadow: 5px 10px 8px #000000;
+    overflow-wrap: anywhere;
 }
 
 .logInfo div p{

@@ -18,12 +18,12 @@ let browser = [];
 
 function init() {
     checkforResponse();
-    document.querySelectorAll("input[type='checkbox']").forEach(item => item.addEventListener("click", showOrHideLog));
+    document.querySelectorAll(".logItems input[type='checkbox']").forEach(item => item.addEventListener("click", showOrHideLog));
     showOrHideLog();
 }
 
 function showOrHideLog() {
-    document.querySelectorAll("input[type='checkbox']").forEach(input => {
+    document.querySelectorAll(".logItems input[type='checkbox']").forEach(input => {
         if (input.checked) {
             showLog(input);
         } else {
@@ -47,14 +47,13 @@ function hideLog(input) {
 }
 
 function checkforResponse() {
-    if (typeof promise === "undefined") {
+    if (document.querySelector(".content") === "null") {
         setTimeout(() => {
             checkforResponse();
         }, 5000);
     } else {
-        promise.then(content => {
-            analyseLog(content);
-        });
+        console.log(document.querySelector(".content"));
+        analyseLog(document.querySelector(".content").innerText);
     }
 }
 
@@ -71,7 +70,7 @@ function analyseLog(content) {
     let logs = content.split("\n");
     setLogAmount(logs);
     for (let log of logs) {
-        if (log !== "") {
+        if (log !== "" && log.length >= 2) {
             let items = log.split(" ");
             ips.push(items[0])
             identityClient.push(items[1])
@@ -95,10 +94,10 @@ function analyseLog(content) {
                 }else if(useragent.includes("Chrome")){
                     browser.push("Chrome");
                 }else{
-                    browser.push("Not Found")
+                    browser.push("Not Detected")
                 }
             }else{
-                OS.push("Not Found");
+                OS.push("Not Detected");
                 browser.push(items[11].split("/")[0].replace("\"", ""))
             }
         }
@@ -113,9 +112,9 @@ function analyseLog(content) {
     chart(httpCode, "httpCodeChart", "doughnut", "HTTP Codes");
     chart(responseCode, "responseCodeChart", "bar", "Response Code");
     chart(requestSize, "requestSizeChart", "line", "Request Size");
-    chart(requestedUrl, "requestedUrlChart", "bar", "Requested URL'S");
+    chart(requestedUrl, "requestedUrlChart", "doughnut", "Requested URL'S");
     chart(OS, "OSChart", "doughnut", "Operating Systems");
-    chart(browser, "browserChart", "doughnut", "Browsers");
+    chart(browser, "browserChart", "bar", "Browsers");
     let keys = keysChart();
     chart(keys, "parameterKeyChart", "bar", "Keys")
     let values = valuesChart();

@@ -3,7 +3,7 @@
 @section("log")
 @isset ($content)
 
-{!! $content !!}
+<div  class="content hidden">{{ $content }}</div> 
 
 @endisset
 

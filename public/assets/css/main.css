@@ -39,19 +39,41 @@ section ul li:hover {
     height: 0;
 }
 
+form input[type="submit"]:hover,
+button[type="submit"]:hover {
+  cursor: pointer;
+}
+
 .new-dashboard-popup {
     width: fit-content;
     position: fixed;
     top: 50%;
-    left: 50%;
-    border: 5px solid #f7c250;
-    background-color: white;
+    left: 40%;
+    border: 5px solid rgb(53, 175, 5);
+    background-color: rgb(24, 26, 27);
     padding: 1rem;
   }
 
 .new-dashboard-popup input{
     display: block;
-    margin: 0.5rem;
+    margin: 5px;
+    border-radius: 2px;
+}
+
+.new-dashboard-popup h2 {
+  font-size: 1.5rem;
+}
+
+.new-dashboard-popup input:focus {
+  outline: none;
+}
+
+.new-dashboard-popup input[type="submit"] {
+  height: 30px;
+}
+
+.new-dashboard-popup form {
+  border: none;
 }
 
 
@@ -71,8 +93,8 @@ section ul li:hover {
 
   .close {
     color: white;
-    background-color: #f7c250;
-    box-shadow: 0 4px 8px 0 #f7c250, 0 6px 20px 0 blanchedalmond;
+    background-color: rgb(53, 175, 5);
+    box-shadow: 0 4px 8px 0 rgb(53, 175, 5), 0 6px 20px 0 blanchedalmond;
     font-weight: bold;
     text-decoration: none;
     position: absolute;
@@ -85,31 +107,6 @@ section ul li:hover {
     padding-left: 0.65rem;
     padding-right: 0.65rem;
   }
-
-.settings {
-  width: fit-content;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  border: 5px solid #f7c250;
-  background-color: white;
-  padding: 1rem;
-}
-
-.settings h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.settings h4 {
-  font-size: 1.1rem;
-  margin-top: 1.5rem;
-}
-
-.settingContents {
-  display: flex;
-  flex-direction: column;
-}
 
 .switch {
   position: relative;
@@ -195,7 +192,10 @@ form label{
   color: white;
 }
 
-form select,button{
+form select,
+button,
+form input[type="submit"],
+form input[type="text"] {
   background-color: transparent;
   width: 10rem;
   height: 1.5rem;
