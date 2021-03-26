@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", init);
 document.querySelectorAll(".btn").forEach(elem => {
-  elem.addEventListener("click", selectButton);
+ elem.addEventListener("click", selectButton);
 });
 
 
@@ -36,27 +36,47 @@ function init() {
   createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage", (swapUsed / swapTotal * 100).toFixed(2));
   createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (user + system).toFixed(2));
   createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (diskUsed / diskTotal * 100).toFixed(2));
+
+  checkLocalStorage();
 }
 
+function checkLocalStorage() {
+  let option = localStorage.getItem("option");
+  if (! option) {
+    selectDefaultOption()
+    return null;
+  };
+  let button = document.getElementsByClassName(option)[0];
+  displayContent(option);
+  button.setAttribute("id", "selected");
+}
+
+
+function selectDefaultOption() {
+  let defaultOption = document.getElementsByClassName("charts")[0];
+  defaultOption.setAttribute("id", "selected");
+}
+
+
 function selectButton(e) {
-  var header = document.getElementById("buttonContainer");
-  var btns = header.getElementsByClassName("btn");
-  for (var i = 0; i < btns.length; i++) {
+  var container = document.getElementById("buttonContainer");
+  var buttons = container.getElementsByClassName("btn");
+  for (var i = 0; i < buttons.length; i++) {
       var current = document.getElementById("selected");
       current.removeAttribute("id");
       this.setAttribute("id", "selected");
-      console.log(this.innerHTML);
     };
-  displayContent(this.innerHTML);
+  displayContent(this.classList[1]);
+  localStorage.setItem("option", this.classList[1])
 }
 
 function displayContent(choice) {
   switch(choice) {
-    case "Plain Text":
+    case "plaintext":
       document.getElementById("tableContainer").classList.remove("hidden");
       document.getElementById("CanvasContainer").classList.add("hidden");
       break;
-    case "Charts":
+    case "charts":
       document.getElementById("CanvasContainer").classList.remove("hidden");
       document.getElementById("tableContainer").classList.add("hidden");
       break;
@@ -67,7 +87,6 @@ function displayContent(choice) {
 
 function createDoughnutChart(canvas, labels, data, title, centerLabel) {
   const chart3 = document.getElementById(canvas);
-  //console.log(chart3);
   new Chart(chart3, {
     responsive: true,
     type: 'doughnut',
