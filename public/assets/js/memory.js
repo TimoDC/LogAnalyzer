@@ -76,16 +76,16 @@ function createDoughnutChart(canvas, labels, data, title, centerLabel) {
       datasets: [{
         data: data,
         backgroundColor: [
-          'rgba(254, 116, 47, 0.35)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(193, 219, 178, 0.45)'
+          'rgb(255,206,182)',
+          'rgb(215,236,251)',
+          'rgb(255,245,221)',
+          'rgb(227,239,220)'
         ],
         borderColor: [
-          'rgba(254, 116, 47, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(169, 223, 197, 0.2)'
+          'rgb(254, 116, 47)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 206, 86)',
+          'rgb(169, 223, 197)'
         ],
         borderWidth: 1
       }]

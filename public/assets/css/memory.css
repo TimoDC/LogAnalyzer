@@ -82,8 +82,8 @@ tr:nth-child(even){background-color: #f2f2f2;}
 /*---------------------*/
 
 #selected, .btn:hover {
-    background-color: #ffc7b6;
-    border-color: #Fcb08b;
+    background-color: rgb(74, 243, 7);
+    border-color: rgb(61, 202, 5);
     color: white;
     padding: 12px 16px;
     font-size: 16px;
@@ -92,9 +92,9 @@ tr:nth-child(even){background-color: #f2f2f2;}
 }
 
 .btn {
-    background-color: white;
-    border-color: #Fcb08b;
-    color: #ffc7b6;
+    background-color: #222222;
+    border-color: rgb(61, 202, 5);
+    color: rgb(74, 243, 7);
     padding: 12px 16px;
     font-size: 16px;
     cursor: pointer;
@@ -128,12 +128,12 @@ tr:nth-child(even){background-color: #f2f2f2;}
 
 #processContainer p {
     font-size: 4vw;
-    color: #ffc7b6;
+    color: rgb(74, 243, 7);
 }
 
 #memoryContainer p, #diskContainer p, #swapContainer p {
     font-size: 2vw;
-    color: #ffc7b6;
+    color: rgb(74, 243, 7);
 }
 
 span {
@@ -156,18 +156,22 @@ span {
     z-index: -1;
     width: calc(100% + var(--border-width) * 2);
     height: calc(100% + var(--border-width) * 2);
-    background: linear-gradient(90deg, #d4ecfc, #ffc7b6, #CCB2DB, #D3CDFC);
+    background: rgb(74, 243, 7);
     background-size: 300% 300%;
     background-position: 0 50%;
     border-radius: calc(2 * var(--border-width));
-    animation: moveGradient 4s alternate infinite;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
-  
-  @keyframes moveGradient {
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
     50% {
-      background-position: 100% 50%;
+      opacity: .25;
     }
   }
+
 
   button:focus {
     outline: none;
@@ -177,9 +181,9 @@ span {
 table#systemContainer {
     padding: 1vw;
     border-radius: 25px;
-    border: 2px solid #d4ecfc;
+    border: 2px solid rgb(61, 202, 5);
     border-collapse: separate;
-    background-color: #d4ecfc;
+    background-color: rgb(61, 202, 5);
     margin: 2vw;
 }
 
