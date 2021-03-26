@@ -32,8 +32,56 @@ function loadInfo(result) {
     addChartForActivity(entries);
     addChartForUnsuccessfulUsernames(entries);
     addChartForCommands(entries);
+    addChartForOpenedSessions(entries);
 
     addTitleForTotalErrors(entries);
+}
+
+function addChartForOpenedSessions(entries) {
+    const openedsessionscanvas = document.querySelector("#openedsessionschart canvas");
+    const label = "Opened Sessions Usernames";
+
+    let count = 0;
+    let openedSessions = [];
+
+    let arrayDuplicates = [];
+
+    let countOpenedSessions = {};
+    let countOpenedSessionsOrdered = [];
+
+    for (let i=0;i<entries.length - 1;i++) {
+        if(entries[i].includes("session opened for user")) {
+            const entry = entries[i];
+            const splitter = entry.split("session opened for user ");
+            const spaceSplitter = splitter[1].split(" ");
+            
+            const openedSession = spaceSplitter[0];
+
+            arrayDuplicates.push(openedSession);
+
+            count++;
+        }
+    }
+
+    addTitleForTotalOpenedSessions(count);
+
+    countDuplicatesInObject(arrayDuplicates, countOpenedSessions);
+
+    openedSessions = sortObjectByCount(openedSessions, countOpenedSessions);
+
+    sortCountDescending(countOpenedSessions, countOpenedSessionsOrdered);
+
+    const countManyOpenedSessions = countOpenedSessionsOrdered.length;
+
+    if (noEnoughData(countManyOpenedSessions)) {
+        document.querySelector("#openedsessionschart").innerHTML = "<p>Not enough data for an opened sessions chart</p>";
+    } else {
+        getTop12(openedSessions, countOpenedSessionsOrdered);
+
+        const text = `Top 12 Opened Sessions Usernames (total usernames: ${countManyOpenedSessions})`;
+
+        createPieChart(openedsessionscanvas, openedSessions, countOpenedSessionsOrdered, label, text);
+    }
 }
 
 function addChartForCommands(entries) {
@@ -301,6 +349,15 @@ function addChartForUnsuccessfulAttempts(entries) {
 
         createPieChart(unsuccessfulattemptscanvas, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, label, text);
     }
+}
+
+function addTitleForTotalOpenedSessions(countOpenedSessions) {
+    const totalopenedsessions = document.querySelector("#totalopenedsessions");
+
+    totalopenedsessions.innerHTML = `
+                                        <h1>${countOpenedSessions}</h1>
+                                        <p>Opened Sessions</p>
+                                    `;
 }
 
 function addTitleForTotalUnsuccessfulAttempts(countUnsuccessfulAttempts) {
