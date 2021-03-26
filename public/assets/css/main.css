@@ -11,6 +11,10 @@ section a{
   color: white;
 }
 
+section a:hover{
+  background-color: rgba(0, 0, 0, 0.719);
+}
+
 section ul div {
     display: flex;
     justify-content: space-evenly;
@@ -22,14 +26,14 @@ section ul li {
     list-style: none;
     padding: 20px 20px;
     width: 150px;
-    border: 2px solid black;
+    border: 2px solid rgb(74, 243, 7);
     border-radius: 10px;
     /*margin-bottom: 20px;*/
     text-align: center;
 }
 
 section ul li:hover {
-    background-color: #00A7E7;
+    background-color: rgba(0, 0, 0, 0.719);
     cursor: pointer;
 }
 
@@ -204,7 +208,6 @@ form input[type="text"] {
 }
 
 form ,input[type="file"]{
-  height: 1.5rem;
   color: rgb(74, 243, 7);
   font-size: 1rem;
 }
@@ -219,4 +222,32 @@ form ,input[type="file"]{
 aside a{
   color: rgba(255, 255, 255, 0.877);
   border: solid rgb(0, 0, 0) 1px;
+}
+
+.log form{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.log form input,select,button{
+    margin-top: 1rem;
+    border-radius: 5px;
+}
+
+.log form input[type="text"],select, button{
+  height: 2.5rem;
+  border: solid rgb(74, 243, 7) 1px;
+}
+
+.log form select{
+  background-color: rgba(0, 0, 0, 0.925);
+}
+
+.log form input[type="file"]{
+  margin-bottom: 2rem;
+}
+
+.log form button:hover{
+  background-color: rgba(0, 0, 0, 0.719);
 }
