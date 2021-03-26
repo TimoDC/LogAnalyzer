@@ -18,6 +18,6 @@ class MySQLController extends Controller
         </script>
         ";
 
-        return view("mysql", ["content" => $content, "dashboards" => $dashboards]);
+        return view("mysql", ["content" => $content, "dashboards" => $dashboards, "board" => $dashboard]);
     }
 }
