@@ -37,11 +37,12 @@ function init() {
   createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (user + system).toFixed(2));
   createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (diskUsed / diskTotal * 100).toFixed(2));
 
-  retrieveCurrentSelectedOption();
+  checkLocalStorage();
 }
 
-function retrieveCurrentSelectedOption() {
-  if (! document.getElementById("selected")) {
+function checkLocalStorage() {
+  let option = localStorage.getItem("option");
+  if (! option) {
     selectDefaultOption()
   };
 
