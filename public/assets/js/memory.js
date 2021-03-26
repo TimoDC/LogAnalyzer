@@ -46,30 +46,25 @@ function checkLocalStorage() {
     selectDefaultOption()
     return null;
   };
-  let elem = document.getElementsByClassName(option)[0];
-  console.log(option);
-  console.log(elem);
+  let button = document.getElementsByClassName(option)[0];
   displayContent(option);
-  elem.setAttribute("id", "selected");
+  button.setAttribute("id", "selected");
 }
 
 
 function selectDefaultOption() {
   let defaultOption = document.getElementsByClassName("charts")[0];
-  console.log(defaultOption);
   defaultOption.setAttribute("id", "selected");
 }
 
 
 function selectButton(e) {
-  var header = document.getElementById("buttonContainer");
-  var btns = header.getElementsByClassName("btn");
-  for (var i = 0; i < btns.length; i++) {
+  var container = document.getElementById("buttonContainer");
+  var buttons = container.getElementsByClassName("btn");
+  for (var i = 0; i < buttons.length; i++) {
       var current = document.getElementById("selected");
       current.removeAttribute("id");
       this.setAttribute("id", "selected");
-      console.log(this)
-      console.log(this.classList[1]);
     };
   displayContent(this.classList[1]);
   localStorage.setItem("option", this.classList[1])
@@ -92,7 +87,6 @@ function displayContent(choice) {
 
 function createDoughnutChart(canvas, labels, data, title, centerLabel) {
   const chart3 = document.getElementById(canvas);
-  //console.log(chart3);
   new Chart(chart3, {
     responsive: true,
     type: 'doughnut',
