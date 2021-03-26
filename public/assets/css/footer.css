@@ -4,6 +4,7 @@ footer {
     left: 0;
     text-align: center;
     width : 100%;
-    background-color: #00A7E7;
+    background-color: rgb(53, 175, 5);
     padding: 20px;
+    font-weight: bold;
 }

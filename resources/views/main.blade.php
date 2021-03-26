@@ -32,32 +32,34 @@
 
     <div class="log">
         @isset($board)
-        <form action="/addLogFile/{{ $board -> id }}" method="post" enctype="multipart/form-data">
-            @csrf
-            <div>
-                <input type="file" name="logFile">
+        <div class="logHeader">
+            <form action="/addLogFile/{{ $board -> id }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <div>
-                    <input type="checkbox" name="OSFile" id="OSFile">
-                    <label for="OSFile">Use System Logs</label>
+                    <input type="file" name="logFile">
+                    <div id="checkbox">
+                        <input type="checkbox" name="OSFile" id="OSFile">
+                        <label for="OSFile">Use System Logs</label>
+                    </div>
                 </div>
-            </div>
-            <div>
                 <div>
-                    <label for="LogType">Log Type: </label>
-                    <select name="LogType" id="LogType">
-                        <option value="Apache">Apache Access</option>
-                        <option value="Apache2">Apache Error</option>
-                        <option value="Auth">Auth</option>
-                        <option value="MySQL">MySQL</option>
-                    </select>
+                    <div>
+                        <label for="LogType">Log Type: </label>
+                        <select name="LogType" id="LogType">
+                            <option value="Apache">Apache Access</option>
+                            <option value="Apache2">Apache Error</option>
+                            <option value="Auth">Auth</option>
+                            <option value="MySQL">MySQL</option>
+                        </select>
+                    </div>
+                    <button type="submit">Submit</button>
                 </div>
-            </div>
-            <button type="submit">Submit</button>
+            </form>
             <form action="/delete/{{ $dashboard -> id }}" method="post">
+                @csrf
                 <button type="submit">Delete Dashboard</button>
             </form>
-        </form>
-
+        </div>
         <section>
             <ul>
                 <div>
@@ -79,7 +81,7 @@
             </ul>
         </section>
         @endisset()
-
+    
         @yield('log')
         @yield('apache2')
         @yield('content')
