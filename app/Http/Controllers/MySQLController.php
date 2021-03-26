@@ -9,6 +9,7 @@ use \App\Models\dashboard;
 class MySQLController extends Controller
 {
     function index(int $id) {
+        $dashboards = dashboard::all();
         $dashboard = dashboard::find($id);
         $filename = $dashboard -> mysqlLogFile;
         $content = "<script>
@@ -17,6 +18,6 @@ class MySQLController extends Controller
         </script>
         ";
 
-        return view("mysql", ["content" => $content]);
+        return view("mysql", ["content" => $content, "dashboards" => $dashboards]);
     }
 }

@@ -1,4 +1,4 @@
-@extends("master")
+@extends("main")
 
 
 @section("css")
@@ -6,11 +6,13 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/mysql.css') }}"/>
 @endsection
 
-@section("main")
+@section("log")
 
 @isset ($content)
 
-<p id="logContent">{!! $content !!}</p>
+{!! $content !!}
+
+@endisset
 
 <div id="content">
     <div id="tables">
@@ -57,7 +59,6 @@
         </div>
     </div>
 </div>
-@endisset
 
 @endsection
 

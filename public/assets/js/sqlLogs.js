@@ -92,16 +92,24 @@ function takePrepareQueryOutOfParts(parts) {
 
 function splitConnectionStringsInParts(string) {
     let parts = string.split(" ");
+    let newParts = [];
+    parts.forEach(part => {
+        if (part != "") {
+            newParts.push(part);
+        }
+    });
+    parts = newParts;
+    
     let curDate = new Date();
     let formattedCurDate = curDate.toISOString().substring(0, 10);
     let date = `20${parts[0].substring(0, 2)}-${parts[0].substring(2, 4)}-${parts[0].substring(4, 6)}`; 
 
-    if (parts[5] >= 37 && date === formattedCurDate) {
+    if (parts[2] >= 37 && date === formattedCurDate) {
         createConnectionTable(parts);
 
-        let databasePart = parts[10];
-        let userPart = parts[8];
-        let loginPart = parts[6].split("\t")[1];
+        let databasePart = parts[7];
+        let userPart = parts[5];
+        let loginPart = parts[3].split("\t")[1];
         
         filterWithDuplicates(databases, databasePart);
         filterWithoutDuplicates(databasesWithoutDuplicates, databasePart);
@@ -159,12 +167,12 @@ function createConnectionTable(parts) {
 
     document.querySelector("#connectionTable #logTable").innerHTML += 
     `<tr>
-        <td>${parts[5]}</td>
+        <td>${parts[2]}</td>
         <td>${date}</td>
         <td>${parts[1]}</td>
-        <td>${parts[6].split("\t")[1]}</td>
-        <td>${parts[8]}</td>
-        <td>${parts[10]}</td>
+        <td>${parts[3].split("\t")[1]}</td>
+        <td>${parts[5]}</td>
+        <td>${parts[7]}</td>
     </tr>`
 }
 
