@@ -36,7 +36,24 @@ function init() {
   createDoughnutChart('swapCanvas', labelsMem, dataSwap, "Swap Usage", (swapUsed / swapTotal * 100).toFixed(2));
   createDoughnutChart('cpuCanvas', labelsCPU, dataCPU, "CPU Usage", (user + system).toFixed(2));
   createDoughnutChart('diskCanvas', labelsMem, dataDisk, "Disk Usage", (diskUsed / diskTotal * 100).toFixed(2));
+
+  retrieveCurrentSelectedOption();
 }
+
+function retrieveCurrentSelectedOption() {
+  if (! document.getElementById("selected")) {
+    selectDefaultOption()
+  };
+
+}
+
+
+function selectDefaultOption() {
+  let defaultOption = document.getElementsByClassName("charts")[0];
+  console.log(defaultOption);
+  defaultOption.setAttribute("id", "selected");
+}
+
 
 function selectButton(e) {
   var header = document.getElementById("buttonContainer");
@@ -45,6 +62,7 @@ function selectButton(e) {
       var current = document.getElementById("selected");
       current.removeAttribute("id");
       this.setAttribute("id", "selected");
+      console.log(this)
       console.log(this.innerHTML);
     };
   displayContent(this.innerHTML);
