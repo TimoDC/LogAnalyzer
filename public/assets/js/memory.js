@@ -44,6 +44,7 @@ function checkLocalStorage() {
   let option = localStorage.getItem("option");
   if (! option) {
     selectDefaultOption()
+    return null;
   };
   let elem = document.getElementsByClassName(option)[0];
   console.log(option);
