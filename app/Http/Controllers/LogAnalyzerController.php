@@ -67,4 +67,10 @@ class LogAnalyzerController extends Controller
         $dashboard->save();
         return redirect()->back();
     }
+
+    function deleteDashBoard(int $id){
+        dashboard::find($id) -> delete();
+        $dashboards = dashboard::all();
+        return view("main", ["dashboards" => $dashboards]);
+    }
 }

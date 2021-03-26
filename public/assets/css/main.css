@@ -1,9 +1,9 @@
 section {
-    /*width: 60%;
-    margin-right: auto;*/
     padding-top: 2rem;
     padding-bottom: 2rem;
     border-right: solid black 3px;
+    border-left: 3px solid black; 
+    border-bottom: 3px solid black; 
 }
 
 section a{
@@ -23,13 +23,17 @@ section ul div {
 }
 
 section ul li {
-    list-style: none;
-    padding: 20px 20px;
-    width: 150px;
-    border: 2px solid rgb(74, 243, 7);
-    border-radius: 10px;
-    /*margin-bottom: 20px;*/
-    text-align: center;
+  list-style: none;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+section ul li a{
+  padding: 1rem;
+  border: 2px solid rgb(74, 243, 7);
+  border-radius: 10px;
+  
+  text-align: center;
 }
 
 section ul li:hover {
@@ -48,24 +52,35 @@ button[type="submit"]:hover {
   cursor: pointer;
 }
 
-.new-dashboard-popup {
-    width: fit-content;
-    position: fixed;
-    top: 50%;
-    left: 40%;
-    border: 5px solid rgb(53, 175, 5);
-    background-color: rgb(24, 26, 27);
-    padding: 1rem;
-  }
+.new-dashboard-popup div {
+  text-align: center;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 30rem;
+  min-width: 250px;
+  /*height: 10.5rem;*/
+  height: auto;
+  min-height: 65px;
+  z-index: 1000;
+  border: 5px solid rgb(53, 175, 5);
+  background-color: rgb(24, 26, 27);
+}
 
 .new-dashboard-popup input{
     display: block;
     margin: 5px;
     border-radius: 2px;
+    height: 2.5rem;
+    border: solid rgb(74, 243, 7) 1px;
+    border-radius: 5px;
+    
 }
 
 .new-dashboard-popup h2 {
   font-size: 1.5rem;
+  margin-top: 1rem;
 }
 
 .new-dashboard-popup input:focus {
@@ -73,7 +88,7 @@ button[type="submit"]:hover {
 }
 
 .new-dashboard-popup input[type="submit"] {
-  height: 30px;
+  height: 1.75rem;
 }
 
 .new-dashboard-popup form {
@@ -181,6 +196,7 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-right: 1rem;
 }
 
 form{
@@ -215,19 +231,13 @@ form ,input[type="file"]{
 .logContainer{
   border-right: solid black 3px;
   border-bottom: solid black 3px;
-  border-top: solid black 3px;
+  border-left: solid black 3px;
   margin-bottom: 3.5rem;
 }
 
 aside a{
   color: rgba(255, 255, 255, 0.877);
   border: solid rgb(0, 0, 0) 1px;
-}
-
-.log form{
-  display: flex;
-  flex-wrap: wrap;
-
 }
 
 .log form input,select,button{
@@ -250,4 +260,28 @@ aside a{
 
 .log form button:hover{
   background-color: rgba(0, 0, 0, 0.719);
+}
+
+.logHeader{
+  display: flex;
+  border-left: 3px solid black; 
+}
+
+.log form div{
+  display: flex;
+  flex-direction: column;
+}
+
+#checkbox{
+  display: inline;
+}
+
+.log form:first-of-type{
+  width: 100%;
+}
+
+.log form:last-of-type{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
