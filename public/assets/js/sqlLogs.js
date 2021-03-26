@@ -28,20 +28,20 @@ function init() {
 }
 
 function checkforResponse() {
-    if (typeof promise === "undefined") {
+    if (document.querySelector(".content") === "null") {
         setTimeout(() => {
             checkforResponse();
         }, 5000);
     } else {
-        promise.then(content => {
-            filterStrings(content, "Connect", connectionStrings);
-            filterStrings(content, "Prepare\tselect", prepareStrings);
-            fillAllAmountLists();
-            createChart(databaseChart, getTop5MostUsed(databasesWithoutDuplicates, databaseAmounts), databaseAmounts, 'Most used databases', 'doughnut');
-            createChart(userChart, getTop5MostUsed(usersWithoutDuplicates, userAmounts), userAmounts, 'Most used users', 'doughnut');
-            createChart(loginChart, getTop5MostUsed(loginsWithoutDuplicates, loginAmounts), loginAmounts, 'Most used logins', 'doughnut');
-            createChart(queryChart, getTop5MostUsed(queriesWithoutDuplicates, queryAmounts), queryAmounts, 'Most used queries', 'pie');
-        });
+        let content = document.querySelector(".content").innerHTML;
+
+        filterStrings(content, "Connect", connectionStrings);
+        filterStrings(content, "Prepare\tselect", prepareStrings);
+        fillAllAmountLists();
+        createChart(databaseChart, getTop5MostUsed(databasesWithoutDuplicates, databaseAmounts), databaseAmounts, 'Most used databases', 'doughnut');
+        createChart(userChart, getTop5MostUsed(usersWithoutDuplicates, userAmounts), userAmounts, 'Most used users', 'doughnut');
+        createChart(loginChart, getTop5MostUsed(loginsWithoutDuplicates, loginAmounts), loginAmounts, 'Most used logins', 'doughnut');
+        createChart(queryChart, getTop5MostUsed(queriesWithoutDuplicates, queryAmounts), queryAmounts, 'Most used queries', 'pie');
     }
 }
 
@@ -72,7 +72,15 @@ function filterStrings(content, commandStringToFilter, stringsList) {
 function splitPrepareStringsInParts(string) {
     let parts = string.split(" ");
 
-    if (parts[4] >= 37) {
+    let newParts = [];
+    parts.forEach(part => {
+        if (part != "") {
+            newParts.push(part);
+        }
+    });
+    parts = newParts;
+
+    if (parts[1] >= 37) {
         createPrepareTable(parts);
 
         let query = takePrepareQueryOutOfParts(parts);
@@ -83,9 +91,9 @@ function splitPrepareStringsInParts(string) {
 }
 
 function takePrepareQueryOutOfParts(parts) {
-    let query =  `${parts[5].split("\t")[1]} ${parts[6]} ${parts[7]} ${parts[8]} ${parts[9]} ${parts[10]} ${parts[11]} ${parts[12]} ${parts[13]} ${parts[14]}`;
+    let query =  `${parts[2].split("\t")[1]} ${parts[3]} ${parts[4]} ${parts[5]} ${parts[6]} ${parts[7]} ${parts[8]} ${parts[9]} ${parts[10]} ${parts[11]}`;
     if (query.includes("undefined")) {
-        query = `${parts[5].split("\t")[1]} ${parts[6]} ${parts[7]} ${parts[8]}`;
+        query = `${parts[2].split("\t")[1]} ${parts[3]} ${parts[4]} ${parts[5]}`;
     }
     return query;
 }
@@ -99,7 +107,7 @@ function splitConnectionStringsInParts(string) {
         }
     });
     parts = newParts;
-    
+
     let curDate = new Date();
     let formattedCurDate = curDate.toISOString().substring(0, 10);
     let date = `20${parts[0].substring(0, 2)}-${parts[0].substring(2, 4)}-${parts[0].substring(4, 6)}`; 
@@ -155,9 +163,10 @@ function getTop5MostUsed(listWithoutDuplicates, amountList) {
 }
 
 function createPrepareTable(parts) {
+
     document.querySelector("#prepareTable #logTable").innerHTML += 
     `<tr>
-        <td>${parts[4]}</td>
+        <td>${parts[1]}</td>
         <td>${takePrepareQueryOutOfParts(parts)}</td>
     </tr>`
 }
