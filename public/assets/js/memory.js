@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", init);
 document.querySelectorAll(".btn").forEach(elem => {
-  elem.addEventListener("click", selectButton);
+ elem.addEventListener("click", selectButton);
 });
 
 
@@ -45,7 +45,11 @@ function checkLocalStorage() {
   if (! option) {
     selectDefaultOption()
   };
-
+  let elem = document.getElementsByClassName(option)[0];
+  console.log(option);
+  console.log(elem);
+  displayContent(option);
+  elem.setAttribute("id", "selected");
 }
 
 
@@ -64,18 +68,19 @@ function selectButton(e) {
       current.removeAttribute("id");
       this.setAttribute("id", "selected");
       console.log(this)
-      console.log(this.innerHTML);
+      console.log(this.classList[1]);
     };
-  displayContent(this.innerHTML);
+  displayContent(this.classList[1]);
+  localStorage.setItem("option", this.classList[1])
 }
 
 function displayContent(choice) {
   switch(choice) {
-    case "Plain Text":
+    case "plaintext":
       document.getElementById("tableContainer").classList.remove("hidden");
       document.getElementById("CanvasContainer").classList.add("hidden");
       break;
-    case "Charts":
+    case "charts":
       document.getElementById("CanvasContainer").classList.remove("hidden");
       document.getElementById("tableContainer").classList.add("hidden");
       break;
