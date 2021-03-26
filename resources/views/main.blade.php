@@ -34,30 +34,28 @@
         @isset($board)
         <form action="/addLogFile/{{ $board -> id }}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="file" name="logFile">
             <div>
-                <label for="OSFile">Use System Logs</label>
-                <input type="checkbox" name="OSFile" id="OSFile">
+                <input type="file" name="logFile">
+                <div>
+                    <input type="checkbox" name="OSFile" id="OSFile">
+                    <label for="OSFile">Use System Logs</label>
+                </div>
             </div>
-            
             <div>
-                <label for="LogType">Log Type: </label>
-                <select name="LogType" id="LogType">
-                    @if($board -> apacheLogFile === NULL)
-                    <option value="Apache">Apache Access</option>
-                    @endif
-                    @if($board -> apacheErrorLogFile === NULL)
-                    <option value="Apache2">Apache Error</option>
-                    @endif
-                    @if($board -> authLogFile === NULL)
-                    <option value="Auth">Auth</option>
-                    @endif
-                    @if($board -> mysqlLogFile === NULL)
-                    <option value="MySQL">MySQL</option>
-                    @endif
-                </select>
+                <div>
+                    <label for="LogType">Log Type: </label>
+                    <select name="LogType" id="LogType">
+                        <option value="Apache">Apache Access</option>
+                        <option value="Apache2">Apache Error</option>
+                        <option value="Auth">Auth</option>
+                        <option value="MySQL">MySQL</option>
+                    </select>
+                </div>
             </div>
             <button type="submit">Submit</button>
+            <form action="/delete/{{ $dashboard -> id }}" method="post">
+                <button type="submit">Delete Dashboard</button>
+            </form>
         </form>
 
         <section>

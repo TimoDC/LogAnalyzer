@@ -1,11 +1,5 @@
 @extends("main")
 
-@isset ($content)
-
-<div  class="content hidden">{{ $content }}</div> 
-
-@endisset
-
 @section("apache2")
 
 <link rel="stylesheet" href="{{ asset('assets/css/apacheLog.css') }}">
@@ -84,4 +78,10 @@
     <script src="{{ asset('assets/js/apacheLog2.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-@endsection
+    @isset ($content)
+
+    <div class="content hidden">{{ $content }}</div>
+
+    @endisset
+
+    @endsection

@@ -16,7 +16,6 @@ class apacheLogController extends Controller
         $dashboard = dashboard::find($id);
         $dashboards = dashboard::all();
         $filename = $dashboard -> apacheLogFile;
-        $content = "";
         if(Str::startsWith($filename,"/var/log/")){
             $file = fopen($filename, "r");
             $data = fread($file,filesize($filename));

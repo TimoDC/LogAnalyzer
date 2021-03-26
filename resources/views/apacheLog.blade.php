@@ -1,12 +1,6 @@
 @extends("main")
 
 @section("log")
-@isset ($content)
-
-<div  class="content hidden">{{ $content }}</div> 
-
-@endisset
-
 <link rel="stylesheet" href="{{ asset('assets/css/apacheLog.css') }}">
 <div class="logContainer">
     <div class="logItems">
@@ -173,5 +167,9 @@
     </div>
     <script src="{{ asset('assets/js/apacheLog.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    @isset ($content)
 
+    <div class="content hidden">{{ $content }}</div>
+
+    @endisset
     @endsection
