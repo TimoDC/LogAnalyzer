@@ -1,4 +1,4 @@
-@extends("master")
+@extends("main")
 
 
 @section("css")
@@ -6,58 +6,65 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/mysql.css') }}"/>
 @endsection
 
-@section("main")
+
+@section("log")
 
 @isset ($content)
 
-<p id="logContent">{!! $content !!}</p>
+<div class="content hidden">{{ $content }}</div>
+
+@endisset
 
 <div id="content">
     <div id="tables">
-        <table id="connectionTable">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Login</th>
-                    <th>User</th>
-                    <th>Database</th>
-                </tr>
-            </thead>
-            <tbody id="logTable">
+        <div class="table">
+            <table id="connectionTable">
+                <thead>
+                    <tr>
+                        <th><div>Id</div></th>
+                        <th><div>Date</div></th>
+                        <th><div>Time</div></th>
+                        <th><div>Login</div></th>
+                        <th><div>User</div></th>
+                        <th><div>Database</div></th>
+                    </tr>
+                </thead>
+                <tbody id="logTable">
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="table">
+            <table id="prepareTable">
+                <thead>
+                    <tr>
+                        <th><div>Id</div></th>
+                        <th><div>Query</div></th>
+                    </tr>
+                </thead>
+                <tbody id="logTable">
 
-        <table id="prepareTable">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Query</th>
-                </tr>
-            </thead>
-            <tbody id="logTable">
-
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div id="charts">
+    <div class="charts">
         <div class="canvas">
-            <canvas id="databaseChart"></canvas>
+            <canvas id="databaseChart" width="400" height="400"></canvas>
         </div>
         <div class="canvas">
-            <canvas id="userChart"></canvas>
+            <canvas id="userChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+    <div class="charts">
+        <div class="canvas">
+            <canvas id="loginChart" width="400" height="400"></canvas>
         </div>
         <div class="canvas">
-            <canvas id="loginChart"></canvas>
-        </div>
-        <div class="canvas">
-            <canvas id="queryChart"></canvas>
+            <canvas id="queryChart" width="400" height="400"></canvas>
         </div>
     </div>
 </div>
-@endisset
 
 @endsection
 
