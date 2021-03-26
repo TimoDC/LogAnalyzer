@@ -23,6 +23,10 @@ aside a {
     margin-bottom: 1rem;
 }
 
+#newDashboardButton:hover {
+    cursor: pointer;
+}
+
 #dashboardButtons {
     display: flex;
     flex-direction: column;
