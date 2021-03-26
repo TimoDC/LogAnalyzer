@@ -35,6 +35,7 @@ function checkforResponse() {
     } else {
         let content = document.querySelector(".content").innerHTML;
 
+        document.querySelector(".content").innerHTML = "";
         filterStrings(content, "Connect", connectionStrings);
         filterStrings(content, "Prepare\tselect", prepareStrings);
         fillAllAmountLists();
@@ -232,6 +233,10 @@ function createChart(chart, label, data, title, type) {
             title: {
                 display: true,
                 text: title
+            },
+            legend: {
+                display: true,
+                position: 'bottom'
             }
         }
     });
