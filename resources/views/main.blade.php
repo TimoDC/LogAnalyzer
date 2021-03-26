@@ -28,9 +28,6 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-
-
-        <a href="#" id="settingsButton">Settings</a>
     </aside>
 
     <div class="log">
