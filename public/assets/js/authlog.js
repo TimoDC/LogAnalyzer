@@ -9,23 +9,31 @@ function init() {
 }
 
 function showInfo() {
-    fetch(AUTHLOG)
+    if (AUTHLOG.includes(" ")) {
+        loadInfo(AUTHLOG);
+    } else {
+        fetch(AUTHLOG)
         .then(response => response.text())
         .then(function(result) {
-            const auth = result;
-            const entries = auth.split("\n");
-
-            showCountEntries(entries);
-            showEntriesInTable(entries);
-
-            addChartForAppName(entries);
-            addChartForUnsuccessfulAttempts(entries);
-            addChartForActivity(entries);
-            addChartForUnsuccessfulUsernames(entries);
-            addChartForCommands(entries);
-
-            addTitleForTotalErrors(entries);
+            loadInfo(result);
         })
+    }
+}
+
+function loadInfo(result) {
+    const auth = result;
+    const entries = auth.split("\n");
+
+    showCountEntries(entries);
+    showEntriesInTable(entries);
+
+    addChartForAppName(entries);
+    addChartForUnsuccessfulAttempts(entries);
+    addChartForActivity(entries);
+    addChartForUnsuccessfulUsernames(entries);
+    addChartForCommands(entries);
+
+    addTitleForTotalErrors(entries);
 }
 
 function addChartForCommands(entries) {
@@ -39,7 +47,7 @@ function addChartForCommands(entries) {
     let countCommands = {};
     let countCommandsOrdered = [];
 
-    for (let i =0; i< entries.length;i++){
+    for (let i =0; i< entries.length - 1;i++){
         if(entries[i].includes("COMMAND")) {
             const entry = entries[i];
             const splitter = entry.split("COMMAND=");
@@ -134,7 +142,7 @@ function addChartForUnsuccessfulUsernames(entries) {
     let countUnsuccessfulAttemptUsernames = {};
     let countUnsuccessfulAttemptUsernamesOrdered = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         if (unsuccessfulAttemptFound(entries, i)) {
             const entry = entries[i];
             const splitter = entry.split("Invalid user ");
@@ -175,7 +183,7 @@ function addChartForActivity(entries) {
     let countHours = {};
     let countHoursOrdered = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         const entry = entries[i];
         const splitter = entry.split(" ");
         const time = splitter[2].split(":");
@@ -257,7 +265,7 @@ function addChartForUnsuccessfulAttempts(entries) {
     let countUnsuccessfulAttemptIps = {};
     let countUnsuccessfulAttemptIpsOrdered = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         if (unsuccessfulAttemptFound(entries, i)) {
             const entry = entries[i];
             const splitter = entry.split("from ");
@@ -358,7 +366,7 @@ function addChartForAppName(entries) {
     let countAppNames = {};
     let countAppNamesOrdered = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         const entry = entries[i];
         const splitter = entry.split(" ");
         const fullappname = splitter[4];
@@ -392,7 +400,7 @@ function addChartForAppName(entries) {
 function showEntriesInTable(entries) {
     const tablebody = document.querySelector("#entries tbody");
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         const entry = entries[i];
         const splitter = entry.split(" ");
 
@@ -414,6 +422,6 @@ function showEntriesInTable(entries) {
 
 function showCountEntries(entries) {
     const countEntries = document.querySelector("#authlogcharts #entries h2 span");
-    countEntries.innerHTML += `${entries.length}`;
+    countEntries.innerHTML += `${entries.length - 1}`;
 }
 
