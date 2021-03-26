@@ -85,13 +85,19 @@ function createPieChart(canvas, labels, data, label, text) {
                 data: data,
                 backgroundColor: palette('tol', data.length).map(function (hex) {
                     return "#" + hex;
+                }),
+                borderColor: palette('tol', data.length).map(function (hex) {
+                    return "#" + hex;
                 })
             }]
         },
         options: {
             title: {
                 display: true,
-                text: text
+                text: text,
+                fontSize: 14,
+                fontColor: "#e3e3e3",
+                fontFamily: "Nunito, sans-serif"
             },
             legend: {
                 display: true,
@@ -204,7 +210,10 @@ function createActivityChart(activity, arrayHours, countHoursOrdered) {
         options: {
             title: {
                 display: true,
-                text: 'Activity Per Hour'
+                text: 'Activity Per Hour',
+                fontSize: 14,
+                fontColor: "#e3e3e3",
+                fontFamily: "Nunito, sans-serif"
             },
             legend: {
                 display: false
