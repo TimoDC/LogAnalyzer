@@ -21,13 +21,11 @@ class apacheLogController extends Controller
             $file = fopen($filename, "r");
             $data = fread($file,filesize($filename));
             fclose($file);
-            $content = "<div id=\"content\" class=\"hidden\"> {$data} </div>";
 
         }else{
             $data = Storage::get($filename);
-            $content = "<div id=\"content\" class=\"hidden\"> {$data} </div>";
         }
-        return view("apacheLog", ["content" => $content, "dashboards" => $dashboards, "board" => $dashboard]);
+        return view("apacheLog", ["content" => $data, "dashboards" => $dashboards, "board" => $dashboard]);
     }
 
     function index2(int $id)
@@ -35,11 +33,15 @@ class apacheLogController extends Controller
         $dashboard = dashboard::find($id);
         $dashboards = dashboard::all();
         $filename = $dashboard -> apacheErrorLogFile;
-        $content = "<script>
-        let promise = fetch('/" . $filename . " ')
-            .then(response => response.text())
-        </script>
-        ";
-        return view("apache2", ["content" => $content, "dashboards" => $dashboards, "board" => $dashboard]);
+        $content = "";
+        if(Str::startsWith($filename,"/var/log/")){
+            $file = fopen($filename, "r");
+            $data = fread($file,filesize($filename));
+            fclose($file);
+
+        }else{
+            $data = Storage::get($filename);
+        }
+        return view("apache2", ["content" => $data, "dashboards" => $dashboards, "board" => $dashboard]);
     }
 }

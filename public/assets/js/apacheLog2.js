@@ -13,24 +13,23 @@ let PHPIPayloads = []
 
 function init() {
     checkforResponse();
-    document.querySelectorAll("input[type='checkbox']").forEach(item => item.addEventListener("click", showOrHideLog));
+    document.querySelectorAll(".logItems input[type='checkbox']").forEach(item => item.addEventListener("click", showOrHideLog));
     showOrHideLog();
 }
 
 function checkforResponse() {
-    if (typeof promise === "undefined") {
+    if (document.querySelector(".content") === "null") {
         setTimeout(() => {
             checkforResponse();
         }, 5000);
     } else {
-        promise.then(content => {
-            analyseLog(content);
-        });
+        console.log(document.querySelector(".content"));
+        analyseLog(document.querySelector(".content").innerText);
     }
 }
 
 function showOrHideLog() {
-    document.querySelectorAll("input[type='checkbox']").forEach(input => {
+    document.querySelectorAll(".logItems input[type='checkbox']").forEach(input => {
         if (input.checked) {
             showLog(input);
         } else {

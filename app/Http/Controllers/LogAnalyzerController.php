@@ -57,7 +57,7 @@ class LogAnalyzerController extends Controller
             }
         } elseif ($request->input("LogType") === "Apache2") {
             if ($request->input("OSFile") === "on") {
-                $dashboard->mysqlLogFile = "/var/log/apache2/error.log";
+                $dashboard->apacheErrorLogFile = "/var/log/apache2/error.log";
             } else {
                 $dashboard->apacheErrorLogFile = $filename;
             }
