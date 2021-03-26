@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use \App\Models\dashboard;
 use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Str;
 
 class apacheLogController extends Controller
 {
@@ -15,11 +16,17 @@ class apacheLogController extends Controller
         $dashboard = dashboard::find($id);
         $dashboards = dashboard::all();
         $filename = $dashboard -> apacheLogFile;
-        $content = "<script>
-        let promise = fetch('/" . $filename . " ')
-            .then(response => response.text())
-        </script>
-        ";
+        $content = "";
+        if(Str::startsWith($filename,"/var/log/")){
+            $file = fopen($filename, "r");
+            $data = fread($file,filesize($filename));
+            fclose($file);
+            $content = "<div id=\"content\" class=\"hidden\"> {$data} </div>";
+
+        }else{
+            $data = Storage::get($filename);
+            $content = "<div id=\"content\" class=\"hidden\"> {$data} </div>";
+        }
         return view("apacheLog", ["content" => $content, "dashboards" => $dashboards, "board" => $dashboard]);
     }
 
