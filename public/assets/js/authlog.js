@@ -24,9 +24,6 @@ function loadInfo(result) {
     const auth = result;
     const entries = auth.split("\n");
 
-    showCountEntries(entries);
-    showEntriesInTable(entries);
-
     addChartForAppName(entries);
     addChartForUnsuccessfulAttempts(entries);
     addChartForActivity(entries);
@@ -35,6 +32,9 @@ function loadInfo(result) {
     addChartForOpenedSessions(entries);
 
     addTitleForTotalErrors(entries);
+
+    showCountEntries(entries);
+    showEntriesInTable(entries);
 }
 
 function addChartForOpenedSessions(entries) {
@@ -456,17 +456,30 @@ function addChartForAppName(entries) {
 
 function showEntriesInTable(entries) {
     const tablebody = document.querySelector("#entries tbody");
+    const reversed = entries.reverse();
 
-    for (let i = 0; i < entries.length - 1; i++) {
-        const entry = entries[i];
-        const splitter = entry.split(" ");
+    if (entries.length > 250) {
+        for (let i = 1; i <= 250;i++) {
+            const entry = reversed[i];
+            createTable(entry, tablebody);
+        }
+    } else {
+        for (let i = 1; i <= entries.length - 1; i++) {
+            const entry = reversed[i];
+            createTable(entry, tablebody);
+        }
+    }
+}
 
-        const timestamp = `${splitter.shift()} ${splitter.shift()} ${splitter.shift()}`;
-        const hostname = splitter.shift();
-        const appname = splitter.shift();
-        const message = splitter.join(" ");
+function createTable(entry, tablebody) {
+    const splitter = entry.split(" ");
 
-        tablebody.innerHTML += `
+    const timestamp = `${splitter.shift()} ${splitter.shift()} ${splitter.shift()}`;
+    const hostname = splitter.shift();
+    const appname = splitter.shift();
+    const message = splitter.join(" ");
+
+    tablebody.innerHTML += `
                                         <tr>
                                             <td>${timestamp}</td>
                                             <td>${hostname}</td>
@@ -474,11 +487,15 @@ function showEntriesInTable(entries) {
                                             <td>${message}</td>
                                         </tr>
                                         `;
-    }
 }
 
 function showCountEntries(entries) {
     const countEntries = document.querySelector("#authlogcharts #entries h2 span");
-    countEntries.innerHTML += `${entries.length - 1}`;
+
+    if (entries.length > 250) {
+        countEntries.innerHTML += `250 of ${entries.length - 1}`;
+    } else {
+        countEntries.innerHTML += `${entries.length - 1}`;
+    }
 }
 
