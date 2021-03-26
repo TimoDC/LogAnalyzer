@@ -9,23 +9,79 @@ function init() {
 }
 
 function showInfo() {
-    fetch(AUTHLOG)
+    if (AUTHLOG.includes(" ")) {
+        loadInfo(AUTHLOG);
+    } else {
+        fetch(AUTHLOG)
         .then(response => response.text())
         .then(function(result) {
-            const auth = result;
-            const entries = auth.split("\n");
-
-            showCountEntries(entries);
-            showEntriesInTable(entries);
-
-            addChartForAppName(entries);
-            addChartForUnsuccessfulAttempts(entries);
-            addChartForActivity(entries);
-            addChartForUnsuccessfulUsernames(entries);
-            addChartForCommands(entries);
-
-            addTitleForTotalErrors(entries);
+            loadInfo(result);
         })
+    }
+}
+
+function loadInfo(result) {
+    const auth = result;
+    const entries = auth.split("\n");
+
+    addChartForAppName(entries);
+    addChartForUnsuccessfulAttempts(entries);
+    addChartForActivity(entries);
+    addChartForUnsuccessfulUsernames(entries);
+    addChartForCommands(entries);
+    addChartForOpenedSessions(entries);
+
+    addTitleForTotalErrors(entries);
+
+    showCountEntries(entries);
+    showEntriesInTable(entries);
+}
+
+function addChartForOpenedSessions(entries) {
+    const openedsessionscanvas = document.querySelector("#openedsessionschart canvas");
+    const label = "Opened Sessions Usernames";
+
+    let count = 0;
+    let openedSessions = [];
+
+    let arrayDuplicates = [];
+
+    let countOpenedSessions = {};
+    let countOpenedSessionsOrdered = [];
+
+    for (let i=0;i<entries.length - 1;i++) {
+        if(entries[i].includes("session opened for user")) {
+            const entry = entries[i];
+            const splitter = entry.split("session opened for user ");
+            const spaceSplitter = splitter[1].split(" ");
+            
+            const openedSession = spaceSplitter[0];
+
+            arrayDuplicates.push(openedSession);
+
+            count++;
+        }
+    }
+
+    addTitleForTotalOpenedSessions(count);
+
+    countDuplicatesInObject(arrayDuplicates, countOpenedSessions);
+
+    openedSessions = sortObjectByCount(openedSessions, countOpenedSessions);
+
+    sortCountDescending(countOpenedSessions, countOpenedSessionsOrdered);
+
+    const countManyOpenedSessions = countOpenedSessionsOrdered.length;
+
+    if (noEnoughData(countManyOpenedSessions)) {
+        document.querySelector("#openedsessionschart").innerHTML = "<p>Not enough data for an opened sessions chart</p>";
+    } else {
+        getTop12(openedSessions, countOpenedSessionsOrdered);
+
+        const text = `Top 12 Opened Sessions Usernames (total usernames: ${countManyOpenedSessions})`;
+
+        createPieChart(openedsessionscanvas, openedSessions, countOpenedSessionsOrdered, label, text);
+    }
 }
 
 function addChartForCommands(entries) {
@@ -39,7 +95,7 @@ function addChartForCommands(entries) {
     let countCommands = {};
     let countCommandsOrdered = [];
 
-    for (let i =0; i< entries.length;i++){
+    for (let i =0; i< entries.length - 1;i++){
         if(entries[i].includes("COMMAND")) {
             const entry = entries[i];
             const splitter = entry.split("COMMAND=");
@@ -85,13 +141,19 @@ function createPieChart(canvas, labels, data, label, text) {
                 data: data,
                 backgroundColor: palette('tol', data.length).map(function (hex) {
                     return "#" + hex;
+                }),
+                borderColor: palette('tol', data.length).map(function (hex) {
+                    return "#" + hex;
                 })
             }]
         },
         options: {
             title: {
                 display: true,
-                text: text
+                text: text,
+                fontSize: 14,
+                fontColor: "#e3e3e3",
+                fontFamily: "Nunito, sans-serif"
             },
             legend: {
                 display: true,
@@ -128,7 +190,7 @@ function addChartForUnsuccessfulUsernames(entries) {
     let countUnsuccessfulAttemptUsernames = {};
     let countUnsuccessfulAttemptUsernamesOrdered = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         if (unsuccessfulAttemptFound(entries, i)) {
             const entry = entries[i];
             const splitter = entry.split("Invalid user ");
@@ -169,7 +231,7 @@ function addChartForActivity(entries) {
     let countHours = {};
     let countHoursOrdered = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         const entry = entries[i];
         const splitter = entry.split(" ");
         const time = splitter[2].split(":");
@@ -204,7 +266,10 @@ function createActivityChart(activity, arrayHours, countHoursOrdered) {
         options: {
             title: {
                 display: true,
-                text: 'Activity Per Hour'
+                text: 'Activity Per Hour',
+                fontSize: 14,
+                fontColor: "#e3e3e3",
+                fontFamily: "Nunito, sans-serif"
             },
             legend: {
                 display: false
@@ -248,7 +313,7 @@ function addChartForUnsuccessfulAttempts(entries) {
     let countUnsuccessfulAttemptIps = {};
     let countUnsuccessfulAttemptIpsOrdered = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         if (unsuccessfulAttemptFound(entries, i)) {
             const entry = entries[i];
             const splitter = entry.split("from ");
@@ -284,6 +349,15 @@ function addChartForUnsuccessfulAttempts(entries) {
 
         createPieChart(unsuccessfulattemptscanvas, unsuccessfulAttemptIps, countUnsuccessfulAttemptIpsOrdered, label, text);
     }
+}
+
+function addTitleForTotalOpenedSessions(countOpenedSessions) {
+    const totalopenedsessions = document.querySelector("#totalopenedsessions");
+
+    totalopenedsessions.innerHTML = `
+                                        <h1>${countOpenedSessions}</h1>
+                                        <p>Opened Sessions</p>
+                                    `;
 }
 
 function addTitleForTotalUnsuccessfulAttempts(countUnsuccessfulAttempts) {
@@ -349,7 +423,7 @@ function addChartForAppName(entries) {
     let countAppNames = {};
     let countAppNamesOrdered = [];
 
-    for (let i = 0; i < entries.length; i++) {
+    for (let i = 0; i < entries.length - 1; i++) {
         const entry = entries[i];
         const splitter = entry.split(" ");
         const fullappname = splitter[4];
@@ -382,17 +456,30 @@ function addChartForAppName(entries) {
 
 function showEntriesInTable(entries) {
     const tablebody = document.querySelector("#entries tbody");
+    const reversed = entries.reverse();
 
-    for (let i = 0; i < entries.length; i++) {
-        const entry = entries[i];
-        const splitter = entry.split(" ");
+    if (entries.length > 250) {
+        for (let i = 1; i <= 250;i++) {
+            const entry = reversed[i];
+            createTable(entry, tablebody);
+        }
+    } else {
+        for (let i = 1; i <= entries.length - 1; i++) {
+            const entry = reversed[i];
+            createTable(entry, tablebody);
+        }
+    }
+}
 
-        const timestamp = `${splitter.shift()} ${splitter.shift()} ${splitter.shift()}`;
-        const hostname = splitter.shift();
-        const appname = splitter.shift();
-        const message = splitter.join(" ");
+function createTable(entry, tablebody) {
+    const splitter = entry.split(" ");
 
-        tablebody.innerHTML += `
+    const timestamp = `${splitter.shift()} ${splitter.shift()} ${splitter.shift()}`;
+    const hostname = splitter.shift();
+    const appname = splitter.shift();
+    const message = splitter.join(" ");
+
+    tablebody.innerHTML += `
                                         <tr>
                                             <td>${timestamp}</td>
                                             <td>${hostname}</td>
@@ -400,11 +487,15 @@ function showEntriesInTable(entries) {
                                             <td>${message}</td>
                                         </tr>
                                         `;
-    }
 }
 
 function showCountEntries(entries) {
     const countEntries = document.querySelector("#authlogcharts #entries h2 span");
-    countEntries.innerHTML += `${entries.length}`;
+
+    if (entries.length > 250) {
+        countEntries.innerHTML += `250 of ${entries.length - 1}`;
+    } else {
+        countEntries.innerHTML += `${entries.length - 1}`;
+    }
 }
 

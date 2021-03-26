@@ -28,9 +28,6 @@
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-
-
-        <a href="#" id="settingsButton">Settings</a>
     </aside>
 
     <div class="log">
@@ -38,6 +35,11 @@
         <form action="/addLogFile/{{ $board -> id }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="logFile">
+            <div>
+                <label for="OSFile">Use System Logs</label>
+                <input type="checkbox" name="OSFile" id="OSFile">
+            </div>
+            
             <div>
                 <label for="LogType">Log Type: </label>
                 <select name="LogType" id="LogType">

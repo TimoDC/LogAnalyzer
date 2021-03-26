@@ -2,11 +2,13 @@ main section#authlogcharts h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-align: center;
+    color: rgb(74, 243, 7);
 }
 
 
 main section#authlogcharts h2 {
     font-weight: bold;
+    color: rgb(74, 243, 7);
 }
 
 #entries {
@@ -43,7 +45,7 @@ main section#authlogcharts h2 {
 }
 
 #entries tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #1e1d1d;
 }
 
 .charts,
@@ -61,6 +63,11 @@ main section#authlogcharts h2 {
     height: 400px;
     width: 400px;
     box-shadow: 5px 10px 8px #000000;
+}
+
+.charts p {
+    text-align: center;
+    line-height: 370px;
 }
 
 .totals {

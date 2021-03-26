@@ -26,11 +26,9 @@
     </div>
 
     <div class="totals">
-        <div id="totalerrors">
-            </div>
-
-        <div id="totalunsuccessfulattempts">
-        </div>
+        <div id="totalerrors"></div>
+        <div id="totalopenedsessions"></div>
+        <div id="totalunsuccessfulattempts"></div>
     </div>
 
     <div class="charts">
@@ -56,6 +54,10 @@
     <div class="charts">
         <div id="commandschart">
             <canvas id="commands" width="400" height="400"></canvas>
+        </div>
+
+        <div id="openedsessionschart">
+            <canvas id="openedsessions" width="400" height="400"></canvas>
         </div>
     </div>
 </section>
